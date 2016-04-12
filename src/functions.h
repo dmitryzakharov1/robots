@@ -24,8 +24,10 @@ double qmaxc[9] = {10,10,10, 10,10,10, 10,10,10};
 double qyminc[3] = {-10,-10,-10};
 double qymaxc[3] = {10,10,10};
 double stepsqyc[3] = {20,20,20};
-int Pnumc[9] = {0,1,2, 3,4,5, 6,7,8};
-int Rnumc[9] = {9,10,11, 12,13,14, 15,16,17};
+int arr[] = {0,1,2, 3,4,5, 6,7,8};
+vector<int> Pnumc(arr, arr+9);
+int arr1[] = {9,10,11, 12,13,14, 15,16,17};
+vector<int> Rnumc(arr1, arr1+9);
 double prepc[2][5][2] = {
 	{{-8,1},{-20,1},{-20,1},{-8,-1},{-8,1}},
 		{{20,1},{8,1},{8,-1},{20,-1},{20,1}}
@@ -249,5 +251,124 @@ if (i>=0) {
 } else {
 	flag = false;
 }
-	
+}
+
+//**************************************************************
+void SetEAixmax(vector<int> EAix1) {
+int i;
+bool flag;
+sumixmax=0;
+for (i=0; i<(ny-1); i++) {
+	EAixmax[i]=EAix1[i];
+}
+for (i=0; i<(ny-1); i++) {
+	EAix[i]=0;
+}
+
+while(not flag) {
+	sumixmax++;
+	for(i=0; i<(ny-1); i++) {
+		sumixmax=sumixmax+EAix[i];
+	}
+	LexPM(EAix,flag);
+}
+
+}
+
+//*************************************************************
+void SetPsi(vector<vector <vector <int> > > Psi1) {
+int i,j,k;
+for(k=0; k<(kL-1); k++)
+{
+	for (i=0; i<(L-1); i++) {
+		for (j=0; j<(L-1); j++) {
+			Psi[k,i,j]=Psi1[k,i,j];
+		}
+	}
+}	
+}
+
+//*************************************************************
+//процедуры делают одно и тоже
+void SetPsiBas(vector<vector <vector <int> > > Psi1) {
+int i,j,k;
+for(k=0; k<(kL-1); k++)
+{
+	for (i=0; i<(L-1); i++) {
+		for (j=0; j<(L-1); j++) {
+			Psi[k,i,j]=Psi1[k,i,j];
+		}
+	}
+}		  
+}
+//*************************************************************
+void VectortoGrey(vector<int> y) {
+int x,i,j,k;
+double r,g1;
+g1=1;
+for(i=0; i<(c-1); i++) { g1=g1*2; }
+for(i=0; i<(p-1); i++) { q[i]=(q[i]-qmin[i])*g1/(qmax[i]-qmin[i]); }
+for(i=0; i<(p*(c+d)-1); i++) { zb[i]=0; }
+for(j=0; j<(p-1); j++) {
+	x=trunc(q[j]);
+    r=q[j]-x;
+    k=c+j*(c+d)-1;
+	while(k>=j*(c+d)) {
+		zb[k]=x%2;
+        x=x/2;
+        k=k-1;
+	}
+	k=c+j*(c+d);
+	while(k<(c+d)*(j+1)) {
+		r=2*r;
+        x=floor(r);
+        zb[k]=x;
+        r=r-x;
+        k=k+1;
+	}
+	y[j*(c+d)]=zb[j*(c+d)];
+	for(i=(j*(c+d)+1); i<((j+1)*(c+d)-1); i++) { y[i]=zb[i] xor zb[i-1]; }
+}
+}
+//*************************************************************
+// Генерация элементарной операции
+bool TestSource(int j) {
+// если j-номер узла источника, то возвращает false
+int i,flag;
+flag=true;
+i=0;
+
+while(i<=(*max_element(Pnum.begin(), Pnum.end())) && (j!=Pnum[i])) { i++; }
+
+if (i<=*max_element(Rnum.begin(), Rnum.end())) { flag=false; } else {
+	i=0;
+	while((i<=*max_element(Rnum.begin(), Rnum.end())) and (j!=Rnum[i])) { i++; }
+	if (i<=*max_element(Rnum.begin(), Rnum.end())) {flag=false;}
+}
+return flag;	
+}
+
+
+void GenVar(vector<int> w[5]) {
+w[0].push_back(rand()%kL+1); //номер слоя
+w[1].push_back(rand()%4+1);
+int w2 = (*w)[2];
+switch((*w)[1]) {
+	case 0:
+	w[2].push_back(rand()%(L-1)+1);
+	w[3].push_back(rand()%(L-w2-1)+1+w2+1);
+	w[4].push_back(O1s[rand()%kw+1]);
+	case '2':
+	w[2].push_back(rand()%(L-1)+1);
+	w[3].push_back(rand()%(L-w2-1)+1+w2+1);
+	w[4].push_back(O1s[rand()%kw+1]);
+	case '3':
+	w[2].push_back(rand()%(L-1)+1);
+	w[3].push_back(rand()%(L-w2-1)+1+w2+1);
+	w[4].push_back(O1s[rand()%kw+1]);
+	case '1':
+	w[2].push_back(rand()%L+1);
+	w[3].push_back((*w)[2]);
+	w[4].push_back(O2s[rand()%kv+1]);
+ }
 }

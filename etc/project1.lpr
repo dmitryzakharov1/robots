@@ -18,6 +18,11 @@ const
   pokmax=16;
   epstermc=1e-2;
   eps2c=0.5e-2;
+  LBasc=2;
+  kLc=4;
+  kInpc=6;
+  L1c=16;
+  Mout1c=9;
   x0c:array [0..17] of double=(0,2,0, 0,4,0, 0,6,0, 0,0,0, 0,0,0, 0,0,0);
   xfc:array[0..8] of real=(-5,0,0, 0,0,0, 5,0,0);
   uminc:array[0..5] of double=(-5,-1, -5,-1, -5,-1);
@@ -138,6 +143,8 @@ const
                                           (4,13));
 
  var
+   tfile:text;
+   a:string;
    // Parameters of NOP
   kL:integer=4; // number of network operators (layers) in MNOP
   kInp:integer=6;// number of inputs in each layer
@@ -202,8 +209,8 @@ const
   kRob:integer=3;// number of robots;
   n:integer=18;//dimention of system;
   m:integer=6;//dimention of control;
-  ll:integer=42;//dimention of viewing;
-
+  lv:integer=42;//dimention of viewing;
+  y:TArrReal;// vector of vewing
   x:array of real;// vector of state
   xs:TArrReal;
   x0:array of real;// vector of initial condition
@@ -213,7 +220,6 @@ const
   u:array of real;// vector of control
   umin:array of real;// vector of control
   umax:array of real;// vector of control
-  lv:integer;
   t:real;
   dt:real=0.01; //step of integration;
   tf:real=8;//terminal time;
@@ -230,7 +236,11 @@ const
   sumixmax:real;
 
   i,j,k, pt,rt,k1,k2,lmax,imax,ks1,ks2:integer;
-  ksi,su, su1, Fumax,Fumin:real;
+  ksi,Fumax,Fumin:real;
+  suGA, su1GA: real;
+  su, su1: array of real;
+
+  kol:integer;
 
   //************************  1.   *******************************
 //ОПИСАНИЕ ВЛОЖЕННЫХ ПРОЦЕДУР И ФУНКЦИЙ
@@ -692,15 +702,6 @@ End;
     end;
   End;
 //*************************************************************
-  Procedure Func0(var Fu:array of real);
-  var
-    i:integer;
-  Begin
-    RPControl;
-    for i:=0 to nfu-1 do
-      Fu[i]:=i;
-  End;
-//*************************************************************
 Function Rast(Fu: array of real): integer;
 var i,j,k,count:integer;
 Begin
@@ -765,6 +766,501 @@ Begin
   for j := 0 to p - 1 do
     q[j]:=(qmax[j]-qmin[j])*q[j]/g1+qmin[j];
 End;
+
+//*********************************************************
+Procedure Initial;
+Begin
+  x[0]:=x0[0]+qy[0];
+  x[1]:=x0[1];
+  x[2]:=x0[2];
+
+  x[3]:=x0[3]+qy[1];
+  x[4]:=x0[4];
+  x[5]:=x0[5];
+
+  x[6]:=x0[6]+qy[2];
+  x[7]:=x0[7];
+  x[8]:=x0[8];
+
+  x[9]:=xf[0]-x0[0];
+  x[10]:=xf[1]-x0[1];
+  x[11]:=xf[2]-x0[2];
+
+  x[12]:=xf[3]-x0[3];
+  x[13]:=xf[4]-x0[4];
+  x[14]:=xf[5]-x0[5];
+
+  x[15]:=xf[6]-x0[6];
+  x[16]:=xf[7]-x0[7];
+  x[17]:=xf[8]-x0[8];
+
+  u[0]:=0;
+  u[1]:=0;
+  u[2]:=0;
+  u[3]:=0;
+  u[4]:=0;
+  u[5]:=0;
+
+  t:=0;
+End;
+
+//*********************************************************
+Procedure Viewer;
+var
+  xlf,xlb,xrf,xrb,
+  ylf,ylb,yrf,yrb:real;
+  steta,cteta:real;
+  i: integer;
+Begin
+// первый робот
+  y[0]:=x[0];
+  y[1]:=x[1];
+  y[2]:=x[2];
+  steta:=sin(x[2]);
+  cteta:=cos(x[2]);
+  xlf:=x[0]*cteta+x[1]*steta+LBasc;//A1ac;
+  ylf:=-x[0]*steta+x[1]*cteta+LBasc/2;//H1hc;
+
+  xlb:=x[0]*cteta+x[1]*steta-LBasc;//1bc;
+  ylb:=ylf;
+
+  xrf:=xlf;
+  yrf:=-x[0]*steta+x[1]*cteta-LBasc/2;
+
+  xrb:=xlb;
+  yrb:=yrf;
+
+  y[3]:=xlf*cteta-ylf*steta;
+  y[4]:=xlf*steta+ylf*cteta;
+
+  y[5]:=xlb*cteta-ylb*steta;
+  y[6]:=xlb*steta+ylb*cteta;
+
+  y[7]:=xrb*cteta-yrb*steta;
+  y[8]:=xrb*steta+yrb*cteta;
+
+  y[9]:=xrf*cteta-yrf*steta;
+  y[10]:=xrf*steta+yrf*cteta;
+
+// второй робот
+  y[11]:=x[3];
+  y[12]:=x[4];
+  y[13]:=x[5];
+  steta:=sin(x[5]);
+  cteta:=cos(x[5]);
+  xlf:=x[3]*cteta+x[4]*steta+LBasc;//A1ac;
+  ylf:=-x[3]*steta+x[4]*cteta+LBasc/2;//H1hc;
+
+  xlb:=x[3]*cteta+x[4]*steta-LBasc;//1bc;
+  ylb:=ylf;
+
+  xrf:=xlf;
+  yrf:=-x[3]*steta+x[4]*cteta-LBasc/2;
+
+  xrb:=xlb;
+  yrb:=yrf;
+
+  y[14]:=xlf*cteta-ylf*steta;
+  y[15]:=xlf*steta+ylf*cteta;
+
+  y[16]:=xlb*cteta-ylb*steta;
+  y[17]:=xlb*steta+ylb*cteta;
+
+  y[18]:=xrb*cteta-yrb*steta;
+  y[19]:=xrb*steta+yrb*cteta;
+
+  y[20]:=xrf*cteta-yrf*steta;
+  y[21]:=xrf*steta+yrf*cteta;
+
+// третий робот
+  y[22]:=x[6];
+  y[23]:=x[7];
+  y[24]:=x[8];
+  steta:=sin(x[8]);
+  cteta:=cos(x[8]);
+  xlf:=x[6]*cteta+x[7]*steta+LBasc;//A1ac;
+  ylf:=-x[6]*steta+x[7]*cteta+LBasc/2;//H1hc;
+
+  xlb:=x[6]*cteta+x[7]*steta-LBasc;//1bc;
+  ylb:=ylf;
+
+  xrf:=xlf;
+  yrf:=-x[6]*steta+x[7]*cteta-LBasc/2;
+
+  xrb:=xlb;
+  yrb:=yrf;
+
+  y[25]:=xlf*cteta-ylf*steta;
+  y[26]:=xlf*steta+ylf*cteta;
+
+  y[27]:=xlb*cteta-ylb*steta;
+  y[28]:=xlb*steta+ylb*cteta;
+
+  y[29]:=xrb*cteta-yrb*steta;
+  y[30]:=xrb*steta+yrb*cteta;
+
+  y[31]:=xrf*cteta-yrf*steta;
+  y[32]:=xrf*steta+yrf*cteta;
+
+  for i := 0 to 8 do
+    y[33+i]:=x[9+i];
+End;
+//*********************************************************
+Function Check1_4(xt,yt,x1,y1,x2,y2,x3,y3,x4,y4:real):real;
+var
+  d1,d2,d3,d4:real;
+Begin
+  d1:=(x1-xt)*(x2-x1)+(y1-yt)*(y2-y1);
+  d2:=(x2-xt)*(x3-x2)+(y2-yt)*(y3-y2);
+  d3:=(x3-xt)*(x4-x3)+(y3-yt)*(y4-y3);
+  d4:=(x4-xt)*(x1-x4)+(y4-yt)*(y1-y4);
+  if (d1*d2>0)and(d2*d3>0)and(d3*d4>0) then
+  begin
+    d1:=sqrt(sqr(x1-xt)+sqr(y1-yt));
+    d2:=sqrt(sqr(x2-xt)+sqr(y2-yt));
+    d3:=sqrt(sqr(x3-xt)+sqr(y3-yt));
+    d4:=sqrt(sqr(x4-xt)+sqr(y4-yt));
+    if d2<d1 then d1:=d2;
+    if d3<d1 then d1:=d3;
+    if d4<d1 then d1:=d4;
+    result:=d1;
+  end
+  else
+    result:=0;
+End;
+//*********************************************************
+Function Check2(y:TArrReal):real;
+var
+  i,j:integer;
+Begin
+  suGA:=0;
+  for i := 0 to High(prepc)do
+  begin
+    for j:=0 to 3 do
+      suGA:=suGA+Check1_4(y[3+2*j],y[4+2*j],prepc[i,0,0],prepc[i,0,1],prepc[i,1,0],
+          prepc[i,1,1],prepc[i,2,0],prepc[i,2,1],prepc[i,3,0],prepc[i,3,1]);
+    for j:=0 to 3 do
+      suGA:=suGA+Check1_4(prepc[i,j,0],prepc[i,j,1],y[3],y[4],y[5],y[6],y[7],y[8],
+           y[9],y[10]);
+    for j:=0 to 3 do
+      suGA:=suGA+Check1_4(y[14+2*j],y[15+2*j],prepc[i,0,0],prepc[i,0,1],prepc[i,1,0],
+          prepc[i,1,1],prepc[i,2,0],prepc[i,2,1],prepc[i,3,0],prepc[i,3,1]);
+    for j:=0 to 3 do
+      suGA:=suGA+Check1_4(prepc[i,j,0],prepc[i,j,1],y[14],y[15],y[16],y[17],y[18],y[19],
+           y[20],y[21]);
+    for j:=0 to 3 do
+      suGA:=suGA+Check1_4(y[25+2*j],y[26+2*j],prepc[i,0,0],prepc[i,0,1],prepc[i,1,0],
+          prepc[i,1,1],prepc[i,2,0],prepc[i,2,1],prepc[i,3,0],prepc[i,3,1]);
+    for j:=0 to 3 do
+      suGA:=suGA+Check1_4(prepc[i,j,0],prepc[i,j,1],y[25],y[26],y[27],y[28],y[29],y[30],
+           y[31],y[32]);
+  end;
+  result:=suGA;
+End;
+//*********************************************************
+Function Check3(y:TArrReal):real;
+var
+  i:integer;
+Begin
+  suGA:=0;
+  {first with second}
+  su1GA:=0;
+  for i:= 0 to kRob - 1 do
+    FlagStop[i]:=true;
+  for i := 0 to 3 do
+    su1GA:=su1GA+Check1_4(y[3+2*i],y[4+2*i],y[14],y[15], y[16],y[17],
+                    y[18],y[19], y[20],y[21]);
+  for i := 0 to 3 do
+    su1GA:=su1GA+Check1_4(y[14+2*i],y[15+2*i],y[3],y[4], y[5],y[6],
+                    y[7],y[8], y[9],y[10]);
+  if su1GA>0 then
+    if Prior[0]>Prior[1] then
+      FlagStop[1]:=false
+    else
+      FlagStop[0]:=false;
+  suGA:=suGA+su1GA;
+  {first with third}
+  su1GA:=0;
+  for i := 0 to 3 do
+    su1GA:=su1GA+Check1_4(y[3+2*i],y[4+2*i],y[25],y[26], y[27],y[28],
+                    y[29],y[30], y[31],y[32]);
+  for i := 0 to 3 do
+    su1GA:=su1GA+Check1_4(y[25+2*i],y[26+2*i],y[3],y[4], y[5],y[6],
+                    y[7],y[8], y[9],y[10]);
+  if su1GA>0 then
+    if Prior[0]>Prior[2] then
+      FlagStop[2]:=false
+    else
+      FlagStop[0]:=false;
+  suGA:=suGA+su1GA;
+  {second with third}
+  su1GA:=0;
+  for i := 0 to 3 do
+    su1GA:=su1GA+Check1_4(y[14+2*i],y[15+2*i],y[25],y[26], y[27],y[28],
+                    y[29],y[30], y[31],y[32]);
+  for i := 0 to 3 do
+    su1GA:=su1GA+Check1_4(y[25+2*i],y[26+2*i],y[14],y[15], y[16],y[17],
+                    y[18],y[19], y[20],y[21]);
+  if su1GA>0 then
+    if Prior[1]>Prior[2] then
+      FlagStop[2]:=false
+    else
+      FlagStop[1]:=false;
+  suGA:=suGA+su1GA;
+  result:=suGA;
+End;
+
+//*************************************************************
+Procedure OgrUpr;
+var
+  i:integer;
+Begin
+  for i:=0 to m-1 do
+    if u[i]>umax[i] then
+      u[i]:=umax[i]
+    else
+      if u[i]<umin[i] then
+        u[i]:=umin[i];
+End;
+
+//*********************************************************
+Procedure RP(t1:real;x1:TArrReal;var f1:TArrReal);
+const
+  q_0=10.218;
+  q_1=0.44775390625;
+  q_2=1.4932;
+  q_3=0.42098;
+  q_4=14.37744140625;
+  q_5=8.479736328125;
+  q_6=0.28297;
+var
+  dx1,dy1,dteta1,
+  dx2,dy2,dteta2,
+  dx3,dy3,dteta3:real;
+  z_0_9,z_0_15,
+  z_1_10,z_1_13,z_1_15:real;
+  i:integer;
+Begin
+  Vs[0]:=x1[9];
+  Vs[1]:=x1[10];
+  Vs[2]:=x1[11];
+
+  Vs[3]:=x1[12];
+  Vs[4]:=x1[13];
+  Vs[5]:=x1[14];
+
+  Vs[6]:=x1[15];
+  Vs[7]:=x1[16];
+  Vs[8]:=x1[17];
+
+  RPControl;
+
+  dx1:=x1[9]-x1[0];
+  dy1:=x1[10]-x1[1];
+  dteta1:=x1[11]-x1[2];
+
+  dx2:=x1[12]-x1[3];
+  dy2:=x1[13]-x1[4];
+  dteta2:=x1[14]-x1[5];
+
+  dx3:=x1[15]-x1[6];
+  dy3:=x1[16]-x1[7];
+  dteta3:=x1[17]-x1[8];
+
+  z_0_9:=-q_2*dteta1*dy1+q_1*dy1+q_0*dx1;
+  z_0_15:=Ro_20(z_0_9*q_3+Ro_19(q_0*dx1))+Ro_8(z_0_9*q_3)+Ro_14(dx1);
+  z_1_10:=Ro_4(q_6*dx1)*q_5*dteta1+q_4*dy1+q_6*dx1+
+        Ro_5(Ro_4(q_6*dx1)*q_5*dteta1)+Ro_10(q_4*dy1)+Ro_3(q_6*dx1);
+  z_1_13:=z_1_10+Ro_4(z_1_10)+Ro_18(Ro_4(q_6*dx1)*q_5*dteta1);
+  z_1_15:=z_1_13*Ro_11(dx1)+Ro_18(z_1_13)+Ro_5(z_1_10);
+  u[0]:=3*z_0_15/2;
+  u[1]:=Ro_18(3*z_1_15+Ro_19(3*z_0_15));
+
+  z_0_9:=-q_2*dteta2*dy2+q_1*dy2+q_0*dx2;
+  z_0_15:=Ro_20(z_0_9*q_3+Ro_19(q_0*dx2))+Ro_8(z_0_9*q_3)+Ro_14(dx2);
+  z_1_10:=Ro_4(q_6*dx2)*q_5*dteta2+q_4*dy2+q_6*dx2+
+        Ro_5(Ro_4(q_6*dx2)*q_5*dteta2)+Ro_10(q_4*dy2)+Ro_3(q_6*dx2);
+  z_1_13:=z_1_10+Ro_4(z_1_10)+Ro_18(Ro_4(q_6*dx2)*q_5*dteta2);
+  z_1_15:=z_1_13*Ro_11(dx2)+Ro_18(z_1_13)+Ro_5(z_1_10);
+  u[2]:=3*z_0_15/2;
+  u[3]:=Ro_18(3*z_1_15+Ro_19(3*z_0_15));
+
+  z_0_9:=-q_2*dteta3*dy3+q_1*dy3+q_0*dx3;
+  z_0_15:=Ro_20(z_0_9*q_3+Ro_19(q_0*dx3))+Ro_8(z_0_9*q_3)+Ro_14(dx3);
+  z_1_10:=Ro_4(q_6*dx3)*q_5*dteta3+q_4*dy3+q_6*dx3+
+        Ro_5(Ro_4(q_6*dx3)*q_5*dteta3)+Ro_10(q_4*dy3)+Ro_3(q_6*dx3);
+  z_1_13:=z_1_10+Ro_4(z_1_10)+Ro_18(Ro_4(q_6*dx3)*q_5*dteta3);
+  z_1_15:=z_1_13*Ro_11(dx3)+Ro_18(z_1_13)+Ro_5(z_1_10);
+  u[4]:=3*z_0_15/2;
+  u[5]:=Ro_18(3*z_1_15+Ro_19(3*z_0_15));
+  OgrUpr;
+  if not FlagStop[0] then
+  begin
+    u[0]:=0;
+    u[1]:=0;
+  end;
+  if not FlagStop[1] then
+  begin
+    u[2]:=0;
+    u[3]:=0;
+  end;
+  if not FlagStop[2] then
+  begin
+    u[4]:=0;
+    u[5]:=0;
+  end;
+  f1[0]:=u[0]*cos(x1[2]);
+  f1[1]:=u[0]*sin(x1[2]);
+  f1[2]:=(u[0]/Lbasc)*sin(u[1])/cos(u[1]);
+
+  f1[3]:=u[2]*cos(x1[5]);
+  f1[4]:=u[2]*sin(x1[5]);
+  f1[5]:=(u[2]/Lbasc)*sin(u[3])/cos(u[3]);
+
+  f1[6]:=u[4]*cos(x1[8]);
+  f1[7]:=u[4]*sin(x1[8]);
+  f1[8]:=(u[4]/Lbasc)*sin(u[5])/cos(u[5]);
+
+  f1[9]:=z[M_Out[0,0]-1,M_Out[0,1]];
+  f1[10]:=z[M_Out[1,0]-1,M_Out[1,1]];
+  f1[11]:=z[M_Out[2,0]-1,M_Out[2,1]];
+
+  f1[12]:=z[M_Out[3,0]-1,M_Out[3,1]];
+  f1[13]:=z[M_Out[4,0]-1,M_Out[4,1]];
+  f1[14]:=z[M_Out[5,0]-1,M_Out[5,1]];
+
+  f1[15]:=z[M_Out[6,0]-1,M_Out[6,1]];
+  f1[16]:=z[M_Out[7,0]-1,M_Out[7,1]];
+  f1[17]:=z[M_Out[8,0]-1,M_Out[8,1]];
+
+
+  for i := 0 to n-1 do
+    if abs(f1[i])>infinity then
+      f1[i]:=Ro_10(f1[i])*infinity;
+End;
+//*************************************************************
+Procedure Euler2;
+var
+  i:integer;
+Begin
+  RP(t,x,fa);
+  for i:=0 to n-1 do
+    xs[i]:=x[i]+dt*fa[i];
+  RP(t+dt,xs,fb);
+  for i:=0 to n-1 do
+    x[i]:=x[i]+dt*(fa[i]+fb[i])/2;
+  t:=t+dt;
+End;
+//*************************************************************
+Procedure Euler3;
+var
+  i:integer;
+Begin
+  RP(t,x,fa);
+  for i:=0 to n-1 do
+    xs[i]:=x[i]+dt*fa[i];
+  RP(t+dt,xs,fb);
+  for i:=0 to n-1 do
+    xs[i]:=x[i]+dt*(fa[i]+fb[i])/2;
+  RP(t+dt,xs,fb);
+  for i:=0 to n-1 do
+    x[i]:=x[i]+dt*(fa[i]+fb[i])/2;
+  t:=t+dt;
+End;
+//*************************************************************
+Procedure Euler4;
+var
+  i:integer;
+Begin
+  RP(t,x,fa);
+  for i:=0 to n-1 do
+    xs[i]:=x[i]+dt*fa[i];
+  RP(t+dt,xs,fb);
+  for i:=0 to n-1 do
+    xs[i]:=x[i]+dt*(fa[i]+fb[i])/2;
+  RP(t+dt,xs,fb);
+  for i:=0 to n-1 do
+    xs[i]:=x[i]+dt*(fa[i]+fb[i])/2;
+  RP(t+dt,xs,fb);
+  for i:=0 to n-1 do
+    x[i]:=x[i]+dt*(fa[i]+fb[i])/2;
+  t:=t+dt;
+End;
+
+//*********************************************************
+Function Normdist(x1,xf1:TArrReal):real;
+var
+  sum,aa:real;
+  i:integer;
+Begin
+  sum:=0;
+  for i:=0 to high(xf1) do
+  begin
+    aa:=abs(xf1[i]-x1[i]);
+    if aa> sum then
+      sum:=aa;
+  end;
+  result:=sum;
+End;
+
+//*********************************************************
+Procedure Func(var Fu: TArrReal);
+const
+  shtraf=0.5;
+var
+  sumpen,promah,pr1:real;
+  i:integer;
+Begin
+  Initial;
+  sumpen:=0;
+  for i:=0 to kR-1 do
+    Cs[i]:=q[i];
+  repeat
+    Viewer;
+    sumpen:=sumpen+check2(y);
+    sumpen:=sumpen+check3(y);
+    Euler2;
+  until (t>tf)or (Normdist(x,xf)<epsterm);
+  promah:=0;
+  for i := 0 to high(xf1) do
+  begin
+     pr1:=abs(x[i]-xfc[i]);
+     if pr1>promah then
+       promah:=pr1;
+  end;
+  fu[0]:=t+shtraf*sumpen*dt;
+  fu[1]:=promah+shtraf*sumpen*dt;
+End;
+//*************************************************************
+Procedure Integr;
+var
+  i,j:integer;
+  flag:boolean;
+Begin
+  for i:=0 to ny-1 do
+    EAix[i]:=0;
+  for i:=0 to nfu-1 do
+    su[i]:=0;
+  repeat
+    for i:=0 to ny-1 do
+      qy[i]:=qymin[i]+stepsqy[i]*EAix[i];
+    Func(su1);
+    for i:=0 to nfu-1 do
+      su[i]:=su[i]+su1[i];
+    LexPM(EAix,flag);
+  until not flag;
+End;
+
+//*************************************************************
+  Procedure Func0(var Fu:array of real);
+  var
+    i:integer;
+  Begin
+    Integr;
+    for i:=0 to nfu-1 do
+      Fu[i]:=su[i];
+  End;
+
 //*************************************************************
 Procedure ImproveChrom(q:TArrReal;var StrChrom: TArrArr5Int);
 var
@@ -793,8 +1289,6 @@ Begin
       StrChrom[i,j]:=0;
 End;
 
-//*************************************************************
-
 
 BEGIN
   //************************  2.  *******************************
@@ -802,7 +1296,6 @@ BEGIN
   //*************************************************************
 
   //номера унарных операций
-  //здесь начинается выполнение
   SetLength(O1s,kW);
   for i:=0 to kW-1 do
       O1s[i]:=O1sc[i];
@@ -870,8 +1363,7 @@ BEGIN
       x0[i]:=x0c[i];
   for i:=0 to high(xf) do
       xf[i]:=xfc[i];
-
-  //ограничения на управление
+    //ограничения на управление
   SetLength(u,m);
   Setlength(umin,m);
   Setlength(umax,m);
@@ -879,6 +1371,11 @@ BEGIN
       umin[i]:=uminc[i];
   for i:=0 to m-1 do
       umax[i]:=umaxc[i];
+  //вектор наблюдения
+  SetLength(y,lv);
+  //хранение промежуточных значений функционалов
+  SetLength(su,nfu);
+  SetLength(su1,nfu);
 
   //0-ой слой (переменных и параметров)
   SetLength(V_Entr,kP+kR);
@@ -924,16 +1421,20 @@ BEGIN
   SetLength(z,kL,L);
   SetLength(zs,kL,L);
 
+
+
   //************************  2.  *******************************
   //                 ГЕНЕТИЧЕСКИЙ АЛГОРИТМ
   //*************************************************************
 
+  //задаем базисную матрицу сетевого оператора
   SetPsiBas(Psi);
-  //generating population
+  //генерируем начальную (нулевую) популяцию векторов вариаций
   VectortoGrey(PopChrPar[0]);
   for i:=0 to lchr-1 do
     for j:=0 to 4 do
       PopChrStr[0,i,j]:=0;
+  //наполняем вектора случайными возможными значениями
   for i:=1 to HH-1 do
   begin
     for j:=0 to lchr-1 do
@@ -941,13 +1442,20 @@ BEGIN
     for j:=0 to p*(c+d)-1 do
       PopChrPar[i,j]:=random(2);
   end;
-  // calculating values of functionals
+  // считаем значения функционалов для каждой хромосомы
   for i:=0 to HH-1 do
   begin
+    //для структурной части: берем текущую базисную матрицу
     SetPsi(Psi0);
+    //вносим в нее вариации;
     for j:=0 to lchr-1 do
     Variations(PopChrStr[i,j]);
+    //для параметрической:
+    //текущие значения параметров в коде Грея переводим в вектор параметров
     GreytoVector(PopChrPar[i]);
+    // для каждой полученной матрицы сетевого оператора и вектора параметров,
+    //определяющих искомое математическое выражение, оцениваем
+    //функции приспособленности
     Func0(Fuh[i]);
   end;
   //caculating distances to Pareto set
@@ -969,7 +1477,7 @@ BEGIN
         //if true
         ks1:=random(lchr);
         ks2:=random(p*(c+d));
-        //crossoving? creating four sons
+        //crossover creating four sons
         for i:=0 to lchr-1 do
         begin
           Son1s[i]:=PopChrStr[k1,i];
@@ -1178,21 +1686,21 @@ BEGIN
       end;
       // находим хромосому с наименьшей величиной нормы нормированных критериев
       k:=0;
-      su:=0;
+      suGA:=0;
       for i:=0 to nfu-1 do
-        su:=su+Shtraf[i]*sqr(FuhNorm[0,i]);
-      su:=sqrt(su);
+        suGA:=suGA+Shtraf[i]*sqr(FuhNorm[0,i]);
+      suGA:=sqrt(suGA);
 //      su:=FuhNorm[0,1];
       for i:=1 to HH-1 do
       begin
-        su1:=0;
+        su1GA:=0;
         for j:=0 to nfu-1 do
-          su1:=su1+Shtraf[j]*sqr(FuhNorm[i,j]);
+          su1GA:=su1GA+Shtraf[j]*sqr(FuhNorm[i,j]);
 //        su1:=sqrt(su1);
-        su1:=FuhNorm[i,1];
-        if su1<su then
+        su1GA:=FuhNorm[i,1];
+        if su1GA<suGA then
         begin
-          su:=su1;
+          suGA:=su1GA;
           k:=i;
         end;
       end;
@@ -1233,8 +1741,29 @@ BEGIN
 
   until pt>PP;
   ChoosePareto;
- //строим множество Парето
-END.
+  //Сохраним множество Парето в файл
+  assign (tfile,'output.txt');
+  rewrite(tfile);
+  kol:=length(Pareto);
+  //сортируем решения по возрастанию
+  for i:=0 to kol-2 do
+    for j:=i+1 to kol-1 do
+      if Fuh[Pareto[i],0]>Fuh[Pareto[j],0]  then
+      begin
+        k:=Pareto[i];
+        Pareto[i]:=Pareto[j];
+        Pareto[j]:=k;
+      end;
+  for i:=0 to kol-1 do
+  begin
+    a:='solution No'+inttostr(Pareto[i])+', ';
+    for j:=0 to nfu-1 do
+      a:=a+' F'+j+'='+Fuh[Pareto[i],j]+', ');
+    write(tfile,a);
+    a:='';
+  end;
+  close(tfile);
 
+END.
 
 

@@ -372,3 +372,69 @@ switch((*w)[1]) {
 	w[4].push_back(O2s[rand()%kv+1]);
  }
 }
+
+//*************************************************************
+void Variations(vector<vector <vector <vector <vector <int> > > > > w) {
+// Элементарные операции
+// 0 - замена недиагонального элемента
+// 1 - замена диагонального элемента
+// 2 - добавление дуги
+// 3 - удаление дуги
+int i,j,s1,s2;
+
+if (w[1]!=0) && (w[2]!=0) && (w[3]!=0) {
+	switch ((*w)[1]) {
+		case 0: if (Psi[w[0],w[2],w[3]]!=0) { Psi[w[0],w[2],w[3]]=w[4]; }
+		case 1: if (Psi[w[0],w[2],w[2]]!=0) { Psi[w[0],w[2],w[3]]=w[4]; }
+		case 2: if (Psi[w[0],w[2],w[3]]==0) { if (Psi[w[0],w[3],w[3]]!=0) {Psi[w[0],w[2],w[3]]=w[4];} }
+		case 3: 
+		s1=0;
+		for (i=0; i<w[3]-1; i++) { if (Psi[w[0],i,w[3]]!=0) { s1++; } }
+		s2=0;
+		for (j=w[2]+1; j<(L-1); j++) { if (Psi[w[0],w[2],j]!=0) { s2++; } }
+		if (s1>1) { if (s2>1) { Psi[w[0],w[1],w[2]]=0; } }
+	}
+}
+}
+//*************************************************************
+void SetV_Entr() {
+int i;
+for (i=0; i< kP-1; i++) { V_Entr[Pnum[i]]=Vs[i]; }	
+for (i=0; i< kR-1; i++) { V_Entr[Rnum[i]]=Cs[i]; }
+}
+//*************************************************************
+double Ro_1(double z) {	return z; }
+//*************************************************************
+double Ro_2(double z) {	if (abs(z)>sqrt(infinity)) { return infinity; } }
+//*************************************************************
+double Ro_3(double z) {	return -z; }
+//*************************************************************
+double Ro_10(double z) { if (z>=0) { return 1; } else { return -1; } }
+//*************************************************************
+double Ro_4(double z) { return Ro_10(z)*sqrt(abs(z)); }
+//*************************************************************
+double Ro_5(double z) { if(abs(z)>eps) { return 1/z; } else { return Ro_10(z)/eps; } }
+//*************************************************************
+double Ro_6(double z) { if (z>-ln(eps)) { return -ln(eps); } else { return exp(z); } }
+//*************************************************************
+double Ro_7(double z) { if (abs(z)<exp(-pokmax)) { return ln(eps); } else { return ln(abs(z)); } }
+//*************************************************************
+double Ro_8(double z) { if (abs(z)>-ln(eps)) { return Ro_10(z); } else { return (1-exp(-z))/(1+exp(-z)); } }
+//*************************************************************
+double Ro_9(double z) { if (z>=0) {return 1; } else { return 0; } }
+//*************************************************************
+double Ro_11(double z) { return cos(z); }
+//*************************************************************
+double Ro_12(double z) { return sin(z); }
+//*************************************************************
+double Ro_13(double z) { return arctan(z); }
+//*************************************************************
+double Ro_15(double z) { if (abs(z)<eps) { return Ro_10(z)*eps; } else { return Ro_10(z)*exp(ln(abs(z))/3); } }
+//*************************************************************
+double Ro_14(double z) { if (abs(z)>Ro_15(infinity)) { return Ro_10(z)*infinity; } else { return sqr(z)*z; } }
+//*************************************************************
+double Ro_16(double z) { if (abs(z)<1) {return z;} else { return Ro_10(z); } }
+//*************************************************************
+double Ro_17(double z) { return Ro_10(z)*ln(abs(z)+1); }
+//*************************************************************
+double Ro_18(double z) { if (abs(z)>-ln(eps)) { return Ro_10(z)*infinity; } else { return Ro_10(z)*(exp(abs(z))-1); } }

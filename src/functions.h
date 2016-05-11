@@ -438,3 +438,106 @@ double Ro_16(double z) { if (abs(z)<1) {return z;} else { return Ro_10(z); } }
 double Ro_17(double z) { return Ro_10(z)*ln(abs(z)+1); }
 //*************************************************************
 double Ro_18(double z) { if (abs(z)>-ln(eps)) { return Ro_10(z)*infinity; } else { return Ro_10(z)*(exp(abs(z))-1); } }
+//*************************************************************
+double Ro_19(double z) { if (abs(z)>1/eps) { return Ro_10(z)*eps; } else { return Ro_10(z)*exp(-abs(z)); } }
+//*************************************************************
+double Ro_20(double z) { return z/2; }
+//*************************************************************
+double Ro_21(double z) { return 2*z; }
+//*************************************************************
+double Ro_22(double z) { if (abs(z)>-ln(eps)) { return 0; } else { return exp(abs(z)); } }
+//*************************************************************
+double Ro_23(double z) { if (abs(z)>1/eps) { return -Ro_10(z)/eps; } else { return z-z*sqr(z); } }
+//*************************************************************
+double Ro_24(double z) { if (z>-ln(eps)) { return eps/(1+eps); } else { return 1/(1+exp(-z)); } }
+//*************************************************************
+double Ro_25(double z) { if (z>0) { return 1; } else { return 0; } }
+//*************************************************************
+double Ro_26(double z) { if (abs(z)<eps1) { return 0; } else { return Ro_10(z); } }
+//*************************************************************
+double Ro_27(double z) { if (abs(z)>1) { return Ro_10(z); } else { return Ro_10(z)*(1-sqrt(1-sqr(z))); } }
+//*************************************************************
+double Ro_28(double z) { if (z*z>ln(infinity)) { return z*(1-eps); } else { return z*(1-exp(-sqr(z))); } }
+//*************************************************************
+double Xi_0(double z1, double z2) { return z1+z2; }
+//*************************************************************
+double Xi_1(double z1, double z2) { return z1*z2; }
+//*************************************************************
+double Xi_2 (double z1, double z2) { if (z1>=z2) { return z1; } else { return z2; } }
+//*************************************************************
+double Xi_3(double z1, double z2) { if (z1<z2) { return z1; } else { return z2; } }
+//*************************************************************
+double Xi_4(double z1, double z2) { return z1+z2-z1*z2; }
+//*************************************************************
+double Xi_5(double z1, double z2) { return Ro_10(z1+z2)*sqrt(sqr(z1)+sqr(z2)); }
+//*************************************************************
+double Xi_6(double z1, double z2) { return Ro_10(z1+z2)*(abs(z1)+abs(z2)); }
+//*************************************************************
+double Xi_7(double z1, double z2) { return Ro_10(z1+z2)*Xi_2(abs(z1),abs(z2)); }
+//*************************************************************
+void RPControl() {
+int k,i,j;
+double zz;
+SetV_Entr();
+for (k=0; k<(kL-1); k++) {
+	for (i=0; i<(L-1); i++) {
+		switch (psi[k,i,i]) {
+			case 2:  z[k,i]=1; 
+			case 3:  z[k,i]=-infinity; 
+			case 4:  z[k,i]:=infinity; 
+			default: z[k,i]:=0;
+		}
+	}
+	for (i=0; i<kInP-1; i++) {
+		if (M_Entr[k,2*i]=0) { z[k,i]=V_Entr[M_Entr[k,2*i+1]]; } else { z[k,i]:=z[M_Entr[k,2*i]-1,M_Entr[k,2*i+1]]; }
+	}
+	for (i=0; i<(L-2); i++) {
+		for (j=i+1; j<(L-1); j++) {
+			if (Psi[k,i,j]!=0) { 
+				if (Psi[k,j,j]!=0) {
+					switch (Psi[k,i,j]) {
+						case 1: zz=Ro_1(z[k,i]);
+						case 2: zz=Ro_2(z[k,i]);
+						case 3: zz=Ro_3(z[k,i]);
+						case 4: zz=Ro_4(z[k,i]);
+						case 5: zz=Ro_5(z[k,i]);
+						case 6: zz=Ro_6(z[k,i]);
+						case 7: zz=Ro_7(z[k,i]);
+						case 8: zz=Ro_8(z[k,i]);
+						case 9: zz=Ro_9(z[k,i]);
+						case 10: zz=Ro_10(z[k,i]);
+						case 11: zz=Ro_11(z[k,i]);
+						case 12: zz=Ro_12(z[k,i]);
+						case 13: zz=Ro_13(z[k,i]);
+						case 14: zz=Ro_14(z[k,i]);
+						case 15: zz=Ro_15(z[k,i]);
+						case 16: zz=Ro_16(z[k,i]);
+						case 17: zz=Ro_17(z[k,i]);
+						case 18: zz=Ro_18(z[k,i]);
+						case 19: zz=Ro_19(z[k,i]);
+						case 20: zz=Ro_20(z[k,i]);
+						case 21: zz=Ro_21(z[k,i]);
+						case 22: zz=Ro_22(z[k,i]);
+						case 23: zz=Ro_23(z[k,i]);
+						case 24: zz=Ro_24(z[k,i]);
+						case 25: zz=Ro_25(z[k,i]);
+						case 26: zz=Ro_26(z[k,i]);
+						case 27: zz=Ro_27(z[k,i]); 
+						case 28: zz=Ro_28(z[k,i]);
+					}
+					switch (Psi[k,j,j]) {
+						case 1: z[k,j]=Xi_0(z[k,j],zz);
+						case 2: z[k,j]=Xi_1(z[k,j],zz);
+						case 3: z[k,j]=Xi_2(z[k,j],zz);
+						case 4: z[k,j]=Xi_3(z[k,j],zz);
+						case 5: z[k,j]=Xi_4(z[k,j],zz);
+						case 6: z[k,j]=Xi_5(z[k,j],zz);
+						case 7: z[k,j]=Xi_6(z[k,j],zz);
+						case 8: z[k,j]=Xi_7(z[k,j],zz);
+					}
+				}
+			}
+		}
+	} 
+}
+}

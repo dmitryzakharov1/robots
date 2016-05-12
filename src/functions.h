@@ -244,7 +244,7 @@ i=ny-1;
 while((i>=0) && (EAix[i]==EAixmax[i])) { i--; }
 if (i>=0) {
 	EAix[i]=EAix[i]+1;
-	for (j=i+1; j<(ny-1); j++) {
+	for (j=i+1; j<=(ny-1); j++) {
 		EAix[j]=0;
 	}
 	flag = true;
@@ -258,16 +258,16 @@ void SetEAixmax(vector<int> EAix1) {
 int i;
 bool flag;
 sumixmax=0;
-for (i=0; i<(ny-1); i++) {
+for (i=0; i<=(ny-1); i++) {
 	EAixmax[i]=EAix1[i];
 }
-for (i=0; i<(ny-1); i++) {
+for (i=0; i<=(ny-1); i++) {
 	EAix[i]=0;
 }
 
 while(not flag) {
 	sumixmax++;
-	for(i=0; i<(ny-1); i++) {
+	for(i=0; i<=(ny-1); i++) {
 		sumixmax=sumixmax+EAix[i];
 	}
 	LexPM(EAix,flag);
@@ -280,7 +280,7 @@ void SetPsi(vector<vector <vector <int> > > Psi1) {
 int i,j,k;
 for(k=0; k<(kL-1); k++)
 {
-	for (i=0; i<(L-1); i++) {
+	for (i=0; i<=(L-1); i++) {
 		for (j=0; j<(L-1); j++) {
 			Psi[k,i,j]=Psi1[k,i,j];
 		}
@@ -292,10 +292,10 @@ for(k=0; k<(kL-1); k++)
 //процедуры делают одно и тоже
 void SetPsiBas(vector<vector <vector <int> > > Psi1) {
 int i,j,k;
-for(k=0; k<(kL-1); k++)
+for(k=0; k<=(kL-1); k++)
 {
-	for (i=0; i<(L-1); i++) {
-		for (j=0; j<(L-1); j++) {
+	for (i=0; i<=(L-1); i++) {
+		for (j=0; j<=(L-1); j++) {
 			Psi[k,i,j]=Psi1[k,i,j];
 		}
 	}
@@ -306,10 +306,10 @@ void VectortoGrey(vector<int> y) {
 int x,i,j,k;
 double r,g1;
 g1=1;
-for(i=0; i<(c-1); i++) { g1=g1*2; }
-for(i=0; i<(p-1); i++) { q[i]=(q[i]-qmin[i])*g1/(qmax[i]-qmin[i]); }
-for(i=0; i<(p*(c+d)-1); i++) { zb[i]=0; }
-for(j=0; j<(p-1); j++) {
+for(i=0; i<=(c-1); i++) { g1=g1*2; }
+for(i=0; i<=(p-1); i++) { q[i]=(q[i]-qmin[i])*g1/(qmax[i]-qmin[i]); }
+for(i=0; i<=(p*(c+d)-1); i++) { zb[i]=0; }
+for(j=0; j<=(p-1); j++) {
 	x=trunc(q[j]);
     r=q[j]-x;
     k=c+j*(c+d)-1;
@@ -327,7 +327,7 @@ for(j=0; j<(p-1); j++) {
         k=k+1;
 	}
 	y[j*(c+d)]=zb[j*(c+d)];
-	for(i=(j*(c+d)+1); i<((j+1)*(c+d)-1); i++) { y[i]=zb[i] xor zb[i-1]; }
+	for(i=(j*(c+d)+1); i<=((j+1)*(c+d)-1); i++) { y[i]=zb[i] xor zb[i-1]; }
 }
 }
 //*************************************************************
@@ -389,9 +389,9 @@ if (w[1]!=0) && (w[2]!=0) && (w[3]!=0) {
 		case 2: if (Psi[w[0],w[2],w[3]]==0) { if (Psi[w[0],w[3],w[3]]!=0) {Psi[w[0],w[2],w[3]]=w[4];} }
 		case 3: 
 		s1=0;
-		for (i=0; i<w[3]-1; i++) { if (Psi[w[0],i,w[3]]!=0) { s1++; } }
+		for (i=0; i=<w[3]-1; i++) { if (Psi[w[0],i,w[3]]!=0) { s1++; } }
 		s2=0;
-		for (j=w[2]+1; j<(L-1); j++) { if (Psi[w[0],w[2],j]!=0) { s2++; } }
+		for (j=w[2]+1; j<=(L-1); j++) { if (Psi[w[0],w[2],j]!=0) { s2++; } }
 		if (s1>1) { if (s2>1) { Psi[w[0],w[1],w[2]]=0; } }
 	}
 }
@@ -399,8 +399,8 @@ if (w[1]!=0) && (w[2]!=0) && (w[3]!=0) {
 //*************************************************************
 void SetV_Entr() {
 int i;
-for (i=0; i< kP-1; i++) { V_Entr[Pnum[i]]=Vs[i]; }	
-for (i=0; i< kR-1; i++) { V_Entr[Rnum[i]]=Cs[i]; }
+for (i=0; i<=kP-1; i++) { V_Entr[Pnum[i]]=Vs[i]; }	
+for (i=0; i<=kR-1; i++) { V_Entr[Rnum[i]]=Cs[i]; }
 }
 //*************************************************************
 double Ro_1(double z) {	return z; }
@@ -479,8 +479,8 @@ void RPControl() {
 int k,i,j;
 double zz;
 SetV_Entr();
-for (k=0; k<(kL-1); k++) {
-	for (i=0; i<(L-1); i++) {
+for (k=0; k<=(kL-1); k++) {
+	for (i=0; i<=(L-1); i++) {
 		switch (psi[k,i,i]) {
 			case 2:  z[k,i]=1; 
 			case 3:  z[k,i]=-infinity; 
@@ -488,11 +488,11 @@ for (k=0; k<(kL-1); k++) {
 			default: z[k,i]:=0;
 		}
 	}
-	for (i=0; i<kInP-1; i++) {
+	for (i=0; i<=kInP-1; i++) {
 		if (M_Entr[k,2*i]=0) { z[k,i]=V_Entr[M_Entr[k,2*i+1]]; } else { z[k,i]:=z[M_Entr[k,2*i]-1,M_Entr[k,2*i+1]]; }
 	}
-	for (i=0; i<(L-2); i++) {
-		for (j=i+1; j<(L-1); j++) {
+	for (i=0; i<=(L-2); i++) {
+		for (j=i+1; j<=(L-1); j++) {
 			if (Psi[k,i,j]!=0) { 
 				if (Psi[k,j,j]!=0) {
 					switch (Psi[k,i,j]) {
@@ -540,4 +540,519 @@ for (k=0; k<(kL-1); k++) {
 		}
 	} 
 }
+}
+//*************************************************************
+int Rast(vector < double > Fu) {
+    int i, j, k, count;
+    count = 0;
+    for (i = 0; i <=(HH - 1); i++) {
+        j = 0;
+        while ((j < nfu) && (Fu[j] >= Fuh[i, j])) {
+            j++;
+        }
+        if (j >= nfu) {
+            k = 0;
+            while ((k < nfu) && (Fu[k] = Fuh[i, k])) {
+                if (k < nfu) {
+                    count++;
+                }
+            }
+        }
+    }
+    return count;
+}
+//*************************************************************
+void ChoosePareto() {
+	int i,j;
+	j=0;
+	for (i=0; i<=(HH-1); i++) {
+		if (Lh[i]==0) {
+			j++;
+			setlength(Pareto,j);
+			Pareto[j-1]=i;
+		}
+	}
+}
+//*************************************************************
+void GreytoVector(vector < int > y) {
+	int i,j,l1,l;
+	double g,g1;
+	l=c+d;
+	l1=high(y)+1;
+	for (i=0; i<=(l1-1); i++) {
+		if (i%l==0) { zb[i]=y[i]; } else { zb[i]=zb[i-1] xor y[i]; }
+	}
+	j=-1;
+	g1=1;
+	g=1;
+	for (i=0; i<=(c-2); i++) { g1=g1*2; }
+	for (i=0; i<=(l1-1); i++) {
+		if ((i mod l)==0) {
+			j++;
+			q[j]=0;
+			g=g1;
+		}
+		q[j]=q[j]+g*zb[i];
+		g=g/2;
+	}
+	g1=g1*2;
+	for (j=0; j<=(p-1); j++) { q[j]=(qmax[j]-qmin[j])*q[j]/g1+qmin[j]; }
+}
+//*********************************************************
+void Initial() {
+x[0]=x0[0]+qy[0];
+x[1]=x0[1];
+x[2]=x0[2];
+
+x[3]=x0[3]+qy[1];
+x[4]=x0[4];
+x[5]=x0[5];
+
+x[6]=x0[6]+qy[2];
+x[7]=x0[7];
+x[8]=x0[8];
+
+x[9]=xf[0]-x0[0];
+x[10]=xf[1]-x0[1];
+x[11]=xf[2]-x0[2];
+
+x[12]=xf[3]-x0[3];
+x[13]=xf[4]-x0[4];
+x[14]=xf[5]-x0[5];
+
+x[15]=xf[6]-x0[6];
+x[16]=xf[7]-x0[7];
+x[17]=xf[8]-x0[8];
+
+u[0]=0;
+u[1]=0;
+u[2]=0;
+u[3]=0;
+u[4]=0;
+u[5]=0;
+
+t=0;
+}
+//*********************************************************
+void Viewer() {
+	double xlf,xlb,xrf,xrb,ylf,ylb,yrf,yrb;
+	double steta,cteta;
+	int i;
+	
+	// первый робот
+  y[0]=x[0];
+  y[1]=x[1];
+  y[2]=x[2];
+  steta=sin(x[2]);
+  cteta=cos(x[2]);
+  xlf=x[0]*cteta+x[1]*steta+LBasc;//A1ac;
+  ylf=-x[0]*steta+x[1]*cteta+LBasc/2;//H1hc;
+
+  xlb=x[0]*cteta+x[1]*steta-LBasc;//1bc;
+  ylb=ylf;
+
+  xrf=xlf;
+  yrf=-x[0]*steta+x[1]*cteta-LBasc/2;
+
+  xrb=xlb;
+  yrb=yrf;
+
+  y[3]=xlf*cteta-ylf*steta;
+  y[4]=xlf*steta+ylf*cteta;
+
+  y[5]=xlb*cteta-ylb*steta;
+  y[6]=xlb*steta+ylb*cteta;
+
+  y[7]=xrb*cteta-yrb*steta;
+  y[8]=xrb*steta+yrb*cteta;
+
+  y[9]=xrf*cteta-yrf*steta;
+  y[10]=xrf*steta+yrf*cteta;
+
+// второй робот
+  y[11]=x[3];
+  y[12]=x[4];
+  y[13]=x[5];
+  steta=sin(x[5]);
+  cteta=cos(x[5]);
+  xlf=x[3]*cteta+x[4]*steta+LBasc;//A1ac;
+  ylf=-x[3]*steta+x[4]*cteta+LBasc/2;//H1hc;
+
+  xlb=x[3]*cteta+x[4]*steta-LBasc;//1bc;
+  ylb=ylf;
+
+  xrf=xlf;
+  yrf=-x[3]*steta+x[4]*cteta-LBasc/2;
+
+  xrb=xlb;
+  yrb=yrf;
+
+  y[14]=xlf*cteta-ylf*steta;
+  y[15]=xlf*steta+ylf*cteta;
+
+  y[16]=xlb*cteta-ylb*steta;
+  y[17]=xlb*steta+ylb*cteta;
+
+  y[18]=xrb*cteta-yrb*steta;
+  y[19]=xrb*steta+yrb*cteta;
+
+  y[20]=xrf*cteta-yrf*steta;
+  y[21]=xrf*steta+yrf*cteta;
+
+// третий робот
+  y[22]=x[6];
+  y[23]=x[7];
+  y[24]=x[8];
+  steta=sin(x[8]);
+  cteta=cos(x[8]);
+  xlf=x[6]*cteta+x[7]*steta+LBasc;//A1ac;
+  ylf=-x[6]*steta+x[7]*cteta+LBasc/2;//H1hc;
+
+  xlb=x[6]*cteta+x[7]*steta-LBasc;//1bc;
+  ylb=ylf;
+
+  xrf=xlf;
+  yrf=-x[6]*steta+x[7]*cteta-LBasc/2;
+
+  xrb=xlb;
+  yrb=yrf;
+
+  y[25]=xlf*cteta-ylf*steta;
+  y[26]=xlf*steta+ylf*cteta;
+
+  y[27]=xlb*cteta-ylb*steta;
+  y[28]=xlb*steta+ylb*cteta;
+
+  y[29]=xrb*cteta-yrb*steta;
+  y[30]=xrb*steta+yrb*cteta;
+
+  y[31]=xrf*cteta-yrf*steta;
+  y[32]=xrf*steta+yrf*cteta;
+  
+  for (i=0; i<=8; i++) { y[33+i]=x[9+i]; }
+}
+//*********************************************************
+double Check1_4(double xt,yt,x1,y1,x2,y2,x3,y3,x4,y4) {
+double d1,d2,d3,d4;
+d1:=(x1-xt)*(x2-x1)+(y1-yt)*(y2-y1);
+d2=(x2-xt)*(x3-x2)+(y2-yt)*(y3-y2);
+d3=(x3-xt)*(x4-x3)+(y3-yt)*(y4-y3);
+d4=(x4-xt)*(x1-x4)+(y4-yt)*(y1-y4);
+if ((d1*d2>0) && (d2*d3>0) && (d3*d4>0))
+{
+	d1=sqrt(sqr(x1-xt)+sqr(y1-yt));
+    d2=sqrt(sqr(x2-xt)+sqr(y2-yt));
+    d3=sqrt(sqr(x3-xt)+sqr(y3-yt));
+    d4=sqrt(sqr(x4-xt)+sqr(y4-yt));
+    if (d2<d1) { d1=d2; }
+    if (d3<d1) { d1=d3; }
+    if (d4<d1) { d1=d4; }
+    return d1;
+} else {
+	return 0;
+}	
+}
+//*********************************************************
+double Chech2(vector <double> y) {
+	int i,j;
+	suGA=0;
+	for (i=0; i<=High(prepc); i++) {
+		for (j=0; j<=3; j++) {
+			suGA=suGA+Check1_4(y[3+2*j],y[4+2*j],prepc[i,0,0],prepc[i,0,1],prepc[i,1,0],
+          prepc[i,1,1],prepc[i,2,0],prepc[i,2,1],prepc[i,3,0],prepc[i,3,1]);
+		}
+		for (j=0; j<=3; j++) {
+			suGA=suGA+Check1_4(prepc[i,j,0],prepc[i,j,1],y[3],y[4],y[5],y[6],y[7],y[8],
+           y[9],y[10]);
+		}
+		for (j=0; j<=3; j++) {
+			suGA=suGA+Check1_4(y[14+2*j],y[15+2*j],prepc[i,0,0],prepc[i,0,1],prepc[i,1,0],
+          prepc[i,1,1],prepc[i,2,0],prepc[i,2,1],prepc[i,3,0],prepc[i,3,1]);
+		}
+		for (j=0; j<=3; j++) {
+			suGA=suGA+Check1_4(prepc[i,j,0],prepc[i,j,1],y[14],y[15],y[16],y[17],y[18],y[19],
+           y[20],y[21]);
+		}
+		for (j=0; j<=3; j++) {
+			suGA=suGA+Check1_4(y[25+2*j],y[26+2*j],prepc[i,0,0],prepc[i,0,1],prepc[i,1,0],
+          prepc[i,1,1],prepc[i,2,0],prepc[i,2,1],prepc[i,3,0],prepc[i,3,1]);
+		}
+		for (j=0; j<=3; j++) {
+			suGA=suGA+Check1_4(prepc[i,j,0],prepc[i,j,1],y[25],y[26],y[27],y[28],y[29],y[30],
+           y[31],y[32]);
+		}
+	}
+	return suGA;
+}
+//*********************************************************
+double Chech3(vector <double> y) {
+	int i;
+	suGA=0;
+	//first with second
+	su1GA=0;
+	for (i=0; i<=(kRob - 1); i++) { FlagStop[i]=true; }
+	for (i=0; i<=3; i++) {
+		 su1GA=su1GA+Check1_4(y[3+2*i],y[4+2*i],y[14],y[15], y[16],y[17],
+                    y[18],y[19], y[20],y[21]);
+	}
+	for (i=0; i<=3; i++) {
+		su1GA=su1GA+Check1_4(y[14+2*i],y[15+2*i],y[3],y[4], y[5],y[6],
+                    y[7],y[8], y[9],y[10]);
+	}
+	if (su1GA>0) {
+		if (Prior[0]>Prior[1]) { FlagStop[1]=false; } else { FlagStop[0]=false; }
+	}
+	suGA=suGA+su1GA;
+	//first with third
+	su1GA=0;
+	for (i=0; i<=3; i++) {
+		su1GA=su1GA+Check1_4(y[3+2*i],y[4+2*i],y[25],y[26], y[27],y[28],
+                    y[29],y[30], y[31],y[32]);
+	}
+	for (i=0; i<=3; i++) {
+		su1GA=su1GA+Check1_4(y[25+2*i],y[26+2*i],y[3],y[4], y[5],y[6],
+                    y[7],y[8], y[9],y[10]);
+	}
+	if (su1GA>0) {
+		if (Prior[0]>Prior[2]) { FlagStop[2]=false; } else { FlagStop[0]:=false; }
+	}
+	suGA=suGA+su1GA;
+	//second with third
+	su1GA=0;
+	for (i=0; i<=3; i++) {
+		su1GA=su1GA+Check1_4(y[14+2*i],y[15+2*i],y[25],y[26], y[27],y[28],
+                    y[29],y[30], y[31],y[32]);
+	}
+	for (i=0; i<=3; i++) {
+		 su1GA=su1GA+Check1_4(y[25+2*i],y[26+2*i],y[14],y[15], y[16],y[17],
+                    y[18],y[19], y[20],y[21]);
+	}
+	if (su1GA>0) {
+		if (Prior[1]>Prior[2]) { FlagStop[2]=false; } else { FlagStop[1]=false; }
+	}
+	suGA=suGA+su1GA;
+	return suGA;
+}
+//*************************************************************
+void OgrUpr() {
+	int i;
+	for (i=0; i<= (m-1); i++) {
+		if (u[i]>umax[i]) { u[i]=umax[i]; } else { if (u[i]<umin[i]) { u[i]=umin[i]; } }
+	}
+}
+//*********************************************************
+Procedure RP(t1:real;x1:TArrReal;var f1:TArrReal);
+void RP(double t1, vector <double> x1, vector <double> f1) {
+const double q_0=10.218;
+const double q_1=0.44775390625;
+const double q_2=1.4932;
+const double q_3=0.42098;
+const double q_4=14.37744140625;
+const double q_5=8.479736328125;
+const double q_6=0.28297;
+
+double dx1,dy1,dteta1,dx2,dy2,dteta2,dx3,dy3,dteta3;
+double z_0_9,z_0_15,z_1_10,z_1_13,z_1_15;
+int i;
+
+Vs[0]=x1[9];
+Vs[1]=x1[10];
+Vs[2]=x1[11];
+
+Vs[3]=x1[12];
+Vs[4]=x1[13];
+Vs[5]=x1[14];
+
+Vs[6]=x1[15];
+Vs[7]=x1[16];
+Vs[8]=x1[17];
+
+RPControl();
+
+dx1=x1[9]-x1[0];
+dy1=x1[10]-x1[1];
+dteta1=x1[11]-x1[2];
+
+dx2=x1[12]-x1[3];
+dy2=x1[13]-x1[4];
+dteta2=x1[14]-x1[5];
+
+dx3=x1[15]-x1[6];
+dy3=x1[16]-x1[7];
+dteta3=x1[17]-x1[8];
+
+z_0_9=-q_2*dteta1*dy1+q_1*dy1+q_0*dx1;
+z_0_15=Ro_20(z_0_9*q_3+Ro_19(q_0*dx1))+Ro_8(z_0_9*q_3)+Ro_14(dx1);
+z_1_10=Ro_4(q_6*dx1)*q_5*dteta1+q_4*dy1+q_6*dx1+
+        Ro_5(Ro_4(q_6*dx1)*q_5*dteta1)+Ro_10(q_4*dy1)+Ro_3(q_6*dx1);
+  z_1_13=z_1_10+Ro_4(z_1_10)+Ro_18(Ro_4(q_6*dx1)*q_5*dteta1);
+  z_1_15=z_1_13*Ro_11(dx1)+Ro_18(z_1_13)+Ro_5(z_1_10);
+  u[0]=3*z_0_15/2;
+  u[1]=Ro_18(3*z_1_15+Ro_19(3*z_0_15));
+  
+  z_0_9=-q_2*dteta2*dy2+q_1*dy2+q_0*dx2;
+  z_0_15=Ro_20(z_0_9*q_3+Ro_19(q_0*dx2))+Ro_8(z_0_9*q_3)+Ro_14(dx2);
+  z_1_10=Ro_4(q_6*dx2)*q_5*dteta2+q_4*dy2+q_6*dx2+
+        Ro_5(Ro_4(q_6*dx2)*q_5*dteta2)+Ro_10(q_4*dy2)+Ro_3(q_6*dx2);
+  z_1_13=z_1_10+Ro_4(z_1_10)+Ro_18(Ro_4(q_6*dx2)*q_5*dteta2);
+  z_1_15=z_1_13*Ro_11(dx2)+Ro_18(z_1_13)+Ro_5(z_1_10);
+  u[2]=3*z_0_15/2;
+  u[3]=Ro_18(3*z_1_15+Ro_19(3*z_0_15));
+  z_0_9=-q_2*dteta3*dy3+q_1*dy3+q_0*dx3;
+  z_0_15=Ro_20(z_0_9*q_3+Ro_19(q_0*dx3))+Ro_8(z_0_9*q_3)+Ro_14(dx3);
+  z_1_10=Ro_4(q_6*dx3)*q_5*dteta3+q_4*dy3+q_6*dx3+
+        Ro_5(Ro_4(q_6*dx3)*q_5*dteta3)+Ro_10(q_4*dy3)+Ro_3(q_6*dx3);
+  z_1_13=z_1_10+Ro_4(z_1_10)+Ro_18(Ro_4(q_6*dx3)*q_5*dteta3);
+  z_1_15=z_1_13*Ro_11(dx3)+Ro_18(z_1_13)+Ro_5(z_1_10);
+  u[4]=3*z_0_15/2;
+  u[5]=Ro_18(3*z_1_15+Ro_19(3*z_0_15));
+  OgrUpr();
+  
+  if !(FlagStop[0]) {
+	  u[0]=0;
+    u[1]=0;
+  }
+  
+  if !(FlagStop[1]) {
+	   u[2]=0;
+    u[3]=0;
+  }
+  
+  if !(FlagStop[2]) {
+	  u[4]=0;
+    u[5]=0;
+  }
+  
+  f1[0]=u[0]*cos(x1[2]);
+  f1[1]=u[0]*sin(x1[2]);
+  f1[2]=(u[0]/Lbasc)*sin(u[1])/cos(u[1]);
+
+  f1[3]=u[2]*cos(x1[5]);
+  f1[4]=u[2]*sin(x1[5]);
+  f1[5]=(u[2]/Lbasc)*sin(u[3])/cos(u[3]);
+
+  f1[6]=u[4]*cos(x1[8]);
+  f1[7]=u[4]*sin(x1[8]);
+  f1[8]=(u[4]/Lbasc)*sin(u[5])/cos(u[5]);
+
+  f1[9]=z[M_Out[0,0]-1,M_Out[0,1]];
+  f1[10]=z[M_Out[1,0]-1,M_Out[1,1]];
+  f1[11]=z[M_Out[2,0]-1,M_Out[2,1]];
+
+  f1[12]=z[M_Out[3,0]-1,M_Out[3,1]];
+  f1[13]=z[M_Out[4,0]-1,M_Out[4,1]];
+  f1[14]=z[M_Out[5,0]-1,M_Out[5,1]];
+
+  f1[15]=z[M_Out[6,0]-1,M_Out[6,1]];
+  f1[16]=z[M_Out[7,0]-1,M_Out[7,1]];
+  f1[17]=z[M_Out[8,0]-1,M_Out[8,1]];
+  
+  for (i=0; i<=(n-1); i++) {
+	  if (abs(f1[i])>infinity) { f1[i]=Ro_10(f1[i])*infinity; }
+  }
+}
+//*************************************************************
+void Euler2() {
+	int i;
+	RP(t,x,fa);
+	for (i=0; i<=(n-1); i++) { xs[i]=x[i]+dt*fa[i]; }
+	RP(t+dt,xs,fb);
+	for (i=0; i<=(n-1); i++) { x[i]=x[i]+dt*(fa[i]+fb[i])/2; }
+	t=t+dt;
+}
+//*************************************************************
+void Euler3() {
+	int i;
+	RP(t,x,fa);
+	for (i=0; i<=(n-1); i++) { xs[i]=x[i]+dt*fa[i]; }
+	RP(t+dt,xs,fb);
+	for (i=0; i<=(n-1); i++) { xs[i]=x[i]+dt*(fa[i]+fb[i])/2; }
+	RP(t+dt,xs,fb);
+	for (i=0; i<=(n-1); i++) { x[i]=x[i]+dt*(fa[i]+fb[i])/2; }
+	t=t+dt;
+}
+//*************************************************************
+void Euler4() {
+	int i;
+	RP(t,x,fa);
+	for (i=0; i<=(n-1); i++) { xs[i]=x[i]+dt*fa[i]; }
+	RP(t+dt,xs,fb);
+	for (i=0; i<=(n-1); i++) { xs[i]=x[i]+dt*(fa[i]+fb[i])/2; }
+	RP(t+dt,xs,fb);
+	for (i=0; i<=(n-1); i++) { xs[i]=x[i]+dt*(fa[i]+fb[i])/2; }
+	RP(t+dt,xs,fb);
+	for (i=0; i<=(n-1); i++) { x[i]:=x[i]+dt*(fa[i]+fb[i])/2; }
+	t=t+dt;
+}
+//*********************************************************
+double Normdist(vector <double> x1, vector <double> xf1) {
+	double sum,aa;
+	int i;
+	sum=0;
+	for (i=0;i<=high(xf1); i++) {
+		aa=abs(xf1[i]-x1[i]);
+		if (aa>sum) { sum=aa; }
+	}
+	return sum;
+}
+//*********************************************************
+void Func(vector <double> Fu) {
+	const double shtraf=0.5;
+	double sumpen,promah,pr1;
+	int i;
+	Initial();
+	sumpen=0;
+	for (i=0; i<=kR-1; i++) { Cs[i]=q[i]; }
+	repeat
+	Viewer();
+	sumpen=sumpen+check2(y);
+    sumpen=sumpen+check3(y);
+    Euler2();
+	until ((t>tf) || (Normdist(x,xf)<epsterm));
+	promah=0;
+	for (i=0; i<=high(xf1); i++) { 
+	pr1=abs(x[i]-xfc[i]);
+	if (pr1>promah) { promah=pr1; }
+	}
+	fu[0]=t+shtraf*sumpen*dt;
+  fu[1]=promah+shtraf*sumpen*dt;
+}
+//*************************************************************
+void Integr() {
+	int i,j;
+	bool flag;
+	for (i=0; i<=ny-1; i++) { EAix[i]=0; }
+	for (i=0; i<=nfu-1; i++) { su[i]=0; }
+	repeat
+	for (i=0; i<=ny-1; i++) { qy[i]=qymin[i]+stepsqy[i]*EAix[i]; }
+	Func(su1);
+	for (i=0; i<=nfu-1; i++) { su[i]=su[i]+su1[i]; }
+	LexPM(EAix,flag);
+	until !flag;
+}
+//*************************************************************
+void Func0(vector <double> Fu) {
+	int i;
+	Integr();
+	for (i=0; i<=(nfu-1); i++) { Fu[i]=su[i]; }
+}
+//*************************************************************
+void ImproveChrom(vector <double> q, vector <vector <vector <vector <vector <int> > > > > StrChrom)
+int i,j,k;
+bool flag;
+SetPsi(Psi0);
+Func0(Fu1);
+k=-1;
+for (i=0; i<=lchr-1; i++) { 
+ Variations(StrChrom[i]);
+ Func0(Fu2);
+ flag=true;
+ for (j=0; j<=nfu-1; j++) { if (Fu2[j]>Fu1[j]) { flag=false; } }
+ if (flag) {
+	 for (j=0; j<=nfu-1; j++) { Fu1[j]=Fu2[j]; }
+	 k=i;
+ }
+ for (i=k+1; i<=lchr-1;i++) {
+	 for (j=0; j<=3; j++) { StrChrom[i,j]=0; }
+ }
 }

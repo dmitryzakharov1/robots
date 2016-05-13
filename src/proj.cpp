@@ -318,52 +318,45 @@ repeat
 			for (i=0; i<=(p*(c+d)-1); i++) { PopChrPar[imax,i]=son3p[i]; }
 			for (i=0; i<=nfu-1; i++) { Fuh[imax,i]=Fu3[i]; }
 		}
-        //calculating all distances for population
-        for i:=0 to HH-1 do
-          Lh[i]:=Rast(Fuh[i]);
-		  
-		for (i=0; i<=HH-1; i++) {  }
+        //calculating all distances for population		  
+		for (i=0; i<=HH-1; i++) { Lh[i]=Rast(Fuh[i]); }
 		//////
 		
-        //mutation for 4th son
-        if random<pmut then
-        begin
-          son4p[random(p*(c+d))]:=random(2);
-          GenVar(son4s[random(lchr)]);
-        end;
+        //mutation for 4th son		
+		if (random<pmut) { 
+		son4p[random(p*(c+d))]=random(2);
+        GenVar(son4s[random(lchr)]);
+		}
+		
         //functional for 4th son
-        SetPsi(Psi0);
-        for j:=0 to lchr-1 do
-          Variations(son4s[j]);
+        SetPsi(Psi0);		  
+		for (j=0; j<=lchr-1; j++) { Variations(son4s[j]); }
         GreytoVector(son4p);
         Func0(Fu4);
         //Distance for 4th son
-        L4:=Rast(Fu4);
+        L4=Rast(Fu4);
         //Chromosome with biggest distance to Pareto set
-        Lmax:=Lh[0];
-        imax:=0;
-        for i:=1 to HH-1 do
-          if Lh[i]>Lmax then
-          begin
-            Lmax:=Lh[i];
+        Lmax=Lh[0];
+        imax=0;
+		  
+		for (i=1;i<=HH-1; i++) {
+			if (Lh[i]>Lmax) {
+			Lmax:=Lh[i];
             imax:=i;
-          end;
-        if L4<Lmax then
+			}
+		}
+		
         //if distance to Pareto set 4th son is less than biggest distance
         //...in population then make substitution
-        begin
-          for i:=0 to lchr-1 do
-            PopChrStr[imax,i]:=son4s[i];
-          for i:=0 to p*(c+d)-1 do
-            PopChrPar[imax,i]:=son4p[i];
-          for i:=0 to nfu-1 do
-            Fuh[imax,i]:=Fu4[i];
-        end;
-        //calculating all distances for population
-        for i:=0 to HH-1 do
-          Lh[i]:=Rast(Fuh[i]);
+		if (L4<Lmax) {
+			for (i=0; i<=lchr-1; i++) {  PopChrStr[imax,i]=son4s[i]; }
+			for (i=0; i<=(p*(c+d)-1); i++) { PopChrPar[imax,i]=son4p[i]; }
+			for (i=0; i<=nfu-1; i++) { Fuh[imax,i]=Fu4[i]; }
 		}
-      rt:=rt+1;
+		
+        //calculating all distances for population	
+		for (i=0; i<=HH-1; i++) { Lh[i]=Rast(Fuh[i]); }
+      rt=rt+1;
       //End of cycle for crossoving
     until rt>RR;
 

@@ -289,46 +289,42 @@ repeat
 		
 		
 		
-        //calculating all distances for population
-        for i:=0 to HH-1 do
-          Lh[i]:=Rast(Fuh[i]);
+        //calculating all distances for population		  
+		for (i=0; i<=HH-1; i++) { Lh[i]=Rast(Fuh[i]); }
         //mutation for 3rd son
-        if random<pmut then
-        begin
-          son3p[random(p*(c+d))]:=random(2);
-          GenVar(son3s[random(lchr)]);
-        end;
+		if (random<pmut) { 
+		son3p[random(p*(c+d))]=random(2);
+        GenVar(son3s[random(lchr)]);
+		}
         //functional for 3rd son
-        SetPsi(Psi0);
-        for j:=0 to lchr-1 do
-          Variations(son3s[j]);
+        SetPsi(Psi0);	  
+		for (j=0; j<=(lchr-1); j++) { Variations(son3s[j]); }
         GreytoVector(son3p);
         Func0(Fu3);
         //Distance for 3rd son
-        L3:=Rast(Fu3);
+        L3=Rast(Fu3);
         //Chromosome with biggest distance to Pareto set
-        Lmax:=Lh[0];
-        imax:=0;
-        for i:=1 to HH-1 do
-          if Lh[i]>Lmax then
-          begin
-            Lmax:=Lh[i];
-            imax:=i;
-          end;
-        if L3<Lmax then
+        Lmax=Lh[0];
+        imax=0;
+		for (i=1; i<=HH-1; i++) {
+			Lmax=Lh[i];
+            imax=i;
+		}
+
         //if distance to Pareto set 3rd son is less than biggest distance
         //...in population then make substitution
-        begin
-          for i:=0 to lchr-1 do
-            PopChrStr[imax,i]:=son3s[i];
-          for i:=0 to p*(c+d)-1 do
-            PopChrPar[imax,i]:=son3p[i];
-          for i:=0 to nfu-1 do
-            Fuh[imax,i]:=Fu3[i];
-        end;
+		if (L3<Lmax) {
+			for (i=0; i<=lchr-1; i++) { PopChrStr[imax,i]=son3s[i]; }
+			for (i=0; i<=(p*(c+d)-1); i++) { PopChrPar[imax,i]=son3p[i]; }
+			for (i=0; i<=nfu-1; i++) { Fuh[imax,i]=Fu3[i]; }
+		}
         //calculating all distances for population
         for i:=0 to HH-1 do
           Lh[i]:=Rast(Fuh[i]);
+		  
+		for (i=0; i<=HH-1; i++) {  }
+		//////
+		
         //mutation for 4th son
         if random<pmut then
         begin

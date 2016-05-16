@@ -4,7 +4,10 @@
 #include <algorithm>
 #include <iterator>
 #include <string>
+#include <cstring>
+#include <sstream>
 #include <vector>
+#include <fstream>
 #include "functions.h"
 
 
@@ -169,7 +172,7 @@ Func0(Fuh[i]);
 //caculating distances to Pareto set
 for (i=0; i<=HH-1; i++) { Lh[i]=Rast(Fuh[i]); }
 //Start of cycle for generations
-pt:=1;  // first current generation
+pt=1;  // first current generation
 
 repeat
     //start of cycle for crossovering
@@ -179,8 +182,8 @@ repeat
       k1=random(HH);
       k2=random(HH);
       ksi=random;
-      if (ksi<(1+alfa*Lh[k1])/(1+Lh[k1])) ||
-         (ksi<(1+alfa*Lh[k2])/(1+Lh[k2])) {
+      if ((ksi<(1+alfa*Lh[k1])/(1+Lh[k1])) ||
+         (ksi<(1+alfa*Lh[k2])/(1+Lh[k2]))) {
       
         //if true
         ks1=random(lchr);
@@ -218,14 +221,14 @@ repeat
 		
         //mutation for 1st son	
 		if (random<pmut) {
-		son1p[random(p*(c+d))]=random(2);
+		Son1p[random(p*(c+d))]=random(2);
           GenVar(son1s[random(lchr)]);
 		}
 		
         //functional for 1st son
         SetPsi(Psi0);		  
 		for (j=0; j<=lchr-1; j++) { Variations(son1s[j]); }
-        GreytoVector(son1p);
+        GreytoVector(Son1p);
         Func0(Fu1);
         //Distance for 1st son
         L1=Rast(Fu1);
@@ -243,7 +246,7 @@ repeat
         //...in population then make substitution
 		if (L1<Lmax) {
 			for (i=0; i<=lchr-1; i++) { PopChrStr[imax,i]=son1s[i]; }
-			for (i=0; i<=(p*(c+d)-1); i++) { PopChrPar[imax,i]=son1p[i]; }
+			for (i=0; i<=(p*(c+d)-1); i++) { PopChrPar[imax,i]=Son1p[i]; }
 			for (i=0; i<=nfu-1; i++) { Fuh[imax,i]:=Fu1[i]; }
 		}
 		
@@ -253,13 +256,13 @@ repeat
 		for (i=0; i<=HH-1; i++) { Lh[i]=Rast(Fuh[i]); }
         //mutation for 2nd son	
 		if (random<pmut) {
-		son2p[random(p*(c+d))]=random(2);
-          GenVar(son2s[random(lchr)]);
+		Son2p[random(p*(c+d))]=random(2);
+          GenVar(Son2s[random(lchr)]);
 		}
         //functional for 2nd son
         SetPsi(Psi0);		  
-		for (j=0; lchr-1; j++) { Variations(son2s[j]); }
-        GreytoVector(son2p);
+		for (j=0; lchr-1; j++) { Variations(Son2s[j]); }
+        GreytoVector(Son2p);
         Func0(Fu2);
         //Distance for 2nd son
         L2=Rast(Fu2);
@@ -278,8 +281,8 @@ repeat
         //if distance to Pareto set 2nd son is less than biggest distance
         //...in population then make substitution
 		if (L2<Lmax) {
-			for (i=0; i<=(lchr-1); i++) { PopChrStr[imax,i]=son2s[i]; }
-			for (i=0; i<=(p*(c+d)-1); i++) { PopChrPar[imax,i]=son2p[i]; }
+			for (i=0; i<=(lchr-1); i++) { PopChrStr[imax,i]=Son2s[i]; }
+			for (i=0; i<=(p*(c+d)-1); i++) { PopChrPar[imax,i]=Son2p[i]; }
 			for (i=0; i<= nfu-1; i++) { Fuh[imax,i]=Fu2[i]; }
 		}
 		
@@ -293,13 +296,13 @@ repeat
 		for (i=0; i<=HH-1; i++) { Lh[i]=Rast(Fuh[i]); }
         //mutation for 3rd son
 		if (random<pmut) { 
-		son3p[random(p*(c+d))]=random(2);
-        GenVar(son3s[random(lchr)]);
+		Son3p[random(p*(c+d))]=random(2);
+        GenVar(Son3s[random(lchr)]);
 		}
         //functional for 3rd son
         SetPsi(Psi0);	  
-		for (j=0; j<=(lchr-1); j++) { Variations(son3s[j]); }
-        GreytoVector(son3p);
+		for (j=0; j<=(lchr-1); j++) { Variations(Son3s[j]); }
+        GreytoVector(Son3p);
         Func0(Fu3);
         //Distance for 3rd son
         L3=Rast(Fu3);
@@ -314,8 +317,8 @@ repeat
         //if distance to Pareto set 3rd son is less than biggest distance
         //...in population then make substitution
 		if (L3<Lmax) {
-			for (i=0; i<=lchr-1; i++) { PopChrStr[imax,i]=son3s[i]; }
-			for (i=0; i<=(p*(c+d)-1); i++) { PopChrPar[imax,i]=son3p[i]; }
+			for (i=0; i<=lchr-1; i++) { PopChrStr[imax,i]=Son3s[i]; }
+			for (i=0; i<=(p*(c+d)-1); i++) { PopChrPar[imax,i]=Son3p[i]; }
 			for (i=0; i<=nfu-1; i++) { Fuh[imax,i]=Fu3[i]; }
 		}
         //calculating all distances for population		  
@@ -324,14 +327,14 @@ repeat
 		
         //mutation for 4th son		
 		if (random<pmut) { 
-		son4p[random(p*(c+d))]=random(2);
-        GenVar(son4s[random(lchr)]);
+		Son4p[random(p*(c+d))]=random(2);
+        GenVar(Son4s[random(lchr)]);
 		}
 		
         //functional for 4th son
         SetPsi(Psi0);		  
-		for (j=0; j<=lchr-1; j++) { Variations(son4s[j]); }
-        GreytoVector(son4p);
+		for (j=0; j<=lchr-1; j++) { Variations(Son4s[j]); }
+        GreytoVector(Son4p);
         Func0(Fu4);
         //Distance for 4th son
         L4=Rast(Fu4);
@@ -341,28 +344,123 @@ repeat
 		  
 		for (i=1;i<=HH-1; i++) {
 			if (Lh[i]>Lmax) {
-			Lmax:=Lh[i];
-            imax:=i;
+			Lmax=Lh[i];
+            imax=i;
 			}
 		}
 		
         //if distance to Pareto set 4th son is less than biggest distance
         //...in population then make substitution
 		if (L4<Lmax) {
-			for (i=0; i<=lchr-1; i++) {  PopChrStr[imax,i]=son4s[i]; }
-			for (i=0; i<=(p*(c+d)-1); i++) { PopChrPar[imax,i]=son4p[i]; }
+			for (i=0; i<=lchr-1; i++) {  PopChrStr[imax,i]=Son4s[i]; }
+			for (i=0; i<=(p*(c+d)-1); i++) { PopChrPar[imax,i]=Son4p[i]; }
 			for (i=0; i<=nfu-1; i++) { Fuh[imax,i]=Fu4[i]; }
 		}
 		
         //calculating all distances for population	
 		for (i=0; i<=HH-1; i++) { Lh[i]=Rast(Fuh[i]); }
-      rt=rt+1;
+      rt++;
       //End of cycle for crossoving
     until rt>RR;
+	
+	// generating new chromosomes
+    // Checking Epoch
+    pt++;
+	
+	    //if epoch is over then changing basic
+    
+	if (pt%Epo==0) 
+    {
+      //... на наиболее близкую хромосому к утопической
+      // хромосоме в пространстве нормированных критериев
+	  for (i=0; i<=nfu-1; i++) {
+		  Fumax=Fuh[0,i];
+        Fumin=Fuh[0,i];
+		 // ищем максимальное и минимальное значения по каждому функционалу
+		 for (k=0; k<=HH-1; k++) {
+			 if (Fuh[k,i]>Fumax) { Fumax=Fuh[k,i]; } else { if (Fuh[k,i]< Fumin) { Fumin=Fuh[k,i]; } }
+		 }
+		 // нормируем критерии, поделив каждое значение на разность между
+        // максимумом и минимумом
+		if (Fumax!=Fumin) {
+			for (k=0; k<=HH-1; k++) { FuhNorm[k,i]=Fuh[k,i]/(Fumax-Fumin); }
+		}
+	  }
+	  
+      // находим хромосому с наименьшей величиной нормы нормированных критериев
+      k=0;
+      suGA=0;	
+	for (i=0; i<=nfu-1; i++) { suGA=suGA+Shtraf[i]*sqr(FuhNorm[0,i]); }
+      suGA=sqrt(suGA);
+//      su=FuhNorm[0,1];
+	  for (i=1; i<=HH-1; i++) {
+		  su1GA=0;
+		  for (j=0; j<=nfu-1; j++) { su1GA=su1GA+Shtraf[j]*sqr(FuhNorm[i,j]); }
+		  su1GA=FuhNorm[i,1];
+		  if (su1GA<suGA) {
+			  suGA=su1GA;
+          k=i;
+		  }
+	  }
+	  
+      // заменяем базис
+      // строим матрицу для найденной хромосомы
+      SetPsi(Psi0);
+	for (j=0; j<=lchr-1; j++) { Variations(PopChrStr[k,j]); }
+      // меняем базисную матрицу на новую
+      SetPsiBas(Psi);
+      //генерируем тождественную хромосому
+	for (i=0; i<=lchr-1; i++) { for (j=0; j<=3; j++) { PopChrStr[0,i,j]=0; } }
+	for (i=0; i<=(p*(c+d)-1); i++) { PopChrPar[0,i]=PopChrPar[k,i]; }
+      //вычисляем все фунционалы для всей популяции	  
+	  for (i=0; i<=HH-1; i++) { 
+	  SetPsi(Psi0);
+	  for (j=0; j<=lchr-1; j++) { Variations(PopChrStr[i,j]); }
+	  GreytoVector(PopChrPar[i]);
+        Func0(Fuh[i]);
+	  }
+	  
+      // формируем элиту
+	  for (i=0; i<=kel-1; i++) {
+		j=random(HH-1)+1;
+        GreytoVector(PopChrPar[j]);
+        ImproveChrom(q,PopChrStr[j]); 
+	  }
+	  
+      //вычисляем новые расстояния
+	for (i=0; i<=HH-1; i++) {  Lh[i]=Rast(Fuh[i]); }
+	}
+    //конец цикла поколений
 
+until pt>PP;
+  ChoosePareto();
+  //Сохраним множество Парето в файл
+  ofstream fout("output.txt");
+  kol=Pareto.size();
+  //сортируем решения по возрастанию
+	  
+for (i=0; i<=kol-2; i++) {
+	for (j=i+1; j<=kol-1; j++) {
+		if (Fuh[Pareto[i],0]>Fuh[Pareto[j],0]) {
+			k=Pareto[i];
+        Pareto[i]=Pareto[j];
+        Pareto[j]=k;
+		}
+	}
+}	  
 
+  
+  for (i=0; i<=kol-1; i++) {
+	  //fout << "solution No " << doubeVecToStr(Pareto[i]) << ", ";
+	  for (j=0; j<=nfu-1; j++) {
+		//  fout << " F" << j << "=" << doubeVecToStr(Fuh[Pareto[i],j]) << ", ";
+		  
+	  }
+  }
+  
+  fout.close();
 
-
+		 }
 
 //конец
 return 0;

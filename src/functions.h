@@ -234,9 +234,10 @@ double sumixmax;
 
 int i,j,k, pt,rt,k1,k2,lmax,imax,ks1,ks2;
 double ksi,su, su1, Fumax,Fumin;
+int kol;
 
  //************************  1.   *******************************
-//ОПИСАНИЕ ВЛОЖЕННЫХ ПРОЦЕДУР И ФУНКЦИЙ
+//ЋЏ€‘ЂЌ€… ‚‹Ћ†…ЌЌ›• ЏђЋ–…„“ђ € ”“ЌЉ–€‰
 //**************************************************************
 void LexPM(vector<int> EAix, bool flag) {
 int i,j;
@@ -374,7 +375,7 @@ switch((*w)[1]) {
 }
 
 //*************************************************************
-void Variations(vector<vector <vector <vector <vector <int> > > > > w) {
+void Variations(int w[5]) {
 // Элементарные операции
 // 0 - замена недиагонального элемента
 // 1 - замена диагонального элемента
@@ -382,7 +383,7 @@ void Variations(vector<vector <vector <vector <vector <int> > > > > w) {
 // 3 - удаление дуги
 int i,j,s1,s2;
 
-if (w[1]!=0) && (w[2]!=0) && (w[3]!=0) {
+if ((w[1] != 0) || (w[2] != 0) || (w[3] != 0)) {
 	switch ((*w)[1]) {
 		case 0: if (Psi[w[0],w[2],w[3]]!=0) { Psi[w[0],w[2],w[3]]=w[4]; }
 		case 1: if (Psi[w[0],w[2],w[2]]!=0) { Psi[w[0],w[2],w[3]]=w[4]; }
@@ -587,7 +588,7 @@ void GreytoVector(vector < int > y) {
 	g=1;
 	for (i=0; i<=(c-2); i++) { g1=g1*2; }
 	for (i=0; i<=(l1-1); i++) {
-		if ((i mod l)==0) {
+		if ((i % l)==0) {
 			j++;
 			q[j]=0;
 			g=g1;
@@ -732,9 +733,9 @@ void Viewer() {
   for (i=0; i<=8; i++) { y[33+i]=x[9+i]; }
 }
 //*********************************************************
-double Check1_4(double xt,yt,x1,y1,x2,y2,x3,y3,x4,y4) {
+double Check1_4(double xt,double yt, double x1,double y1, double x2, double y2, double x3, double y3, double x4, double y4) {
 double d1,d2,d3,d4;
-d1:=(x1-xt)*(x2-x1)+(y1-yt)*(y2-y1);
+d1=(x1-xt)*(x2-x1)+(y1-yt)*(y2-y1);
 d2=(x2-xt)*(x3-x2)+(y2-yt)*(y3-y2);
 d3=(x3-xt)*(x4-x3)+(y3-yt)*(y4-y3);
 d4=(x4-xt)*(x1-x4)+(y4-yt)*(y1-y4);
@@ -753,7 +754,7 @@ if ((d1*d2>0) && (d2*d3>0) && (d3*d4>0))
 }	
 }
 //*********************************************************
-double Chech2(vector <double> y) {
+double Check2(vector <double> y) {
 	int i,j;
 	suGA=0;
 	for (i=0; i<=High(prepc); i++) {
@@ -1055,4 +1056,19 @@ for (i=0; i<=lchr-1; i++) {
  for (i=k+1; i<=lchr-1;i++) {
 	 for (j=0; j<=3; j++) { StrChrom[i,j]=0; }
  }
+}
+
+///////////////////////
+// служебное
+std::vector<std::string> doubeVecToStr(const std::vector<double>& vec)
+{
+    std::vector<std::string> tempStr;
+
+    for (unsigned int i(0); i < vec.size(); ++i){
+        std::ostringstream doubleStr;
+        doubleStr << vec[i];    
+        tempStr.push_back(doubleStr.str());
+    }
+
+    return tempStr;
 }

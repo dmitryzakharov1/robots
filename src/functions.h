@@ -234,6 +234,8 @@ double sumixmax;
 
 int i,j,k, pt,rt,k1,k2,lmax,imax,ks1,ks2;
 double ksi,su, su1, Fumax,Fumin;
+double suGA, su1GA;
+vector <double> su, su1;
 int kol;
 
  //************************  1.   *******************************
@@ -482,21 +484,21 @@ double zz;
 SetV_Entr();
 for (k=0; k<=(kL-1); k++) {
 	for (i=0; i<=(L-1); i++) {
-		switch (psi[k,i,i]) {
+		switch ((*(*(*Psi)[k])[i])[i]) {
 			case 2:  z[k,i]=1; 
 			case 3:  z[k,i]=-infinity; 
 			case 4:  z[k,i]:=infinity; 
 			default: z[k,i]:=0;
 		}
 	}
-	for (i=0; i<=kInP-1; i++) {
+	/*for (i=0; i<=kInP-1; i++) {
 		if (M_Entr[k,2*i]=0) { z[k,i]=V_Entr[M_Entr[k,2*i+1]]; } else { z[k,i]:=z[M_Entr[k,2*i]-1,M_Entr[k,2*i+1]]; }
 	}
 	for (i=0; i<=(L-2); i++) {
 		for (j=i+1; j<=(L-1); j++) {
 			if (Psi[k,i,j]!=0) { 
 				if (Psi[k,j,j]!=0) {
-					switch (Psi[k,i,j]) {
+					switch ((*(*(*Psi)[k])[i])[j]) {
 						case 1: zz=Ro_1(z[k,i]);
 						case 2: zz=Ro_2(z[k,i]);
 						case 3: zz=Ro_3(z[k,i]);
@@ -526,8 +528,8 @@ for (k=0; k<=(kL-1); k++) {
 						case 27: zz=Ro_27(z[k,i]); 
 						case 28: zz=Ro_28(z[k,i]);
 					}
-					switch (Psi[k,j,j]) {
-						case 1: z[k,j]=Xi_0(z[k,j],zz);
+					switch ((*(*(*Psi)[k])[j])[j]) {
+						case 1: z[k,j]=Xi_0((*(*z)[k])[j],zz);
 						case 2: z[k,j]=Xi_1(z[k,j],zz);
 						case 3: z[k,j]=Xi_2(z[k,j],zz);
 						case 4: z[k,j]=Xi_3(z[k,j],zz);
@@ -539,7 +541,7 @@ for (k=0; k<=(kL-1); k++) {
 				}
 			}
 		}
-	} 
+	*/} 
 }
 }
 //*************************************************************

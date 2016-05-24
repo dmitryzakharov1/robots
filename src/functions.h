@@ -143,10 +143,10 @@ int M_Outc[9][2] = {{1,15},
 //переменные
 // Parameters of NOP
 int kL=4; // number of network operators (layers) in MNOP
-int kInp=6; // number of inputs in each layer
+int kInP=6; // number of inputs in each layer
 int L=16; // //dimension of network operator matrices
-int kp=9; //size of the set of variables
-int kr=9; //size of the set of parameters
+int kP=9; //size of the set of variables
+int kR=9; //size of the set of parameters
 int kw=20; //size of the set of unary operations
 int kv=2; //size of the set of binary operations
 int Mout=9; // number of outputs
@@ -163,6 +163,8 @@ vector<vector <int> > M_Out; //matrix of outputs
 vector<vector <double> > z; //vector of nodes
 vector<vector <string> > zs; //string for mathematical expression
 vector<vector <vector <int> > > Psi,Psi0; //Network  operator matrices
+//int **Psi = new int *[M];
+
 
 // Parameters of GA
 int HH=1024; //number of chromosomes in the initial population
@@ -233,7 +235,7 @@ vector<int> EAix,EAixmax;
 double sumixmax;
 
 int i,j,k, pt,rt,k1,k2,lmax,imax,ks1,ks2;
-double ksi,su, su1, Fumax,Fumin;
+double ksi, Fumax,Fumin;
 double suGA, su1GA;
 vector <double> su, su1;
 int kol;
@@ -386,16 +388,20 @@ void Variations(int w[5]) {
 int i,j,s1,s2;
 
 if ((w[1] != 0) || (w[2] != 0) || (w[3] != 0)) {
-	switch ((*w)[1]) {
-		case 0: if (Psi[w[0],w[2],w[3]]!=0) { Psi[w[0],w[2],w[3]]=w[4]; }
-		case 1: if (Psi[w[0],w[2],w[2]]!=0) { Psi[w[0],w[2],w[3]]=w[4]; }
-		case 2: if (Psi[w[0],w[2],w[3]]==0) { if (Psi[w[0],w[3],w[3]]!=0) {Psi[w[0],w[2],w[3]]=w[4];} }
+	switch (w[1]) {
+		//case 0: if ((*(*(*(*Psi)[w[0]])[w[2]])[w[3]])!=0) { Psi[w[0]][w[2]][w[3]]=w[4]; }
+		case 0: if (Psi[w[0]][w[2]][w[3]] != 0) { Psi[w[0]][w[2]][w[3]]=w[4]; }
+		
+		
+		
+		case 1: if (Psi[w[0]][w[2]][w[2]]!=0) { Psi[w[0]][w[2]][w[3]]=w[4]; }
+		case 2: if (Psi[w[0]][w[2]][w[3]]==0) { if (Psi[w[0]][w[3]][w[3]]!=0) {Psi[w[0]][w[2]][w[3]]=w[4];} }
 		case 3: 
 		s1=0;
-		for (i=0; i=<w[3]-1; i++) { if (Psi[w[0],i,w[3]]!=0) { s1++; } }
+		for (i=0; i<=w[3]-1; i++) { if (Psi[w[0]][i][w[3]]!=0) { s1++; } }
 		s2=0;
-		for (j=w[2]+1; j<=(L-1); j++) { if (Psi[w[0],w[2],j]!=0) { s2++; } }
-		if (s1>1) { if (s2>1) { Psi[w[0],w[1],w[2]]=0; } }
+		for (j=w[2]+1; j<=(L-1); j++) { if (Psi[w[0]][w[2]][j]!=0) { s2++; } }
+		if (s1>1) { if (s2>1) { Psi[w[0]][w[1]][w[2]]=0; } } 
 	}
 }
 }
@@ -408,21 +414,21 @@ for (i=0; i<=kR-1; i++) { V_Entr[Rnum[i]]=Cs[i]; }
 //*************************************************************
 double Ro_1(double z) {	return z; }
 //*************************************************************
-double Ro_2(double z) {	if (abs(z)>sqrt(infinity)) { return infinity; } }
+double Ro_2(double z) {	if (fabs(z)>sqrt(infinity)) { return infinity; } }
 //*************************************************************
 double Ro_3(double z) {	return -z; }
 //*************************************************************
 double Ro_10(double z) { if (z>=0) { return 1; } else { return -1; } }
 //*************************************************************
-double Ro_4(double z) { return Ro_10(z)*sqrt(abs(z)); }
+double Ro_4(double z) { return Ro_10(z)*sqrt(fabs(z)); }
 //*************************************************************
-double Ro_5(double z) { if(abs(z)>eps) { return 1/z; } else { return Ro_10(z)/eps; } }
+double Ro_5(double z) { if(fabs(z)>eps) { return 1/z; } else { return Ro_10(z)/eps; } }
 //*************************************************************
-double Ro_6(double z) { if (z>-ln(eps)) { return -ln(eps); } else { return exp(z); } }
+double Ro_6(double z) { if (z>-log(eps)) { return -log(eps); } else { return exp(z); } }
 //*************************************************************
-double Ro_7(double z) { if (abs(z)<exp(-pokmax)) { return ln(eps); } else { return ln(abs(z)); } }
+double Ro_7(double z) { if (fabs(z)<exp(-pokmax)) { return log(eps); } else { return log(fabs(z)); } }
 //*************************************************************
-double Ro_8(double z) { if (abs(z)>-ln(eps)) { return Ro_10(z); } else { return (1-exp(-z))/(1+exp(-z)); } }
+double Ro_8(double z) { if (fabs(z)>-log(eps)) { return Ro_10(z); } else { return (1-exp(-z))/(1+exp(-z)); } }
 //*************************************************************
 double Ro_9(double z) { if (z>=0) {return 1; } else { return 0; } }
 //*************************************************************
@@ -430,37 +436,37 @@ double Ro_11(double z) { return cos(z); }
 //*************************************************************
 double Ro_12(double z) { return sin(z); }
 //*************************************************************
-double Ro_13(double z) { return arctan(z); }
+double Ro_13(double z) { return atan(z); }
 //*************************************************************
-double Ro_15(double z) { if (abs(z)<eps) { return Ro_10(z)*eps; } else { return Ro_10(z)*exp(ln(abs(z))/3); } }
+double Ro_15(double z) { if (fabs(z)<eps) { return Ro_10(z)*eps; } else { return Ro_10(z)*exp(log(fabs(z))/3); } }
 //*************************************************************
-double Ro_14(double z) { if (abs(z)>Ro_15(infinity)) { return Ro_10(z)*infinity; } else { return sqr(z)*z; } }
+double Ro_14(double z) { if (fabs(z)>Ro_15(infinity)) { return Ro_10(z)*infinity; } else { return sqrt(z)*z; } }
 //*************************************************************
-double Ro_16(double z) { if (abs(z)<1) {return z;} else { return Ro_10(z); } }
+double Ro_16(double z) { if (fabs(z)<1) {return z;} else { return Ro_10(z); } }
 //*************************************************************
-double Ro_17(double z) { return Ro_10(z)*ln(abs(z)+1); }
+double Ro_17(double z) { return Ro_10(z)*log(fabs(z)+1); }
 //*************************************************************
-double Ro_18(double z) { if (abs(z)>-ln(eps)) { return Ro_10(z)*infinity; } else { return Ro_10(z)*(exp(abs(z))-1); } }
+double Ro_18(double z) { if (fabs(z)>-log(eps)) { return Ro_10(z)*infinity; } else { return Ro_10(z)*(exp(fabs(z))-1); } }
 //*************************************************************
-double Ro_19(double z) { if (abs(z)>1/eps) { return Ro_10(z)*eps; } else { return Ro_10(z)*exp(-abs(z)); } }
+double Ro_19(double z) { if (fabs(z)>1/eps) { return Ro_10(z)*eps; } else { return Ro_10(z)*exp(-fabs(z)); } }
 //*************************************************************
 double Ro_20(double z) { return z/2; }
 //*************************************************************
 double Ro_21(double z) { return 2*z; }
 //*************************************************************
-double Ro_22(double z) { if (abs(z)>-ln(eps)) { return 0; } else { return exp(abs(z)); } }
+double Ro_22(double z) { if (fabs(z)>-log(eps)) { return 0; } else { return exp(fabs(z)); } }
 //*************************************************************
-double Ro_23(double z) { if (abs(z)>1/eps) { return -Ro_10(z)/eps; } else { return z-z*sqr(z); } }
+double Ro_23(double z) { if (fabs(z)>1/eps) { return -Ro_10(z)/eps; } else { return z-z*sqrt(z); } }
 //*************************************************************
-double Ro_24(double z) { if (z>-ln(eps)) { return eps/(1+eps); } else { return 1/(1+exp(-z)); } }
+double Ro_24(double z) { if (z>-log(eps)) { return eps/(1+eps); } else { return 1/(1+exp(-z)); } }
 //*************************************************************
 double Ro_25(double z) { if (z>0) { return 1; } else { return 0; } }
 //*************************************************************
-double Ro_26(double z) { if (abs(z)<eps1) { return 0; } else { return Ro_10(z); } }
+double Ro_26(double z) { if (fabs(z)<eps1) { return 0; } else { return Ro_10(z); } }
 //*************************************************************
-double Ro_27(double z) { if (abs(z)>1) { return Ro_10(z); } else { return Ro_10(z)*(1-sqrt(1-sqr(z))); } }
+double Ro_27(double z) { if (fabs(z)>1) { return Ro_10(z); } else { return Ro_10(z)*(1-sqrt(1-sqrt(z))); } }
 //*************************************************************
-double Ro_28(double z) { if (z*z>ln(infinity)) { return z*(1-eps); } else { return z*(1-exp(-sqr(z))); } }
+double Ro_28(double z) { if (z*z>log(infinity)) { return z*(1-eps); } else { return z*(1-exp(-sqrt(z))); } }
 //*************************************************************
 double Xi_0(double z1, double z2) { return z1+z2; }
 //*************************************************************
@@ -472,11 +478,11 @@ double Xi_3(double z1, double z2) { if (z1<z2) { return z1; } else { return z2; 
 //*************************************************************
 double Xi_4(double z1, double z2) { return z1+z2-z1*z2; }
 //*************************************************************
-double Xi_5(double z1, double z2) { return Ro_10(z1+z2)*sqrt(sqr(z1)+sqr(z2)); }
+double Xi_5(double z1, double z2) { return Ro_10(z1+z2)*sqrt(sqrt(z1)+sqrt(z2)); }
 //*************************************************************
-double Xi_6(double z1, double z2) { return Ro_10(z1+z2)*(abs(z1)+abs(z2)); }
+double Xi_6(double z1, double z2) { return Ro_10(z1+z2)*(fabs(z1)+fabs(z2)); }
 //*************************************************************
-double Xi_7(double z1, double z2) { return Ro_10(z1+z2)*Xi_2(abs(z1),abs(z2)); }
+double Xi_7(double z1, double z2) { return Ro_10(z1+z2)*Xi_2(fabs(z1),fabs(z2)); }
 //*************************************************************
 void RPControl() {
 int k,i,j;
@@ -484,64 +490,64 @@ double zz;
 SetV_Entr();
 for (k=0; k<=(kL-1); k++) {
 	for (i=0; i<=(L-1); i++) {
-		switch ((*(*(*Psi)[k])[i])[i]) {
-			case 2:  z[k,i]=1; 
-			case 3:  z[k,i]=-infinity; 
-			case 4:  z[k,i]:=infinity; 
-			default: z[k,i]:=0;
+		switch (Psi[k][i][i]) {
+			case 2:  z[k][i]=1; 
+			case 3:  z[k][i]=-infinity; 
+			case 4:  z[k][i]=infinity; 
+			default: z[k][i]=0;
 		}
 	}
-	/*for (i=0; i<=kInP-1; i++) {
-		if (M_Entr[k,2*i]=0) { z[k,i]=V_Entr[M_Entr[k,2*i+1]]; } else { z[k,i]:=z[M_Entr[k,2*i]-1,M_Entr[k,2*i+1]]; }
+	for (i=0; i<=kInP-1; i++) {
+		if (M_Entr[k][2*i]=0) { z[k][i]=V_Entr[M_Entr[k][2*i+1]]; } else { z[k][i]=z[M_Entr[k][2*i]-1][M_Entr[k][2*i+1]]; }
 	}
 	for (i=0; i<=(L-2); i++) {
 		for (j=i+1; j<=(L-1); j++) {
-			if (Psi[k,i,j]!=0) { 
-				if (Psi[k,j,j]!=0) {
-					switch ((*(*(*Psi)[k])[i])[j]) {
-						case 1: zz=Ro_1(z[k,i]);
-						case 2: zz=Ro_2(z[k,i]);
-						case 3: zz=Ro_3(z[k,i]);
-						case 4: zz=Ro_4(z[k,i]);
-						case 5: zz=Ro_5(z[k,i]);
-						case 6: zz=Ro_6(z[k,i]);
-						case 7: zz=Ro_7(z[k,i]);
-						case 8: zz=Ro_8(z[k,i]);
-						case 9: zz=Ro_9(z[k,i]);
-						case 10: zz=Ro_10(z[k,i]);
-						case 11: zz=Ro_11(z[k,i]);
-						case 12: zz=Ro_12(z[k,i]);
-						case 13: zz=Ro_13(z[k,i]);
-						case 14: zz=Ro_14(z[k,i]);
-						case 15: zz=Ro_15(z[k,i]);
-						case 16: zz=Ro_16(z[k,i]);
-						case 17: zz=Ro_17(z[k,i]);
-						case 18: zz=Ro_18(z[k,i]);
-						case 19: zz=Ro_19(z[k,i]);
-						case 20: zz=Ro_20(z[k,i]);
-						case 21: zz=Ro_21(z[k,i]);
-						case 22: zz=Ro_22(z[k,i]);
-						case 23: zz=Ro_23(z[k,i]);
-						case 24: zz=Ro_24(z[k,i]);
-						case 25: zz=Ro_25(z[k,i]);
-						case 26: zz=Ro_26(z[k,i]);
-						case 27: zz=Ro_27(z[k,i]); 
-						case 28: zz=Ro_28(z[k,i]);
+			if (Psi[k][i][j]!=0) { 
+				if (Psi[k][j][j]!=0) {
+					switch (Psi[k][i][j]) {
+						case 1: zz=Ro_1(z[k][i]);
+						case 2: zz=Ro_2(z[k][i]);
+						case 3: zz=Ro_3(z[k][i]);
+						case 4: zz=Ro_4(z[k][i]);
+						case 5: zz=Ro_5(z[k][i]);
+						case 6: zz=Ro_6(z[k][i]);
+						case 7: zz=Ro_7(z[k][i]);
+						case 8: zz=Ro_8(z[k][i]);
+						case 9: zz=Ro_9(z[k][i]);
+						case 10: zz=Ro_10(z[k][i]);
+						case 11: zz=Ro_11(z[k][i]);
+						case 12: zz=Ro_12(z[k][i]);
+						case 13: zz=Ro_13(z[k][i]);
+						case 14: zz=Ro_14(z[k][i]);
+						case 15: zz=Ro_15(z[k][i]);
+						case 16: zz=Ro_16(z[k][i]);
+						case 17: zz=Ro_17(z[k][i]);
+						case 18: zz=Ro_18(z[k][i]);
+						case 19: zz=Ro_19(z[k][i]);
+						case 20: zz=Ro_20(z[k][i]);
+						case 21: zz=Ro_21(z[k][i]);
+						case 22: zz=Ro_22(z[k][i]);
+						case 23: zz=Ro_23(z[k][i]);
+						case 24: zz=Ro_24(z[k][i]);
+						case 25: zz=Ro_25(z[k][i]);
+						case 26: zz=Ro_26(z[k][i]);
+						case 27: zz=Ro_27(z[k][i]); 
+						case 28: zz=Ro_28(z[k][i]);
 					}
-					switch ((*(*(*Psi)[k])[j])[j]) {
-						case 1: z[k,j]=Xi_0((*(*z)[k])[j],zz);
-						case 2: z[k,j]=Xi_1(z[k,j],zz);
-						case 3: z[k,j]=Xi_2(z[k,j],zz);
-						case 4: z[k,j]=Xi_3(z[k,j],zz);
-						case 5: z[k,j]=Xi_4(z[k,j],zz);
-						case 6: z[k,j]=Xi_5(z[k,j],zz);
-						case 7: z[k,j]=Xi_6(z[k,j],zz);
-						case 8: z[k,j]=Xi_7(z[k,j],zz);
+					switch (Psi[k][j][j]) {
+						case 1: z[k][j]=Xi_0(z[k][j],zz);
+						case 2: z[k][j]=Xi_1(z[k][j],zz);
+						case 3: z[k][j]=Xi_2(z[k][j],zz);
+						case 4: z[k][j]=Xi_3(z[k][j],zz);
+						case 5: z[k][j]=Xi_4(z[k][j],zz);
+						case 6: z[k][j]=Xi_5(z[k][j],zz);
+						case 7: z[k][j]=Xi_6(z[k][j],zz);
+						case 8: z[k][j]=Xi_7(z[k][j],zz);
 					}
 				}
 			}
 		}
-	*/} 
+	} 
 }
 }
 //*************************************************************
@@ -550,12 +556,12 @@ int Rast(vector < double > Fu) {
     count = 0;
     for (i = 0; i <=(HH - 1); i++) {
         j = 0;
-        while ((j < nfu) && (Fu[j] >= Fuh[i, j])) {
+        while ((j < nfu) && (Fu[j] >= Fuh[i][j])) {
             j++;
         }
         if (j >= nfu) {
             k = 0;
-            while ((k < nfu) && (Fu[k] = Fuh[i, k])) {
+            while ((k < nfu) && (Fu[k] = Fuh[i][k])) {
                 if (k < nfu) {
                     count++;
                 }
@@ -571,7 +577,8 @@ void ChoosePareto() {
 	for (i=0; i<=(HH-1); i++) {
 		if (Lh[i]==0) {
 			j++;
-			setlength(Pareto,j);
+			//setlength(Pareto,j);
+			Pareto.resize(j);
 			Pareto[j-1]=i;
 		}
 	}
@@ -581,7 +588,8 @@ void GreytoVector(vector < int > y) {
 	int i,j,l1,l;
 	double g,g1;
 	l=c+d;
-	l1=high(y)+1;
+	//l1=high(y)+1;
+	l1=max_element();
 	for (i=0; i<=(l1-1); i++) {
 		if (i%l==0) { zb[i]=y[i]; } else { zb[i]=zb[i-1] xor y[i]; }
 	}
@@ -743,10 +751,10 @@ d3=(x3-xt)*(x4-x3)+(y3-yt)*(y4-y3);
 d4=(x4-xt)*(x1-x4)+(y4-yt)*(y1-y4);
 if ((d1*d2>0) && (d2*d3>0) && (d3*d4>0))
 {
-	d1=sqrt(sqr(x1-xt)+sqr(y1-yt));
-    d2=sqrt(sqr(x2-xt)+sqr(y2-yt));
-    d3=sqrt(sqr(x3-xt)+sqr(y3-yt));
-    d4=sqrt(sqr(x4-xt)+sqr(y4-yt));
+	d1=sqrt(sqrt(x1-xt)+sqrt(y1-yt));
+    d2=sqrt(sqrt(x2-xt)+sqrt(y2-yt));
+    d3=sqrt(sqrt(x3-xt)+sqrt(y3-yt));
+    d4=sqrt(sqrt(x4-xt)+sqrt(y4-yt));
     if (d2<d1) { d1=d2; }
     if (d3<d1) { d1=d3; }
     if (d4<d1) { d1=d4; }
@@ -1040,7 +1048,7 @@ void Func0(vector <double> Fu) {
 	for (i=0; i<=(nfu-1); i++) { Fu[i]=su[i]; }
 }
 //*************************************************************
-void ImproveChrom(vector <double> q, vector <vector <vector <vector <vector <int> > > > > StrChrom)
+void ImproveChrom(vector <double> q, int StrChrom[5])
 int i,j,k;
 bool flag;
 SetPsi(Psi0);

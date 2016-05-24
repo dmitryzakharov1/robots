@@ -1,0 +1,1423 @@
+mpicxx  -c  proj.cpp 
+In file included from proj.cpp:11:0:
+functions.h: In function ‘void GreytoVector(std::vector<int>)’:
+functions.h:591:11: error: ‘high’ was not declared in this scope
+  l1=high(y)+1;
+           ^
+functions.h: In function ‘void Viewer()’:
+functions.h:653:3: error: ‘y’ was not declared in this scope
+   y[0]=x[0];
+   ^
+functions.h:658:29: error: ‘LBasc’ was not declared in this scope
+   xlf=x[0]*cteta+x[1]*steta+LBasc;//A1ac;
+                             ^
+functions.h: In function ‘double Check2(std::vector<double>)’:
+functions.h:769:25: error: ‘High’ was not declared in this scope
+  for (i=0; i<=High(prepc); i++) {
+                         ^
+functions.h:772:75: error: cannot convert ‘double (*)[2]’ to ‘double’ for argument ‘3’ to ‘double Check1_4(double, double, double, double, double, double, double, double, double, double)’
+           prepc[i,1,1],prepc[i,2,0],prepc[i,2,1],prepc[i,3,0],prepc[i,3,1]);
+                                                                           ^
+functions.h:776:22: error: cannot convert ‘double (*)[2]’ to ‘double’ for argument ‘1’ to ‘double Check1_4(double, double, double, double, double, double, double, double, double, double)’
+            y[9],y[10]);
+                      ^
+functions.h:780:75: error: cannot convert ‘double (*)[2]’ to ‘double’ for argument ‘3’ to ‘double Check1_4(double, double, double, double, double, double, double, double, double, double)’
+           prepc[i,1,1],prepc[i,2,0],prepc[i,2,1],prepc[i,3,0],prepc[i,3,1]);
+                                                                           ^
+functions.h:784:23: error: cannot convert ‘double (*)[2]’ to ‘double’ for argument ‘1’ to ‘double Check1_4(double, double, double, double, double, double, double, double, double, double)’
+            y[20],y[21]);
+                       ^
+functions.h:788:75: error: cannot convert ‘double (*)[2]’ to ‘double’ for argument ‘3’ to ‘double Check1_4(double, double, double, double, double, double, double, double, double, double)’
+           prepc[i,1,1],prepc[i,2,0],prepc[i,2,1],prepc[i,3,0],prepc[i,3,1]);
+                                                                           ^
+functions.h:792:23: error: cannot convert ‘double (*)[2]’ to ‘double’ for argument ‘1’ to ‘double Check1_4(double, double, double, double, double, double, double, double, double, double)’
+            y[31],y[32]);
+                       ^
+functions.h: In function ‘double Chech3(std::vector<double>)’:
+functions.h:827:67: error: expected ‘;’ before ‘:’ token
+   if (Prior[0]>Prior[2]) { FlagStop[2]=false; } else { FlagStop[0]:=false; }
+                                                                   ^
+functions.h: At global scope:
+functions.h:854:1: error: ‘Procedure’ does not name a type
+ Procedure RP(t1:real;x1:TArrReal;var f1:TArrReal);
+ ^
+functions.h:854:24: error: found ‘:’ in nested-name-specifier, expected ‘::’
+ Procedure RP(t1:real;x1:TArrReal;var f1:TArrReal);
+                        ^
+functions.h:854:22: error: ‘x1’ does not name a type
+ Procedure RP(t1:real;x1:TArrReal;var f1:TArrReal);
+                      ^
+functions.h:854:34: error: ‘var’ does not name a type
+ Procedure RP(t1:real;x1:TArrReal;var f1:TArrReal);
+                                  ^
+functions.h: In function ‘void RP(double, std::vector<double>, std::vector<double>)’:
+functions.h:921:6: error: expected ‘(’ before ‘!’ token
+   if !(FlagStop[0]) {
+      ^
+functions.h:926:6: error: expected ‘(’ before ‘!’ token
+   if !(FlagStop[1]) {
+      ^
+functions.h:931:6: error: expected ‘(’ before ‘!’ token
+   if !(FlagStop[2]) {
+      ^
+functions.h:938:15: error: ‘Lbasc’ was not declared in this scope
+   f1[2]=(u[0]/Lbasc)*sin(u[1])/cos(u[1]);
+               ^
+functions.h:948:21: error: no match for ‘operator-’ (operand types are ‘std::vector<int>’ and ‘int’)
+   f1[9]=z[M_Out[0,0]-1,M_Out[0,1]];
+                     ^
+functions.h:948:21: note: candidates are:
+In file included from /usr/include/c++/4.8/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/4.8/algorithm:61,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/bits/stl_iterator.h:327:5: note: template<class _Iterator> typename std::reverse_iterator<_Iterator>::difference_type std::operator-(const std::reverse_iterator<_Iterator>&, const std::reverse_iterator<_Iterator>&)
+     operator-(const reverse_iterator<_Iterator>& __x,
+     ^
+/usr/include/c++/4.8/bits/stl_iterator.h:327:5: note:   template argument deduction/substitution failed:
+In file included from proj.cpp:11:0:
+functions.h:948:22: note:   ‘std::vector<int>’ is not derived from ‘const std::reverse_iterator<_Iterator>’
+   f1[9]=z[M_Out[0,0]-1,M_Out[0,1]];
+                      ^
+In file included from /usr/include/c++/4.8/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/4.8/algorithm:61,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/bits/stl_iterator.h:384:5: note: template<class _IteratorL, class _IteratorR> typename std::reverse_iterator<_Iterator>::difference_type std::operator-(const std::reverse_iterator<_Iterator>&, const std::reverse_iterator<_IteratorR>&)
+     operator-(const reverse_iterator<_IteratorL>& __x,
+     ^
+/usr/include/c++/4.8/bits/stl_iterator.h:384:5: note:   template argument deduction/substitution failed:
+In file included from proj.cpp:11:0:
+functions.h:948:22: note:   ‘std::vector<int>’ is not derived from ‘const std::reverse_iterator<_Iterator>’
+   f1[9]=z[M_Out[0,0]-1,M_Out[0,1]];
+                      ^
+In file included from /usr/include/c++/4.8/vector:65:0,
+                 from proj.cpp:9:
+/usr/include/c++/4.8/bits/stl_bvector.h:208:3: note: std::ptrdiff_t std::operator-(const std::_Bit_iterator_base&, const std::_Bit_iterator_base&)
+   operator-(const _Bit_iterator_base& __x, const _Bit_iterator_base& __y)
+   ^
+/usr/include/c++/4.8/bits/stl_bvector.h:208:3: note:   no known conversion for argument 1 from ‘std::vector<int>’ to ‘const std::_Bit_iterator_base&’
+In file included from /usr/include/c++/4.8/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/4.8/algorithm:61,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/bits/stl_iterator.h:896:5: note: template<class _Iterator, class _Container> typename __gnu_cxx::__normal_iterator<_Iterator, _Container>::difference_type __gnu_cxx::operator-(const __gnu_cxx::__normal_iterator<_Iterator, _Container>&, const __gnu_cxx::__normal_iterator<_Iterator, _Container>&)
+     operator-(const __normal_iterator<_Iterator, _Container>& __lhs,
+     ^
+/usr/include/c++/4.8/bits/stl_iterator.h:896:5: note:   template argument deduction/substitution failed:
+In file included from proj.cpp:11:0:
+functions.h:948:22: note:   ‘std::vector<int>’ is not derived from ‘const __gnu_cxx::__normal_iterator<_Iterator, _Container>’
+   f1[9]=z[M_Out[0,0]-1,M_Out[0,1]];
+                      ^
+In file included from /usr/include/c++/4.8/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/4.8/algorithm:61,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/bits/stl_iterator.h:889:5: note: template<class _IteratorL, class _IteratorR, class _Container> typename __gnu_cxx::__normal_iterator<_IteratorL, _Container>::difference_type __gnu_cxx::operator-(const __gnu_cxx::__normal_iterator<_IteratorL, _Container>&, const __gnu_cxx::__normal_iterator<_IteratorR, _Container>&)
+     operator-(const __normal_iterator<_IteratorL, _Container>& __lhs,
+     ^
+/usr/include/c++/4.8/bits/stl_iterator.h:889:5: note:   template argument deduction/substitution failed:
+In file included from proj.cpp:11:0:
+functions.h:948:22: note:   ‘std::vector<int>’ is not derived from ‘const __gnu_cxx::__normal_iterator<_IteratorL, _Container>’
+   f1[9]=z[M_Out[0,0]-1,M_Out[0,1]];
+                      ^
+functions.h:949:22: error: no match for ‘operator-’ (operand types are ‘std::vector<int>’ and ‘int’)
+   f1[10]=z[M_Out[1,0]-1,M_Out[1,1]];
+                      ^
+functions.h:949:22: note: candidates are:
+In file included from /usr/include/c++/4.8/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/4.8/algorithm:61,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/bits/stl_iterator.h:327:5: note: template<class _Iterator> typename std::reverse_iterator<_Iterator>::difference_type std::operator-(const std::reverse_iterator<_Iterator>&, const std::reverse_iterator<_Iterator>&)
+     operator-(const reverse_iterator<_Iterator>& __x,
+     ^
+/usr/include/c++/4.8/bits/stl_iterator.h:327:5: note:   template argument deduction/substitution failed:
+In file included from proj.cpp:11:0:
+functions.h:949:23: note:   ‘std::vector<int>’ is not derived from ‘const std::reverse_iterator<_Iterator>’
+   f1[10]=z[M_Out[1,0]-1,M_Out[1,1]];
+                       ^
+In file included from /usr/include/c++/4.8/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/4.8/algorithm:61,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/bits/stl_iterator.h:384:5: note: template<class _IteratorL, class _IteratorR> typename std::reverse_iterator<_Iterator>::difference_type std::operator-(const std::reverse_iterator<_Iterator>&, const std::reverse_iterator<_IteratorR>&)
+     operator-(const reverse_iterator<_IteratorL>& __x,
+     ^
+/usr/include/c++/4.8/bits/stl_iterator.h:384:5: note:   template argument deduction/substitution failed:
+In file included from proj.cpp:11:0:
+functions.h:949:23: note:   ‘std::vector<int>’ is not derived from ‘const std::reverse_iterator<_Iterator>’
+   f1[10]=z[M_Out[1,0]-1,M_Out[1,1]];
+                       ^
+In file included from /usr/include/c++/4.8/vector:65:0,
+                 from proj.cpp:9:
+/usr/include/c++/4.8/bits/stl_bvector.h:208:3: note: std::ptrdiff_t std::operator-(const std::_Bit_iterator_base&, const std::_Bit_iterator_base&)
+   operator-(const _Bit_iterator_base& __x, const _Bit_iterator_base& __y)
+   ^
+/usr/include/c++/4.8/bits/stl_bvector.h:208:3: note:   no known conversion for argument 1 from ‘std::vector<int>’ to ‘const std::_Bit_iterator_base&’
+In file included from /usr/include/c++/4.8/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/4.8/algorithm:61,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/bits/stl_iterator.h:896:5: note: template<class _Iterator, class _Container> typename __gnu_cxx::__normal_iterator<_Iterator, _Container>::difference_type __gnu_cxx::operator-(const __gnu_cxx::__normal_iterator<_Iterator, _Container>&, const __gnu_cxx::__normal_iterator<_Iterator, _Container>&)
+     operator-(const __normal_iterator<_Iterator, _Container>& __lhs,
+     ^
+/usr/include/c++/4.8/bits/stl_iterator.h:896:5: note:   template argument deduction/substitution failed:
+In file included from proj.cpp:11:0:
+functions.h:949:23: note:   ‘std::vector<int>’ is not derived from ‘const __gnu_cxx::__normal_iterator<_Iterator, _Container>’
+   f1[10]=z[M_Out[1,0]-1,M_Out[1,1]];
+                       ^
+In file included from /usr/include/c++/4.8/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/4.8/algorithm:61,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/bits/stl_iterator.h:889:5: note: template<class _IteratorL, class _IteratorR, class _Container> typename __gnu_cxx::__normal_iterator<_IteratorL, _Container>::difference_type __gnu_cxx::operator-(const __gnu_cxx::__normal_iterator<_IteratorL, _Container>&, const __gnu_cxx::__normal_iterator<_IteratorR, _Container>&)
+     operator-(const __normal_iterator<_IteratorL, _Container>& __lhs,
+     ^
+/usr/include/c++/4.8/bits/stl_iterator.h:889:5: note:   template argument deduction/substitution failed:
+In file included from proj.cpp:11:0:
+functions.h:949:23: note:   ‘std::vector<int>’ is not derived from ‘const __gnu_cxx::__normal_iterator<_IteratorL, _Container>’
+   f1[10]=z[M_Out[1,0]-1,M_Out[1,1]];
+                       ^
+functions.h:950:22: error: no match for ‘operator-’ (operand types are ‘std::vector<int>’ and ‘int’)
+   f1[11]=z[M_Out[2,0]-1,M_Out[2,1]];
+                      ^
+functions.h:950:22: note: candidates are:
+In file included from /usr/include/c++/4.8/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/4.8/algorithm:61,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/bits/stl_iterator.h:327:5: note: template<class _Iterator> typename std::reverse_iterator<_Iterator>::difference_type std::operator-(const std::reverse_iterator<_Iterator>&, const std::reverse_iterator<_Iterator>&)
+     operator-(const reverse_iterator<_Iterator>& __x,
+     ^
+/usr/include/c++/4.8/bits/stl_iterator.h:327:5: note:   template argument deduction/substitution failed:
+In file included from proj.cpp:11:0:
+functions.h:950:23: note:   ‘std::vector<int>’ is not derived from ‘const std::reverse_iterator<_Iterator>’
+   f1[11]=z[M_Out[2,0]-1,M_Out[2,1]];
+                       ^
+In file included from /usr/include/c++/4.8/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/4.8/algorithm:61,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/bits/stl_iterator.h:384:5: note: template<class _IteratorL, class _IteratorR> typename std::reverse_iterator<_Iterator>::difference_type std::operator-(const std::reverse_iterator<_Iterator>&, const std::reverse_iterator<_IteratorR>&)
+     operator-(const reverse_iterator<_IteratorL>& __x,
+     ^
+/usr/include/c++/4.8/bits/stl_iterator.h:384:5: note:   template argument deduction/substitution failed:
+In file included from proj.cpp:11:0:
+functions.h:950:23: note:   ‘std::vector<int>’ is not derived from ‘const std::reverse_iterator<_Iterator>’
+   f1[11]=z[M_Out[2,0]-1,M_Out[2,1]];
+                       ^
+In file included from /usr/include/c++/4.8/vector:65:0,
+                 from proj.cpp:9:
+/usr/include/c++/4.8/bits/stl_bvector.h:208:3: note: std::ptrdiff_t std::operator-(const std::_Bit_iterator_base&, const std::_Bit_iterator_base&)
+   operator-(const _Bit_iterator_base& __x, const _Bit_iterator_base& __y)
+   ^
+/usr/include/c++/4.8/bits/stl_bvector.h:208:3: note:   no known conversion for argument 1 from ‘std::vector<int>’ to ‘const std::_Bit_iterator_base&’
+In file included from /usr/include/c++/4.8/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/4.8/algorithm:61,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/bits/stl_iterator.h:896:5: note: template<class _Iterator, class _Container> typename __gnu_cxx::__normal_iterator<_Iterator, _Container>::difference_type __gnu_cxx::operator-(const __gnu_cxx::__normal_iterator<_Iterator, _Container>&, const __gnu_cxx::__normal_iterator<_Iterator, _Container>&)
+     operator-(const __normal_iterator<_Iterator, _Container>& __lhs,
+     ^
+/usr/include/c++/4.8/bits/stl_iterator.h:896:5: note:   template argument deduction/substitution failed:
+In file included from proj.cpp:11:0:
+functions.h:950:23: note:   ‘std::vector<int>’ is not derived from ‘const __gnu_cxx::__normal_iterator<_Iterator, _Container>’
+   f1[11]=z[M_Out[2,0]-1,M_Out[2,1]];
+                       ^
+In file included from /usr/include/c++/4.8/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/4.8/algorithm:61,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/bits/stl_iterator.h:889:5: note: template<class _IteratorL, class _IteratorR, class _Container> typename __gnu_cxx::__normal_iterator<_IteratorL, _Container>::difference_type __gnu_cxx::operator-(const __gnu_cxx::__normal_iterator<_IteratorL, _Container>&, const __gnu_cxx::__normal_iterator<_IteratorR, _Container>&)
+     operator-(const __normal_iterator<_IteratorL, _Container>& __lhs,
+     ^
+/usr/include/c++/4.8/bits/stl_iterator.h:889:5: note:   template argument deduction/substitution failed:
+In file included from proj.cpp:11:0:
+functions.h:950:23: note:   ‘std::vector<int>’ is not derived from ‘const __gnu_cxx::__normal_iterator<_IteratorL, _Container>’
+   f1[11]=z[M_Out[2,0]-1,M_Out[2,1]];
+                       ^
+functions.h:952:22: error: no match for ‘operator-’ (operand types are ‘std::vector<int>’ and ‘int’)
+   f1[12]=z[M_Out[3,0]-1,M_Out[3,1]];
+                      ^
+functions.h:952:22: note: candidates are:
+In file included from /usr/include/c++/4.8/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/4.8/algorithm:61,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/bits/stl_iterator.h:327:5: note: template<class _Iterator> typename std::reverse_iterator<_Iterator>::difference_type std::operator-(const std::reverse_iterator<_Iterator>&, const std::reverse_iterator<_Iterator>&)
+     operator-(const reverse_iterator<_Iterator>& __x,
+     ^
+/usr/include/c++/4.8/bits/stl_iterator.h:327:5: note:   template argument deduction/substitution failed:
+In file included from proj.cpp:11:0:
+functions.h:952:23: note:   ‘std::vector<int>’ is not derived from ‘const std::reverse_iterator<_Iterator>’
+   f1[12]=z[M_Out[3,0]-1,M_Out[3,1]];
+                       ^
+In file included from /usr/include/c++/4.8/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/4.8/algorithm:61,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/bits/stl_iterator.h:384:5: note: template<class _IteratorL, class _IteratorR> typename std::reverse_iterator<_Iterator>::difference_type std::operator-(const std::reverse_iterator<_Iterator>&, const std::reverse_iterator<_IteratorR>&)
+     operator-(const reverse_iterator<_IteratorL>& __x,
+     ^
+/usr/include/c++/4.8/bits/stl_iterator.h:384:5: note:   template argument deduction/substitution failed:
+In file included from proj.cpp:11:0:
+functions.h:952:23: note:   ‘std::vector<int>’ is not derived from ‘const std::reverse_iterator<_Iterator>’
+   f1[12]=z[M_Out[3,0]-1,M_Out[3,1]];
+                       ^
+In file included from /usr/include/c++/4.8/vector:65:0,
+                 from proj.cpp:9:
+/usr/include/c++/4.8/bits/stl_bvector.h:208:3: note: std::ptrdiff_t std::operator-(const std::_Bit_iterator_base&, const std::_Bit_iterator_base&)
+   operator-(const _Bit_iterator_base& __x, const _Bit_iterator_base& __y)
+   ^
+/usr/include/c++/4.8/bits/stl_bvector.h:208:3: note:   no known conversion for argument 1 from ‘std::vector<int>’ to ‘const std::_Bit_iterator_base&’
+In file included from /usr/include/c++/4.8/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/4.8/algorithm:61,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/bits/stl_iterator.h:896:5: note: template<class _Iterator, class _Container> typename __gnu_cxx::__normal_iterator<_Iterator, _Container>::difference_type __gnu_cxx::operator-(const __gnu_cxx::__normal_iterator<_Iterator, _Container>&, const __gnu_cxx::__normal_iterator<_Iterator, _Container>&)
+     operator-(const __normal_iterator<_Iterator, _Container>& __lhs,
+     ^
+/usr/include/c++/4.8/bits/stl_iterator.h:896:5: note:   template argument deduction/substitution failed:
+In file included from proj.cpp:11:0:
+functions.h:952:23: note:   ‘std::vector<int>’ is not derived from ‘const __gnu_cxx::__normal_iterator<_Iterator, _Container>’
+   f1[12]=z[M_Out[3,0]-1,M_Out[3,1]];
+                       ^
+In file included from /usr/include/c++/4.8/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/4.8/algorithm:61,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/bits/stl_iterator.h:889:5: note: template<class _IteratorL, class _IteratorR, class _Container> typename __gnu_cxx::__normal_iterator<_IteratorL, _Container>::difference_type __gnu_cxx::operator-(const __gnu_cxx::__normal_iterator<_IteratorL, _Container>&, const __gnu_cxx::__normal_iterator<_IteratorR, _Container>&)
+     operator-(const __normal_iterator<_IteratorL, _Container>& __lhs,
+     ^
+/usr/include/c++/4.8/bits/stl_iterator.h:889:5: note:   template argument deduction/substitution failed:
+In file included from proj.cpp:11:0:
+functions.h:952:23: note:   ‘std::vector<int>’ is not derived from ‘const __gnu_cxx::__normal_iterator<_IteratorL, _Container>’
+   f1[12]=z[M_Out[3,0]-1,M_Out[3,1]];
+                       ^
+functions.h:953:22: error: no match for ‘operator-’ (operand types are ‘std::vector<int>’ and ‘int’)
+   f1[13]=z[M_Out[4,0]-1,M_Out[4,1]];
+                      ^
+functions.h:953:22: note: candidates are:
+In file included from /usr/include/c++/4.8/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/4.8/algorithm:61,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/bits/stl_iterator.h:327:5: note: template<class _Iterator> typename std::reverse_iterator<_Iterator>::difference_type std::operator-(const std::reverse_iterator<_Iterator>&, const std::reverse_iterator<_Iterator>&)
+     operator-(const reverse_iterator<_Iterator>& __x,
+     ^
+/usr/include/c++/4.8/bits/stl_iterator.h:327:5: note:   template argument deduction/substitution failed:
+In file included from proj.cpp:11:0:
+functions.h:953:23: note:   ‘std::vector<int>’ is not derived from ‘const std::reverse_iterator<_Iterator>’
+   f1[13]=z[M_Out[4,0]-1,M_Out[4,1]];
+                       ^
+In file included from /usr/include/c++/4.8/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/4.8/algorithm:61,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/bits/stl_iterator.h:384:5: note: template<class _IteratorL, class _IteratorR> typename std::reverse_iterator<_Iterator>::difference_type std::operator-(const std::reverse_iterator<_Iterator>&, const std::reverse_iterator<_IteratorR>&)
+     operator-(const reverse_iterator<_IteratorL>& __x,
+     ^
+/usr/include/c++/4.8/bits/stl_iterator.h:384:5: note:   template argument deduction/substitution failed:
+In file included from proj.cpp:11:0:
+functions.h:953:23: note:   ‘std::vector<int>’ is not derived from ‘const std::reverse_iterator<_Iterator>’
+   f1[13]=z[M_Out[4,0]-1,M_Out[4,1]];
+                       ^
+In file included from /usr/include/c++/4.8/vector:65:0,
+                 from proj.cpp:9:
+/usr/include/c++/4.8/bits/stl_bvector.h:208:3: note: std::ptrdiff_t std::operator-(const std::_Bit_iterator_base&, const std::_Bit_iterator_base&)
+   operator-(const _Bit_iterator_base& __x, const _Bit_iterator_base& __y)
+   ^
+/usr/include/c++/4.8/bits/stl_bvector.h:208:3: note:   no known conversion for argument 1 from ‘std::vector<int>’ to ‘const std::_Bit_iterator_base&’
+In file included from /usr/include/c++/4.8/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/4.8/algorithm:61,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/bits/stl_iterator.h:896:5: note: template<class _Iterator, class _Container> typename __gnu_cxx::__normal_iterator<_Iterator, _Container>::difference_type __gnu_cxx::operator-(const __gnu_cxx::__normal_iterator<_Iterator, _Container>&, const __gnu_cxx::__normal_iterator<_Iterator, _Container>&)
+     operator-(const __normal_iterator<_Iterator, _Container>& __lhs,
+     ^
+/usr/include/c++/4.8/bits/stl_iterator.h:896:5: note:   template argument deduction/substitution failed:
+In file included from proj.cpp:11:0:
+functions.h:953:23: note:   ‘std::vector<int>’ is not derived from ‘const __gnu_cxx::__normal_iterator<_Iterator, _Container>’
+   f1[13]=z[M_Out[4,0]-1,M_Out[4,1]];
+                       ^
+In file included from /usr/include/c++/4.8/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/4.8/algorithm:61,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/bits/stl_iterator.h:889:5: note: template<class _IteratorL, class _IteratorR, class _Container> typename __gnu_cxx::__normal_iterator<_IteratorL, _Container>::difference_type __gnu_cxx::operator-(const __gnu_cxx::__normal_iterator<_IteratorL, _Container>&, const __gnu_cxx::__normal_iterator<_IteratorR, _Container>&)
+     operator-(const __normal_iterator<_IteratorL, _Container>& __lhs,
+     ^
+/usr/include/c++/4.8/bits/stl_iterator.h:889:5: note:   template argument deduction/substitution failed:
+In file included from proj.cpp:11:0:
+functions.h:953:23: note:   ‘std::vector<int>’ is not derived from ‘const __gnu_cxx::__normal_iterator<_IteratorL, _Container>’
+   f1[13]=z[M_Out[4,0]-1,M_Out[4,1]];
+                       ^
+functions.h:954:22: error: no match for ‘operator-’ (operand types are ‘std::vector<int>’ and ‘int’)
+   f1[14]=z[M_Out[5,0]-1,M_Out[5,1]];
+                      ^
+functions.h:954:22: note: candidates are:
+In file included from /usr/include/c++/4.8/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/4.8/algorithm:61,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/bits/stl_iterator.h:327:5: note: template<class _Iterator> typename std::reverse_iterator<_Iterator>::difference_type std::operator-(const std::reverse_iterator<_Iterator>&, const std::reverse_iterator<_Iterator>&)
+     operator-(const reverse_iterator<_Iterator>& __x,
+     ^
+/usr/include/c++/4.8/bits/stl_iterator.h:327:5: note:   template argument deduction/substitution failed:
+In file included from proj.cpp:11:0:
+functions.h:954:23: note:   ‘std::vector<int>’ is not derived from ‘const std::reverse_iterator<_Iterator>’
+   f1[14]=z[M_Out[5,0]-1,M_Out[5,1]];
+                       ^
+In file included from /usr/include/c++/4.8/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/4.8/algorithm:61,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/bits/stl_iterator.h:384:5: note: template<class _IteratorL, class _IteratorR> typename std::reverse_iterator<_Iterator>::difference_type std::operator-(const std::reverse_iterator<_Iterator>&, const std::reverse_iterator<_IteratorR>&)
+     operator-(const reverse_iterator<_IteratorL>& __x,
+     ^
+/usr/include/c++/4.8/bits/stl_iterator.h:384:5: note:   template argument deduction/substitution failed:
+In file included from proj.cpp:11:0:
+functions.h:954:23: note:   ‘std::vector<int>’ is not derived from ‘const std::reverse_iterator<_Iterator>’
+   f1[14]=z[M_Out[5,0]-1,M_Out[5,1]];
+                       ^
+In file included from /usr/include/c++/4.8/vector:65:0,
+                 from proj.cpp:9:
+/usr/include/c++/4.8/bits/stl_bvector.h:208:3: note: std::ptrdiff_t std::operator-(const std::_Bit_iterator_base&, const std::_Bit_iterator_base&)
+   operator-(const _Bit_iterator_base& __x, const _Bit_iterator_base& __y)
+   ^
+/usr/include/c++/4.8/bits/stl_bvector.h:208:3: note:   no known conversion for argument 1 from ‘std::vector<int>’ to ‘const std::_Bit_iterator_base&’
+In file included from /usr/include/c++/4.8/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/4.8/algorithm:61,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/bits/stl_iterator.h:896:5: note: template<class _Iterator, class _Container> typename __gnu_cxx::__normal_iterator<_Iterator, _Container>::difference_type __gnu_cxx::operator-(const __gnu_cxx::__normal_iterator<_Iterator, _Container>&, const __gnu_cxx::__normal_iterator<_Iterator, _Container>&)
+     operator-(const __normal_iterator<_Iterator, _Container>& __lhs,
+     ^
+/usr/include/c++/4.8/bits/stl_iterator.h:896:5: note:   template argument deduction/substitution failed:
+In file included from proj.cpp:11:0:
+functions.h:954:23: note:   ‘std::vector<int>’ is not derived from ‘const __gnu_cxx::__normal_iterator<_Iterator, _Container>’
+   f1[14]=z[M_Out[5,0]-1,M_Out[5,1]];
+                       ^
+In file included from /usr/include/c++/4.8/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/4.8/algorithm:61,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/bits/stl_iterator.h:889:5: note: template<class _IteratorL, class _IteratorR, class _Container> typename __gnu_cxx::__normal_iterator<_IteratorL, _Container>::difference_type __gnu_cxx::operator-(const __gnu_cxx::__normal_iterator<_IteratorL, _Container>&, const __gnu_cxx::__normal_iterator<_IteratorR, _Container>&)
+     operator-(const __normal_iterator<_IteratorL, _Container>& __lhs,
+     ^
+/usr/include/c++/4.8/bits/stl_iterator.h:889:5: note:   template argument deduction/substitution failed:
+In file included from proj.cpp:11:0:
+functions.h:954:23: note:   ‘std::vector<int>’ is not derived from ‘const __gnu_cxx::__normal_iterator<_IteratorL, _Container>’
+   f1[14]=z[M_Out[5,0]-1,M_Out[5,1]];
+                       ^
+functions.h:956:22: error: no match for ‘operator-’ (operand types are ‘std::vector<int>’ and ‘int’)
+   f1[15]=z[M_Out[6,0]-1,M_Out[6,1]];
+                      ^
+functions.h:956:22: note: candidates are:
+In file included from /usr/include/c++/4.8/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/4.8/algorithm:61,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/bits/stl_iterator.h:327:5: note: template<class _Iterator> typename std::reverse_iterator<_Iterator>::difference_type std::operator-(const std::reverse_iterator<_Iterator>&, const std::reverse_iterator<_Iterator>&)
+     operator-(const reverse_iterator<_Iterator>& __x,
+     ^
+/usr/include/c++/4.8/bits/stl_iterator.h:327:5: note:   template argument deduction/substitution failed:
+In file included from proj.cpp:11:0:
+functions.h:956:23: note:   ‘std::vector<int>’ is not derived from ‘const std::reverse_iterator<_Iterator>’
+   f1[15]=z[M_Out[6,0]-1,M_Out[6,1]];
+                       ^
+In file included from /usr/include/c++/4.8/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/4.8/algorithm:61,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/bits/stl_iterator.h:384:5: note: template<class _IteratorL, class _IteratorR> typename std::reverse_iterator<_Iterator>::difference_type std::operator-(const std::reverse_iterator<_Iterator>&, const std::reverse_iterator<_IteratorR>&)
+     operator-(const reverse_iterator<_IteratorL>& __x,
+     ^
+/usr/include/c++/4.8/bits/stl_iterator.h:384:5: note:   template argument deduction/substitution failed:
+In file included from proj.cpp:11:0:
+functions.h:956:23: note:   ‘std::vector<int>’ is not derived from ‘const std::reverse_iterator<_Iterator>’
+   f1[15]=z[M_Out[6,0]-1,M_Out[6,1]];
+                       ^
+In file included from /usr/include/c++/4.8/vector:65:0,
+                 from proj.cpp:9:
+/usr/include/c++/4.8/bits/stl_bvector.h:208:3: note: std::ptrdiff_t std::operator-(const std::_Bit_iterator_base&, const std::_Bit_iterator_base&)
+   operator-(const _Bit_iterator_base& __x, const _Bit_iterator_base& __y)
+   ^
+/usr/include/c++/4.8/bits/stl_bvector.h:208:3: note:   no known conversion for argument 1 from ‘std::vector<int>’ to ‘const std::_Bit_iterator_base&’
+In file included from /usr/include/c++/4.8/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/4.8/algorithm:61,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/bits/stl_iterator.h:896:5: note: template<class _Iterator, class _Container> typename __gnu_cxx::__normal_iterator<_Iterator, _Container>::difference_type __gnu_cxx::operator-(const __gnu_cxx::__normal_iterator<_Iterator, _Container>&, const __gnu_cxx::__normal_iterator<_Iterator, _Container>&)
+     operator-(const __normal_iterator<_Iterator, _Container>& __lhs,
+     ^
+/usr/include/c++/4.8/bits/stl_iterator.h:896:5: note:   template argument deduction/substitution failed:
+In file included from proj.cpp:11:0:
+functions.h:956:23: note:   ‘std::vector<int>’ is not derived from ‘const __gnu_cxx::__normal_iterator<_Iterator, _Container>’
+   f1[15]=z[M_Out[6,0]-1,M_Out[6,1]];
+                       ^
+In file included from /usr/include/c++/4.8/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/4.8/algorithm:61,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/bits/stl_iterator.h:889:5: note: template<class _IteratorL, class _IteratorR, class _Container> typename __gnu_cxx::__normal_iterator<_IteratorL, _Container>::difference_type __gnu_cxx::operator-(const __gnu_cxx::__normal_iterator<_IteratorL, _Container>&, const __gnu_cxx::__normal_iterator<_IteratorR, _Container>&)
+     operator-(const __normal_iterator<_IteratorL, _Container>& __lhs,
+     ^
+/usr/include/c++/4.8/bits/stl_iterator.h:889:5: note:   template argument deduction/substitution failed:
+In file included from proj.cpp:11:0:
+functions.h:956:23: note:   ‘std::vector<int>’ is not derived from ‘const __gnu_cxx::__normal_iterator<_IteratorL, _Container>’
+   f1[15]=z[M_Out[6,0]-1,M_Out[6,1]];
+                       ^
+functions.h:957:22: error: no match for ‘operator-’ (operand types are ‘std::vector<int>’ and ‘int’)
+   f1[16]=z[M_Out[7,0]-1,M_Out[7,1]];
+                      ^
+functions.h:957:22: note: candidates are:
+In file included from /usr/include/c++/4.8/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/4.8/algorithm:61,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/bits/stl_iterator.h:327:5: note: template<class _Iterator> typename std::reverse_iterator<_Iterator>::difference_type std::operator-(const std::reverse_iterator<_Iterator>&, const std::reverse_iterator<_Iterator>&)
+     operator-(const reverse_iterator<_Iterator>& __x,
+     ^
+/usr/include/c++/4.8/bits/stl_iterator.h:327:5: note:   template argument deduction/substitution failed:
+In file included from proj.cpp:11:0:
+functions.h:957:23: note:   ‘std::vector<int>’ is not derived from ‘const std::reverse_iterator<_Iterator>’
+   f1[16]=z[M_Out[7,0]-1,M_Out[7,1]];
+                       ^
+In file included from /usr/include/c++/4.8/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/4.8/algorithm:61,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/bits/stl_iterator.h:384:5: note: template<class _IteratorL, class _IteratorR> typename std::reverse_iterator<_Iterator>::difference_type std::operator-(const std::reverse_iterator<_Iterator>&, const std::reverse_iterator<_IteratorR>&)
+     operator-(const reverse_iterator<_IteratorL>& __x,
+     ^
+/usr/include/c++/4.8/bits/stl_iterator.h:384:5: note:   template argument deduction/substitution failed:
+In file included from proj.cpp:11:0:
+functions.h:957:23: note:   ‘std::vector<int>’ is not derived from ‘const std::reverse_iterator<_Iterator>’
+   f1[16]=z[M_Out[7,0]-1,M_Out[7,1]];
+                       ^
+In file included from /usr/include/c++/4.8/vector:65:0,
+                 from proj.cpp:9:
+/usr/include/c++/4.8/bits/stl_bvector.h:208:3: note: std::ptrdiff_t std::operator-(const std::_Bit_iterator_base&, const std::_Bit_iterator_base&)
+   operator-(const _Bit_iterator_base& __x, const _Bit_iterator_base& __y)
+   ^
+/usr/include/c++/4.8/bits/stl_bvector.h:208:3: note:   no known conversion for argument 1 from ‘std::vector<int>’ to ‘const std::_Bit_iterator_base&’
+In file included from /usr/include/c++/4.8/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/4.8/algorithm:61,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/bits/stl_iterator.h:896:5: note: template<class _Iterator, class _Container> typename __gnu_cxx::__normal_iterator<_Iterator, _Container>::difference_type __gnu_cxx::operator-(const __gnu_cxx::__normal_iterator<_Iterator, _Container>&, const __gnu_cxx::__normal_iterator<_Iterator, _Container>&)
+     operator-(const __normal_iterator<_Iterator, _Container>& __lhs,
+     ^
+/usr/include/c++/4.8/bits/stl_iterator.h:896:5: note:   template argument deduction/substitution failed:
+In file included from proj.cpp:11:0:
+functions.h:957:23: note:   ‘std::vector<int>’ is not derived from ‘const __gnu_cxx::__normal_iterator<_Iterator, _Container>’
+   f1[16]=z[M_Out[7,0]-1,M_Out[7,1]];
+                       ^
+In file included from /usr/include/c++/4.8/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/4.8/algorithm:61,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/bits/stl_iterator.h:889:5: note: template<class _IteratorL, class _IteratorR, class _Container> typename __gnu_cxx::__normal_iterator<_IteratorL, _Container>::difference_type __gnu_cxx::operator-(const __gnu_cxx::__normal_iterator<_IteratorL, _Container>&, const __gnu_cxx::__normal_iterator<_IteratorR, _Container>&)
+     operator-(const __normal_iterator<_IteratorL, _Container>& __lhs,
+     ^
+/usr/include/c++/4.8/bits/stl_iterator.h:889:5: note:   template argument deduction/substitution failed:
+In file included from proj.cpp:11:0:
+functions.h:957:23: note:   ‘std::vector<int>’ is not derived from ‘const __gnu_cxx::__normal_iterator<_IteratorL, _Container>’
+   f1[16]=z[M_Out[7,0]-1,M_Out[7,1]];
+                       ^
+functions.h:958:22: error: no match for ‘operator-’ (operand types are ‘std::vector<int>’ and ‘int’)
+   f1[17]=z[M_Out[8,0]-1,M_Out[8,1]];
+                      ^
+functions.h:958:22: note: candidates are:
+In file included from /usr/include/c++/4.8/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/4.8/algorithm:61,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/bits/stl_iterator.h:327:5: note: template<class _Iterator> typename std::reverse_iterator<_Iterator>::difference_type std::operator-(const std::reverse_iterator<_Iterator>&, const std::reverse_iterator<_Iterator>&)
+     operator-(const reverse_iterator<_Iterator>& __x,
+     ^
+/usr/include/c++/4.8/bits/stl_iterator.h:327:5: note:   template argument deduction/substitution failed:
+In file included from proj.cpp:11:0:
+functions.h:958:23: note:   ‘std::vector<int>’ is not derived from ‘const std::reverse_iterator<_Iterator>’
+   f1[17]=z[M_Out[8,0]-1,M_Out[8,1]];
+                       ^
+In file included from /usr/include/c++/4.8/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/4.8/algorithm:61,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/bits/stl_iterator.h:384:5: note: template<class _IteratorL, class _IteratorR> typename std::reverse_iterator<_Iterator>::difference_type std::operator-(const std::reverse_iterator<_Iterator>&, const std::reverse_iterator<_IteratorR>&)
+     operator-(const reverse_iterator<_IteratorL>& __x,
+     ^
+/usr/include/c++/4.8/bits/stl_iterator.h:384:5: note:   template argument deduction/substitution failed:
+In file included from proj.cpp:11:0:
+functions.h:958:23: note:   ‘std::vector<int>’ is not derived from ‘const std::reverse_iterator<_Iterator>’
+   f1[17]=z[M_Out[8,0]-1,M_Out[8,1]];
+                       ^
+In file included from /usr/include/c++/4.8/vector:65:0,
+                 from proj.cpp:9:
+/usr/include/c++/4.8/bits/stl_bvector.h:208:3: note: std::ptrdiff_t std::operator-(const std::_Bit_iterator_base&, const std::_Bit_iterator_base&)
+   operator-(const _Bit_iterator_base& __x, const _Bit_iterator_base& __y)
+   ^
+/usr/include/c++/4.8/bits/stl_bvector.h:208:3: note:   no known conversion for argument 1 from ‘std::vector<int>’ to ‘const std::_Bit_iterator_base&’
+In file included from /usr/include/c++/4.8/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/4.8/algorithm:61,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/bits/stl_iterator.h:896:5: note: template<class _Iterator, class _Container> typename __gnu_cxx::__normal_iterator<_Iterator, _Container>::difference_type __gnu_cxx::operator-(const __gnu_cxx::__normal_iterator<_Iterator, _Container>&, const __gnu_cxx::__normal_iterator<_Iterator, _Container>&)
+     operator-(const __normal_iterator<_Iterator, _Container>& __lhs,
+     ^
+/usr/include/c++/4.8/bits/stl_iterator.h:896:5: note:   template argument deduction/substitution failed:
+In file included from proj.cpp:11:0:
+functions.h:958:23: note:   ‘std::vector<int>’ is not derived from ‘const __gnu_cxx::__normal_iterator<_Iterator, _Container>’
+   f1[17]=z[M_Out[8,0]-1,M_Out[8,1]];
+                       ^
+In file included from /usr/include/c++/4.8/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/4.8/algorithm:61,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/bits/stl_iterator.h:889:5: note: template<class _IteratorL, class _IteratorR, class _Container> typename __gnu_cxx::__normal_iterator<_IteratorL, _Container>::difference_type __gnu_cxx::operator-(const __gnu_cxx::__normal_iterator<_IteratorL, _Container>&, const __gnu_cxx::__normal_iterator<_IteratorR, _Container>&)
+     operator-(const __normal_iterator<_IteratorL, _Container>& __lhs,
+     ^
+/usr/include/c++/4.8/bits/stl_iterator.h:889:5: note:   template argument deduction/substitution failed:
+In file included from proj.cpp:11:0:
+functions.h:958:23: note:   ‘std::vector<int>’ is not derived from ‘const __gnu_cxx::__normal_iterator<_IteratorL, _Container>’
+   f1[17]=z[M_Out[8,0]-1,M_Out[8,1]];
+                       ^
+functions.h:961:17: error: call of overloaded ‘abs(double&)’ is ambiguous
+    if (abs(f1[i])>infinity) { f1[i]=Ro_10(f1[i])*infinity; }
+                 ^
+functions.h:961:17: note: candidates are:
+In file included from proj.cpp:2:0:
+/usr/include/stdlib.h:775:12: note: int abs(int)
+ extern int abs (int __x) __THROW __attribute__ ((__const__)) __wur;
+            ^
+In file included from /usr/include/c++/4.8/bits/stl_algo.h:59:0,
+                 from /usr/include/c++/4.8/algorithm:62,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/cstdlib:179:3: note: __int128 std::abs(__int128)
+   abs(__int128 __x) { return __x >= 0 ? __x : -__x; }
+   ^
+/usr/include/c++/4.8/cstdlib:174:3: note: long long int std::abs(long long int)
+   abs(long long __x) { return __builtin_llabs (__x); }
+   ^
+/usr/include/c++/4.8/cstdlib:166:3: note: long int std::abs(long int)
+   abs(long __i) { return __builtin_labs(__i); }
+   ^
+In file included from proj.cpp:11:0:
+functions.h: In function ‘void Euler4()’:
+functions.h:994:33: error: expected ‘;’ before ‘:’ token
+  for (i=0; i<=(n-1); i++) { x[i]:=x[i]+dt*(fa[i]+fb[i])/2; }
+                                 ^
+functions.h: In function ‘double Normdist(std::vector<double>, std::vector<double>)’:
+functions.h:1002:22: error: ‘high’ was not declared in this scope
+  for (i=0;i<=high(xf1); i++) {
+                      ^
+functions.h:1003:22: error: call of overloaded ‘abs(double)’ is ambiguous
+   aa=abs(xf1[i]-x1[i]);
+                      ^
+functions.h:1003:22: note: candidates are:
+In file included from proj.cpp:2:0:
+/usr/include/stdlib.h:775:12: note: int abs(int)
+ extern int abs (int __x) __THROW __attribute__ ((__const__)) __wur;
+            ^
+In file included from /usr/include/c++/4.8/bits/stl_algo.h:59:0,
+                 from /usr/include/c++/4.8/algorithm:62,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/cstdlib:179:3: note: __int128 std::abs(__int128)
+   abs(__int128 __x) { return __x >= 0 ? __x : -__x; }
+   ^
+/usr/include/c++/4.8/cstdlib:174:3: note: long long int std::abs(long long int)
+   abs(long long __x) { return __builtin_llabs (__x); }
+   ^
+/usr/include/c++/4.8/cstdlib:166:3: note: long int std::abs(long int)
+   abs(long __i) { return __builtin_labs(__i); }
+   ^
+In file included from proj.cpp:11:0:
+functions.h: In function ‘void Func(std::vector<double>)’:
+functions.h:1016:2: error: ‘repeat’ was not declared in this scope
+  repeat
+  ^
+functions.h:1017:2: error: expected ‘;’ before ‘Viewer’
+  Viewer();
+  ^
+functions.h:1018:23: error: ‘y’ was not declared in this scope
+  sumpen=sumpen+check2(y);
+                       ^
+functions.h:1018:24: error: ‘check2’ was not declared in this scope
+  sumpen=sumpen+check2(y);
+                        ^
+functions.h:1019:27: error: ‘check3’ was not declared in this scope
+     sumpen=sumpen+check3(y);
+                           ^
+functions.h:1021:43: error: ‘until’ was not declared in this scope
+  until ((t>tf) || (Normdist(x,xf)<epsterm));
+                                           ^
+functions.h:1023:23: error: ‘high’ was not declared in this scope
+  for (i=0; i<=high(xf1); i++) { 
+                       ^
+functions.h:1024:21: error: call of overloaded ‘abs(double)’ is ambiguous
+  pr1=abs(x[i]-xfc[i]);
+                     ^
+functions.h:1024:21: note: candidates are:
+In file included from proj.cpp:2:0:
+/usr/include/stdlib.h:775:12: note: int abs(int)
+ extern int abs (int __x) __THROW __attribute__ ((__const__)) __wur;
+            ^
+In file included from /usr/include/c++/4.8/bits/stl_algo.h:59:0,
+                 from /usr/include/c++/4.8/algorithm:62,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/cstdlib:179:3: note: __int128 std::abs(__int128)
+   abs(__int128 __x) { return __x >= 0 ? __x : -__x; }
+   ^
+/usr/include/c++/4.8/cstdlib:174:3: note: long long int std::abs(long long int)
+   abs(long long __x) { return __builtin_llabs (__x); }
+   ^
+/usr/include/c++/4.8/cstdlib:166:3: note: long int std::abs(long int)
+   abs(long __i) { return __builtin_labs(__i); }
+   ^
+In file included from proj.cpp:11:0:
+functions.h:1027:2: error: ‘fu’ was not declared in this scope
+  fu[0]=t+shtraf*sumpen*dt;
+  ^
+functions.h: In function ‘void Integr()’:
+functions.h:1036:2: error: ‘repeat’ was not declared in this scope
+  repeat
+  ^
+functions.h:1037:2: error: expected ‘;’ before ‘for’
+  for (i=0; i<=ny-1; i++) { qy[i]=qymin[i]+stepsqy[i]*EAix[i]; }
+  ^
+functions.h:1037:24: error: expected ‘;’ before ‘)’ token
+  for (i=0; i<=ny-1; i++) { qy[i]=qymin[i]+stepsqy[i]*EAix[i]; }
+                        ^
+functions.h:1041:2: error: ‘until’ was not declared in this scope
+  until !flag;
+  ^
+functions.h:1041:8: error: expected ‘;’ before ‘!’ token
+  until !flag;
+        ^
+functions.h: At global scope:
+functions.h:1051:1: error: expected initializer before ‘int’
+ int i,j,k;
+ ^
+functions.h:1053:7: error: expected constructor, destructor, or type conversion before ‘(’ token
+ SetPsi(Psi0);
+       ^
+functions.h:1054:6: error: expected constructor, destructor, or type conversion before ‘(’ token
+ Func0(Fu1);
+      ^
+functions.h:1055:1: error: ‘k’ does not name a type
+ k=-1;
+ ^
+functions.h:1056:1: error: expected unqualified-id before ‘for’
+ for (i=0; i<=lchr-1; i++) { 
+ ^
+functions.h:1056:11: error: ‘i’ does not name a type
+ for (i=0; i<=lchr-1; i++) { 
+           ^
+functions.h:1056:22: error: ‘i’ does not name a type
+ for (i=0; i<=lchr-1; i++) { 
+                      ^
+proj.cpp: In function ‘int main(int, const char**)’:
+proj.cpp:22:15: error: ‘kW’ was not declared in this scope
+ SetLength(O1s,kW); 
+               ^
+proj.cpp:22:17: error: ‘SetLength’ was not declared in this scope
+ SetLength(O1s,kW); 
+                 ^
+proj.cpp:25:15: error: ‘kV’ was not declared in this scope
+ SetLength(O2s,kV);
+               ^
+proj.cpp:26:32: error: expected ‘;’ before ‘:’ token
+ for (i=0; i<=kV-1;i++) { O2s[i]:=O2sc[i]; } 
+                                ^
+proj.cpp:33:14: error: no match for ‘operator=’ (operand types are ‘std::vector<std::vector<int> >’ and ‘int [16][16]’)
+    Psi[k,i,j]=PsiMultBasc[k,i,j];
+              ^
+proj.cpp:33:14: note: candidate is:
+In file included from /usr/include/c++/4.8/vector:69:0,
+                 from proj.cpp:9:
+/usr/include/c++/4.8/bits/vector.tcc:160:5: note: std::vector<_Tp, _Alloc>& std::vector<_Tp, _Alloc>::operator=(const std::vector<_Tp, _Alloc>&) [with _Tp = std::vector<int>; _Alloc = std::allocator<std::vector<int> >]
+     vector<_Tp, _Alloc>::
+     ^
+/usr/include/c++/4.8/bits/vector.tcc:160:5: note:   no known conversion for argument 1 from ‘int [16][16]’ to ‘const std::vector<std::vector<int> >&’
+proj.cpp:34:24: error: no match for ‘operator=’ (operand types are ‘std::vector<std::vector<int> >’ and ‘int [16][16]’)
+             Psi0[k,i,j]=PsiMultBasc[k,i,j];
+                        ^
+proj.cpp:34:24: note: candidate is:
+In file included from /usr/include/c++/4.8/vector:69:0,
+                 from proj.cpp:9:
+/usr/include/c++/4.8/bits/vector.tcc:160:5: note: std::vector<_Tp, _Alloc>& std::vector<_Tp, _Alloc>::operator=(const std::vector<_Tp, _Alloc>&) [with _Tp = std::vector<int>; _Alloc = std::allocator<std::vector<int> >]
+     vector<_Tp, _Alloc>::
+     ^
+/usr/include/c++/4.8/bits/vector.tcc:160:5: note:   no known conversion for argument 1 from ‘int [16][16]’ to ‘const std::vector<std::vector<int> >&’
+proj.cpp:40:23: error: ‘kInp’ was not declared in this scope
+ SetLength(M_Entr,kL,2*kInp);
+                       ^
+proj.cpp:42:18: error: ‘kinp’ was not declared in this scope
+  for (i=0; i<=(2*kinp - 1); i++) {  M_Entr[k,i]=M_Entrc[k,i]; }
+                  ^
+proj.cpp:42:48: error: no match for ‘operator=’ (operand types are ‘std::vector<int>’ and ‘int [12]’)
+  for (i=0; i<=(2*kinp - 1); i++) {  M_Entr[k,i]=M_Entrc[k,i]; }
+                                                ^
+proj.cpp:42:48: note: candidate is:
+In file included from /usr/include/c++/4.8/vector:69:0,
+                 from proj.cpp:9:
+/usr/include/c++/4.8/bits/vector.tcc:160:5: note: std::vector<_Tp, _Alloc>& std::vector<_Tp, _Alloc>::operator=(const std::vector<_Tp, _Alloc>&) [with _Tp = int; _Alloc = std::allocator<int>]
+     vector<_Tp, _Alloc>::
+     ^
+/usr/include/c++/4.8/bits/vector.tcc:160:5: note:   no known conversion for argument 1 from ‘int [12]’ to ‘const std::vector<int>&’
+proj.cpp:47:35: error: no match for ‘operator=’ (operand types are ‘std::vector<int>’ and ‘int [2]’)
+  for (j=0; j<=1; j++) { M_Out[i,j]=M_Outc[i,j]; }
+                                   ^
+proj.cpp:47:35: note: candidate is:
+In file included from /usr/include/c++/4.8/vector:69:0,
+                 from proj.cpp:9:
+/usr/include/c++/4.8/bits/vector.tcc:160:5: note: std::vector<_Tp, _Alloc>& std::vector<_Tp, _Alloc>::operator=(const std::vector<_Tp, _Alloc>&) [with _Tp = int; _Alloc = std::allocator<int>]
+     vector<_Tp, _Alloc>::
+     ^
+/usr/include/c++/4.8/bits/vector.tcc:160:5: note:   no known conversion for argument 1 from ‘int [2]’ to ‘const std::vector<int>&’
+proj.cpp:61:19: error: ‘Setlength’ was not declared in this scope
+ Setlength(qymax,ny);
+                   ^
+proj.cpp:83:24: error: ‘high’ was not declared in this scope
+   Setlength(xf,high(xfc)+1);  
+                        ^
+proj.cpp:91:33: error: expected ‘;’ before ‘:’ token
+ for (i=0; i<=m-1; i++) { umax[i]:=umaxc[i]; }
+                                 ^
+proj.cpp:93:13: error: ‘y’ was not declared in this scope
+   SetLength(y,lv);
+             ^
+proj.cpp:105:34: error: expected ‘;’ before ‘:’ token
+ for (i=0; i<=kP-1; i++) { Pnum[i]:=Pnumc[i]; } 
+                                  ^
+proj.cpp:124:37: error: expected ‘;’ before ‘:’ token
+ for (i=0; i<=nfu-1; i++) { Shtraf[i]:=1; }
+                                     ^
+proj.cpp:149:28: error: could not convert ‘PopChrPar.std::vector<_Tp, _Alloc>::operator[]<std::vector<std::vector<int> >, std::allocator<std::vector<std::vector<int> > > >(0ul)’ from ‘std::vector<std::vector<int> >’ to ‘std::vector<int>’
+   VectortoGrey(PopChrPar[0]); 
+                            ^
+proj.cpp:151:41: error: no match for ‘operator=’ (operand types are ‘std::vector<std::vector<std::vector<int> > >’ and ‘int’)
+  for (j=0; j<=4; j++) { PopChrStr[0,i,j]=0; }
+                                         ^
+proj.cpp:151:41: note: candidate is:
+In file included from /usr/include/c++/4.8/vector:69:0,
+                 from proj.cpp:9:
+/usr/include/c++/4.8/bits/vector.tcc:160:5: note: std::vector<_Tp, _Alloc>& std::vector<_Tp, _Alloc>::operator=(const std::vector<_Tp, _Alloc>&) [with _Tp = std::vector<std::vector<int> >; _Alloc = std::allocator<std::vector<std::vector<int> > >]
+     vector<_Tp, _Alloc>::
+     ^
+/usr/include/c++/4.8/bits/vector.tcc:160:5: note:   no known conversion for argument 1 from ‘int’ to ‘const std::vector<std::vector<std::vector<int> > >&’
+proj.cpp:155:51: error: cannot convert ‘std::vector<std::vector<std::vector<int> > >’ to ‘std::vector<int>*’ for argument ‘1’ to ‘void GenVar(std::vector<int>*)’
+  for (j=0; j<=lchr-1; j++) { GenVar(PopChrStr[i,j]); }
+                                                   ^
+proj.cpp:156:58: error: too many arguments to function ‘long int random()’
+  for (j=0; j<=(p*(c+d)-1); j++) { PopChrPar[i,j]=random(2); }
+                                                          ^
+In file included from proj.cpp:2:0:
+/usr/include/stdlib.h:321:17: note: declared here
+ extern long int random (void) __THROW;
+                 ^
+proj.cpp:156:49: error: no match for ‘operator=’ (operand types are ‘std::vector<std::vector<int> >’ and ‘long int’)
+  for (j=0; j<=(p*(c+d)-1); j++) { PopChrPar[i,j]=random(2); }
+                                                 ^
+proj.cpp:156:49: note: candidate is:
+In file included from /usr/include/c++/4.8/vector:69:0,
+                 from proj.cpp:9:
+/usr/include/c++/4.8/bits/vector.tcc:160:5: note: std::vector<_Tp, _Alloc>& std::vector<_Tp, _Alloc>::operator=(const std::vector<_Tp, _Alloc>&) [with _Tp = std::vector<int>; _Alloc = std::allocator<std::vector<int> >]
+     vector<_Tp, _Alloc>::
+     ^
+/usr/include/c++/4.8/bits/vector.tcc:160:5: note:   no known conversion for argument 1 from ‘long int’ to ‘const std::vector<std::vector<int> >&’
+proj.cpp:163:56: error: cannot convert ‘std::vector<std::vector<std::vector<int> > >’ to ‘int*’ for argument ‘1’ to ‘void Variations(int*)’
+ for (j=0; j<=(lchr-1); j++) { Variations(PopChrStr[i,j]); }
+                                                        ^
+proj.cpp:166:26: error: could not convert ‘PopChrPar.std::vector<_Tp, _Alloc>::operator[]<std::vector<std::vector<int> >, std::allocator<std::vector<std::vector<int> > > >(((std::vector<std::vector<std::vector<int> > >::size_type)i))’ from ‘std::vector<std::vector<int> >’ to ‘std::vector<int>’
+ GreytoVector(PopChrPar[i]);
+                          ^
+proj.cpp:177:1: error: ‘repeat’ was not declared in this scope
+ repeat
+ ^
+proj.cpp:179:5: error: expected ‘;’ before ‘rt’
+     rt=1;//first couple for crossoving
+     ^
+proj.cpp:182:7: error: expected ‘;’ before ‘k1’
+       k1=random(HH);
+       ^
+proj.cpp:183:19: error: too many arguments to function ‘long int random()’
+       k2=random(HH);
+                   ^
+In file included from proj.cpp:2:0:
+/usr/include/stdlib.h:321:17: note: declared here
+ extern long int random (void) __THROW;
+                 ^
+proj.cpp:184:10: error: cannot convert ‘long int()throw ()’ to ‘double’ in assignment
+       ksi=random;
+          ^
+proj.cpp:189:24: error: too many arguments to function ‘long int random()’
+         ks1=random(lchr);
+                        ^
+In file included from proj.cpp:2:0:
+/usr/include/stdlib.h:321:17: note: declared here
+ extern long int random (void) __THROW;
+                 ^
+proj.cpp:190:27: error: too many arguments to function ‘long int random()’
+         ks2=random(p*(c+d));
+                           ^
+In file included from proj.cpp:2:0:
+/usr/include/stdlib.h:321:17: note: declared here
+ extern long int random (void) __THROW;
+                 ^
+proj.cpp:194:11: error: no match for ‘operator=’ (operand types are ‘std::vector<std::vector<int> >’ and ‘std::vector<std::vector<std::vector<int> > >’)
+   Son1s[i]=PopChrStr[k1,i];
+           ^
+proj.cpp:194:11: note: candidate is:
+In file included from /usr/include/c++/4.8/vector:69:0,
+                 from proj.cpp:9:
+/usr/include/c++/4.8/bits/vector.tcc:160:5: note: std::vector<_Tp, _Alloc>& std::vector<_Tp, _Alloc>::operator=(const std::vector<_Tp, _Alloc>&) [with _Tp = std::vector<int>; _Alloc = std::allocator<std::vector<int> >]
+     vector<_Tp, _Alloc>::
+     ^
+/usr/include/c++/4.8/bits/vector.tcc:160:5: note:   no known conversion for argument 1 from ‘std::vector<std::vector<std::vector<int> > >’ to ‘const std::vector<std::vector<int> >&’
+proj.cpp:195:17: error: no match for ‘operator=’ (operand types are ‘std::vector<std::vector<int> >’ and ‘std::vector<std::vector<std::vector<int> > >’)
+         Son2s[i]=PopChrStr[k2,i];
+                 ^
+proj.cpp:195:17: note: candidate is:
+In file included from /usr/include/c++/4.8/vector:69:0,
+                 from proj.cpp:9:
+/usr/include/c++/4.8/bits/vector.tcc:160:5: note: std::vector<_Tp, _Alloc>& std::vector<_Tp, _Alloc>::operator=(const std::vector<_Tp, _Alloc>&) [with _Tp = std::vector<int>; _Alloc = std::allocator<std::vector<int> >]
+     vector<_Tp, _Alloc>::
+     ^
+/usr/include/c++/4.8/bits/vector.tcc:160:5: note:   no known conversion for argument 1 from ‘std::vector<std::vector<std::vector<int> > >’ to ‘const std::vector<std::vector<int> >&’
+proj.cpp:199:11: error: cannot convert ‘std::vector<std::vector<int> >’ to ‘int’ in assignment
+   Son1p[i]=PopChrPar[k1,i];
+           ^
+proj.cpp:200:17: error: cannot convert ‘std::vector<std::vector<int> >’ to ‘int’ in assignment
+         Son2p[i]=PopChrPar[k2,i];
+                 ^
+proj.cpp:201:17: error: cannot convert ‘std::vector<std::vector<int> >’ to ‘int’ in assignment
+         Son3p[i]=PopChrPar[k1,i];
+                 ^
+proj.cpp:202:17: error: cannot convert ‘std::vector<std::vector<int> >’ to ‘int’ in assignment
+         Son4p[i]=PopChrPar[k2,i];
+                 ^
+proj.cpp:206:12: error: cannot convert ‘std::vector<std::vector<int> >’ to ‘int’ in assignment
+    Son1p[i]=PopChrPar[k2,i];
+            ^
+proj.cpp:207:19: error: cannot convert ‘std::vector<std::vector<int> >’ to ‘int’ in assignment
+           Son2p[i]=PopChrPar[k1,i];
+                   ^
+proj.cpp:208:19: error: cannot convert ‘std::vector<std::vector<int> >’ to ‘int’ in assignment
+           Son3p[i]=PopChrPar[k2,i];
+                   ^
+proj.cpp:209:19: error: cannot convert ‘std::vector<std::vector<int> >’ to ‘int’ in assignment
+           Son4p[i]=PopChrPar[k1,i];
+                   ^
+proj.cpp:213:12: error: no match for ‘operator=’ (operand types are ‘std::vector<std::vector<int> >’ and ‘std::vector<std::vector<std::vector<int> > >’)
+    Son3s[i]=PopChrStr[k1,i];
+            ^
+proj.cpp:213:12: note: candidate is:
+In file included from /usr/include/c++/4.8/vector:69:0,
+                 from proj.cpp:9:
+/usr/include/c++/4.8/bits/vector.tcc:160:5: note: std::vector<_Tp, _Alloc>& std::vector<_Tp, _Alloc>::operator=(const std::vector<_Tp, _Alloc>&) [with _Tp = std::vector<int>; _Alloc = std::allocator<std::vector<int> >]
+     vector<_Tp, _Alloc>::
+     ^
+/usr/include/c++/4.8/bits/vector.tcc:160:5: note:   no known conversion for argument 1 from ‘std::vector<std::vector<std::vector<int> > >’ to ‘const std::vector<std::vector<int> >&’
+proj.cpp:214:19: error: no match for ‘operator=’ (operand types are ‘std::vector<std::vector<int> >’ and ‘std::vector<std::vector<std::vector<int> > >’)
+           Son4s[i]=PopChrStr[k2,i];
+                   ^
+proj.cpp:214:19: note: candidate is:
+In file included from /usr/include/c++/4.8/vector:69:0,
+                 from proj.cpp:9:
+/usr/include/c++/4.8/bits/vector.tcc:160:5: note: std::vector<_Tp, _Alloc>& std::vector<_Tp, _Alloc>::operator=(const std::vector<_Tp, _Alloc>&) [with _Tp = std::vector<int>; _Alloc = std::allocator<std::vector<int> >]
+     vector<_Tp, _Alloc>::
+     ^
+/usr/include/c++/4.8/bits/vector.tcc:160:5: note:   no known conversion for argument 1 from ‘std::vector<std::vector<std::vector<int> > >’ to ‘const std::vector<std::vector<int> >&’
+proj.cpp:218:11: error: no match for ‘operator=’ (operand types are ‘std::vector<std::vector<int> >’ and ‘std::vector<std::vector<std::vector<int> > >’)
+   Son3s[i]=PopChrStr[k2,i];
+           ^
+proj.cpp:218:11: note: candidate is:
+In file included from /usr/include/c++/4.8/vector:69:0,
+                 from proj.cpp:9:
+/usr/include/c++/4.8/bits/vector.tcc:160:5: note: std::vector<_Tp, _Alloc>& std::vector<_Tp, _Alloc>::operator=(const std::vector<_Tp, _Alloc>&) [with _Tp = std::vector<int>; _Alloc = std::allocator<std::vector<int> >]
+     vector<_Tp, _Alloc>::
+     ^
+/usr/include/c++/4.8/bits/vector.tcc:160:5: note:   no known conversion for argument 1 from ‘std::vector<std::vector<std::vector<int> > >’ to ‘const std::vector<std::vector<int> >&’
+proj.cpp:219:17: error: no match for ‘operator=’ (operand types are ‘std::vector<std::vector<int> >’ and ‘std::vector<std::vector<std::vector<int> > >’)
+         Son4s[i]=PopChrStr[k1,i];
+                 ^
+proj.cpp:219:17: note: candidate is:
+In file included from /usr/include/c++/4.8/vector:69:0,
+                 from proj.cpp:9:
+/usr/include/c++/4.8/bits/vector.tcc:160:5: note: std::vector<_Tp, _Alloc>& std::vector<_Tp, _Alloc>::operator=(const std::vector<_Tp, _Alloc>&) [with _Tp = std::vector<int>; _Alloc = std::allocator<std::vector<int> >]
+     vector<_Tp, _Alloc>::
+     ^
+/usr/include/c++/4.8/bits/vector.tcc:160:5: note:   no known conversion for argument 1 from ‘std::vector<std::vector<std::vector<int> > >’ to ‘const std::vector<std::vector<int> >&’
+proj.cpp:223:14: error: invalid operands of types ‘long int()throw ()’ and ‘double’ to binary ‘operator<’
+   if (random<pmut) {
+              ^
+proj.cpp:224:23: error: too many arguments to function ‘long int random()’
+   Son1p[random(p*(c+d))]=random(2);
+                       ^
+In file included from proj.cpp:2:0:
+/usr/include/stdlib.h:321:17: note: declared here
+ extern long int random (void) __THROW;
+                 ^
+proj.cpp:224:34: error: too many arguments to function ‘long int random()’
+   Son1p[random(p*(c+d))]=random(2);
+                                  ^
+In file included from proj.cpp:2:0:
+/usr/include/stdlib.h:321:17: note: declared here
+ extern long int random (void) __THROW;
+                 ^
+proj.cpp:225:18: error: ‘son1s’ was not declared in this scope
+           GenVar(son1s[random(lchr)]);
+                  ^
+proj.cpp:225:35: error: too many arguments to function ‘long int random()’
+           GenVar(son1s[random(lchr)]);
+                                   ^
+In file included from proj.cpp:2:0:
+/usr/include/stdlib.h:321:17: note: declared here
+ extern long int random (void) __THROW;
+                 ^
+proj.cpp:230:42: error: ‘son1s’ was not declared in this scope
+   for (j=0; j<=lchr-1; j++) { Variations(son1s[j]); }
+                                          ^
+proj.cpp:236:9: error: ‘Lmax’ was not declared in this scope
+         Lmax=Lh[0];
+         ^
+proj.cpp:248:50: error: ‘son1s’ was not declared in this scope
+    for (i=0; i<=lchr-1; i++) { PopChrStr[imax,i]=son1s[i]; }
+                                                  ^
+proj.cpp:249:54: error: no match for ‘operator=’ (operand types are ‘std::vector<std::vector<int> >’ and ‘int’)
+    for (i=0; i<=(p*(c+d)-1); i++) { PopChrPar[imax,i]=Son1p[i]; }
+                                                      ^
+proj.cpp:249:54: note: candidate is:
+In file included from /usr/include/c++/4.8/vector:69:0,
+                 from proj.cpp:9:
+/usr/include/c++/4.8/bits/vector.tcc:160:5: note: std::vector<_Tp, _Alloc>& std::vector<_Tp, _Alloc>::operator=(const std::vector<_Tp, _Alloc>&) [with _Tp = std::vector<int>; _Alloc = std::allocator<std::vector<int> >]
+     vector<_Tp, _Alloc>::
+     ^
+/usr/include/c++/4.8/bits/vector.tcc:160:5: note:   no known conversion for argument 1 from ‘int’ to ‘const std::vector<std::vector<int> >&’
+proj.cpp:250:42: error: expected ‘;’ before ‘:’ token
+    for (i=0; i<=nfu-1; i++) { Fuh[imax,i]:=Fu1[i]; }
+                                          ^
+proj.cpp:258:14: error: invalid operands of types ‘long int()throw ()’ and ‘double’ to binary ‘operator<’
+   if (random<pmut) {
+              ^
+proj.cpp:259:23: error: too many arguments to function ‘long int random()’
+   Son2p[random(p*(c+d))]=random(2);
+                       ^
+In file included from proj.cpp:2:0:
+/usr/include/stdlib.h:321:17: note: declared here
+ extern long int random (void) __THROW;
+                 ^
+proj.cpp:259:34: error: too many arguments to function ‘long int random()’
+   Son2p[random(p*(c+d))]=random(2);
+                                  ^
+In file included from proj.cpp:2:0:
+/usr/include/stdlib.h:321:17: note: declared here
+ extern long int random (void) __THROW;
+                 ^
+proj.cpp:260:35: error: too many arguments to function ‘long int random()’
+           GenVar(Son2s[random(lchr)]);
+                                   ^
+In file included from proj.cpp:2:0:
+/usr/include/stdlib.h:321:17: note: declared here
+ extern long int random (void) __THROW;
+                 ^
+proj.cpp:260:37: error: cannot convert ‘std::vector<std::vector<int> >’ to ‘std::vector<int>*’ for argument ‘1’ to ‘void GenVar(std::vector<int>*)’
+           GenVar(Son2s[random(lchr)]);
+                                     ^
+proj.cpp:264:47: error: cannot convert ‘std::vector<std::vector<int> >’ to ‘int*’ for argument ‘1’ to ‘void Variations(int*)’
+   for (j=0; lchr-1; j++) { Variations(Son2s[j]); }
+                                               ^
+proj.cpp:284:51: error: no match for ‘operator=’ (operand types are ‘std::vector<std::vector<std::vector<int> > >’ and ‘std::vector<std::vector<int> >’)
+    for (i=0; i<=(lchr-1); i++) { PopChrStr[imax,i]=Son2s[i]; }
+                                                   ^
+proj.cpp:284:51: note: candidate is:
+In file included from /usr/include/c++/4.8/vector:69:0,
+                 from proj.cpp:9:
+/usr/include/c++/4.8/bits/vector.tcc:160:5: note: std::vector<_Tp, _Alloc>& std::vector<_Tp, _Alloc>::operator=(const std::vector<_Tp, _Alloc>&) [with _Tp = std::vector<std::vector<int> >; _Alloc = std::allocator<std::vector<std::vector<int> > >]
+     vector<_Tp, _Alloc>::
+     ^
+/usr/include/c++/4.8/bits/vector.tcc:160:5: note:   no known conversion for argument 1 from ‘std::vector<std::vector<int> >’ to ‘const std::vector<std::vector<std::vector<int> > >&’
+proj.cpp:285:54: error: no match for ‘operator=’ (operand types are ‘std::vector<std::vector<int> >’ and ‘int’)
+    for (i=0; i<=(p*(c+d)-1); i++) { PopChrPar[imax,i]=Son2p[i]; }
+                                                      ^
+proj.cpp:285:54: note: candidate is:
+In file included from /usr/include/c++/4.8/vector:69:0,
+                 from proj.cpp:9:
+/usr/include/c++/4.8/bits/vector.tcc:160:5: note: std::vector<_Tp, _Alloc>& std::vector<_Tp, _Alloc>::operator=(const std::vector<_Tp, _Alloc>&) [with _Tp = std::vector<int>; _Alloc = std::allocator<std::vector<int> >]
+     vector<_Tp, _Alloc>::
+     ^
+/usr/include/c++/4.8/bits/vector.tcc:160:5: note:   no known conversion for argument 1 from ‘int’ to ‘const std::vector<std::vector<int> >&’
+proj.cpp:286:43: error: no match for ‘operator=’ (operand types are ‘std::vector<double>’ and ‘double’)
+    for (i=0; i<= nfu-1; i++) { Fuh[imax,i]=Fu2[i]; }
+                                           ^
+proj.cpp:286:43: note: candidate is:
+In file included from /usr/include/c++/4.8/vector:69:0,
+                 from proj.cpp:9:
+/usr/include/c++/4.8/bits/vector.tcc:160:5: note: std::vector<_Tp, _Alloc>& std::vector<_Tp, _Alloc>::operator=(const std::vector<_Tp, _Alloc>&) [with _Tp = double; _Alloc = std::allocator<double>]
+     vector<_Tp, _Alloc>::
+     ^
+/usr/include/c++/4.8/bits/vector.tcc:160:5: note:   no known conversion for argument 1 from ‘double’ to ‘const std::vector<double>&’
+proj.cpp:298:14: error: invalid operands of types ‘long int()throw ()’ and ‘double’ to binary ‘operator<’
+   if (random<pmut) { 
+              ^
+proj.cpp:299:23: error: too many arguments to function ‘long int random()’
+   Son3p[random(p*(c+d))]=random(2);
+                       ^
+In file included from proj.cpp:2:0:
+/usr/include/stdlib.h:321:17: note: declared here
+ extern long int random (void) __THROW;
+                 ^
+proj.cpp:299:34: error: too many arguments to function ‘long int random()’
+   Son3p[random(p*(c+d))]=random(2);
+                                  ^
+In file included from proj.cpp:2:0:
+/usr/include/stdlib.h:321:17: note: declared here
+ extern long int random (void) __THROW;
+                 ^
+proj.cpp:300:33: error: too many arguments to function ‘long int random()’
+         GenVar(Son3s[random(lchr)]);
+                                 ^
+In file included from proj.cpp:2:0:
+/usr/include/stdlib.h:321:17: note: declared here
+ extern long int random (void) __THROW;
+                 ^
+proj.cpp:300:35: error: cannot convert ‘std::vector<std::vector<int> >’ to ‘std::vector<int>*’ for argument ‘1’ to ‘void GenVar(std::vector<int>*)’
+         GenVar(Son3s[random(lchr)]);
+                                   ^
+proj.cpp:304:52: error: cannot convert ‘std::vector<std::vector<int> >’ to ‘int*’ for argument ‘1’ to ‘void Variations(int*)’
+   for (j=0; j<=(lchr-1); j++) { Variations(Son3s[j]); }
+                                                    ^
+proj.cpp:320:49: error: no match for ‘operator=’ (operand types are ‘std::vector<std::vector<std::vector<int> > >’ and ‘std::vector<std::vector<int> >’)
+    for (i=0; i<=lchr-1; i++) { PopChrStr[imax,i]=Son3s[i]; }
+                                                 ^
+proj.cpp:320:49: note: candidate is:
+In file included from /usr/include/c++/4.8/vector:69:0,
+                 from proj.cpp:9:
+/usr/include/c++/4.8/bits/vector.tcc:160:5: note: std::vector<_Tp, _Alloc>& std::vector<_Tp, _Alloc>::operator=(const std::vector<_Tp, _Alloc>&) [with _Tp = std::vector<std::vector<int> >; _Alloc = std::allocator<std::vector<std::vector<int> > >]
+     vector<_Tp, _Alloc>::
+     ^
+/usr/include/c++/4.8/bits/vector.tcc:160:5: note:   no known conversion for argument 1 from ‘std::vector<std::vector<int> >’ to ‘const std::vector<std::vector<std::vector<int> > >&’
+proj.cpp:321:54: error: no match for ‘operator=’ (operand types are ‘std::vector<std::vector<int> >’ and ‘int’)
+    for (i=0; i<=(p*(c+d)-1); i++) { PopChrPar[imax,i]=Son3p[i]; }
+                                                      ^
+proj.cpp:321:54: note: candidate is:
+In file included from /usr/include/c++/4.8/vector:69:0,
+                 from proj.cpp:9:
+/usr/include/c++/4.8/bits/vector.tcc:160:5: note: std::vector<_Tp, _Alloc>& std::vector<_Tp, _Alloc>::operator=(const std::vector<_Tp, _Alloc>&) [with _Tp = std::vector<int>; _Alloc = std::allocator<std::vector<int> >]
+     vector<_Tp, _Alloc>::
+     ^
+/usr/include/c++/4.8/bits/vector.tcc:160:5: note:   no known conversion for argument 1 from ‘int’ to ‘const std::vector<std::vector<int> >&’
+proj.cpp:322:42: error: no match for ‘operator=’ (operand types are ‘std::vector<double>’ and ‘double’)
+    for (i=0; i<=nfu-1; i++) { Fuh[imax,i]=Fu3[i]; }
+                                          ^
+proj.cpp:322:42: note: candidate is:
+In file included from /usr/include/c++/4.8/vector:69:0,
+                 from proj.cpp:9:
+/usr/include/c++/4.8/bits/vector.tcc:160:5: note: std::vector<_Tp, _Alloc>& std::vector<_Tp, _Alloc>::operator=(const std::vector<_Tp, _Alloc>&) [with _Tp = double; _Alloc = std::allocator<double>]
+     vector<_Tp, _Alloc>::
+     ^
+/usr/include/c++/4.8/bits/vector.tcc:160:5: note:   no known conversion for argument 1 from ‘double’ to ‘const std::vector<double>&’
+proj.cpp:329:14: error: invalid operands of types ‘long int()throw ()’ and ‘double’ to binary ‘operator<’
+   if (random<pmut) { 
+              ^
+proj.cpp:330:23: error: too many arguments to function ‘long int random()’
+   Son4p[random(p*(c+d))]=random(2);
+                       ^
+In file included from proj.cpp:2:0:
+/usr/include/stdlib.h:321:17: note: declared here
+ extern long int random (void) __THROW;
+                 ^
+proj.cpp:330:34: error: too many arguments to function ‘long int random()’
+   Son4p[random(p*(c+d))]=random(2);
+                                  ^
+In file included from proj.cpp:2:0:
+/usr/include/stdlib.h:321:17: note: declared here
+ extern long int random (void) __THROW;
+                 ^
+proj.cpp:331:33: error: too many arguments to function ‘long int random()’
+         GenVar(Son4s[random(lchr)]);
+                                 ^
+In file included from proj.cpp:2:0:
+/usr/include/stdlib.h:321:17: note: declared here
+ extern long int random (void) __THROW;
+                 ^
+proj.cpp:331:35: error: cannot convert ‘std::vector<std::vector<int> >’ to ‘std::vector<int>*’ for argument ‘1’ to ‘void GenVar(std::vector<int>*)’
+         GenVar(Son4s[random(lchr)]);
+                                   ^
+proj.cpp:336:50: error: cannot convert ‘std::vector<std::vector<int> >’ to ‘int*’ for argument ‘1’ to ‘void Variations(int*)’
+   for (j=0; j<=lchr-1; j++) { Variations(Son4s[j]); }
+                                                  ^
+proj.cpp:355:50: error: no match for ‘operator=’ (operand types are ‘std::vector<std::vector<std::vector<int> > >’ and ‘std::vector<std::vector<int> >’)
+    for (i=0; i<=lchr-1; i++) {  PopChrStr[imax,i]=Son4s[i]; }
+                                                  ^
+proj.cpp:355:50: note: candidate is:
+In file included from /usr/include/c++/4.8/vector:69:0,
+                 from proj.cpp:9:
+/usr/include/c++/4.8/bits/vector.tcc:160:5: note: std::vector<_Tp, _Alloc>& std::vector<_Tp, _Alloc>::operator=(const std::vector<_Tp, _Alloc>&) [with _Tp = std::vector<std::vector<int> >; _Alloc = std::allocator<std::vector<std::vector<int> > >]
+     vector<_Tp, _Alloc>::
+     ^
+/usr/include/c++/4.8/bits/vector.tcc:160:5: note:   no known conversion for argument 1 from ‘std::vector<std::vector<int> >’ to ‘const std::vector<std::vector<std::vector<int> > >&’
+proj.cpp:356:54: error: no match for ‘operator=’ (operand types are ‘std::vector<std::vector<int> >’ and ‘int’)
+    for (i=0; i<=(p*(c+d)-1); i++) { PopChrPar[imax,i]=Son4p[i]; }
+                                                      ^
+proj.cpp:356:54: note: candidate is:
+In file included from /usr/include/c++/4.8/vector:69:0,
+                 from proj.cpp:9:
+/usr/include/c++/4.8/bits/vector.tcc:160:5: note: std::vector<_Tp, _Alloc>& std::vector<_Tp, _Alloc>::operator=(const std::vector<_Tp, _Alloc>&) [with _Tp = std::vector<int>; _Alloc = std::allocator<std::vector<int> >]
+     vector<_Tp, _Alloc>::
+     ^
+/usr/include/c++/4.8/bits/vector.tcc:160:5: note:   no known conversion for argument 1 from ‘int’ to ‘const std::vector<std::vector<int> >&’
+proj.cpp:357:42: error: no match for ‘operator=’ (operand types are ‘std::vector<double>’ and ‘double’)
+    for (i=0; i<=nfu-1; i++) { Fuh[imax,i]=Fu4[i]; }
+                                          ^
+proj.cpp:357:42: note: candidate is:
+In file included from /usr/include/c++/4.8/vector:69:0,
+                 from proj.cpp:9:
+/usr/include/c++/4.8/bits/vector.tcc:160:5: note: std::vector<_Tp, _Alloc>& std::vector<_Tp, _Alloc>::operator=(const std::vector<_Tp, _Alloc>&) [with _Tp = double; _Alloc = std::allocator<double>]
+     vector<_Tp, _Alloc>::
+     ^
+/usr/include/c++/4.8/bits/vector.tcc:160:5: note:   no known conversion for argument 1 from ‘double’ to ‘const std::vector<double>&’
+proj.cpp:364:5: error: ‘until’ was not declared in this scope
+     until rt>RR;
+     ^
+proj.cpp:364:11: error: expected ‘;’ before ‘rt’
+     until rt>RR;
+           ^
+proj.cpp:377:10: error: cannot convert ‘std::vector<double>’ to ‘double’ in assignment
+     Fumax=Fuh[0,i];
+          ^
+proj.cpp:378:14: error: cannot convert ‘std::vector<double>’ to ‘double’ in assignment
+         Fumin=Fuh[0,i];
+              ^
+proj.cpp:381:17: error: no match for ‘operator>’ (operand types are ‘std::vector<double>’ and ‘double’)
+     if (Fuh[k,i]>Fumax) { Fumax=Fuh[k,i]; } else { if (Fuh[k,i]< Fumin) { Fumin=Fuh[k,i]; } }
+                 ^
+proj.cpp:381:17: note: candidates are:
+In file included from /usr/include/c++/4.8/utility:70:0,
+                 from /usr/include/c++/4.8/algorithm:60,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/bits/stl_pair.h:233:5: note: template<class _T1, class _T2> bool std::operator>(const std::pair<_T1, _T2>&, const std::pair<_T1, _T2>&)
+     operator>(const pair<_T1, _T2>& __x, const pair<_T1, _T2>& __y)
+     ^
+/usr/include/c++/4.8/bits/stl_pair.h:233:5: note:   template argument deduction/substitution failed:
+proj.cpp:381:18: note:   ‘std::vector<double>’ is not derived from ‘const std::pair<_T1, _T2>’
+     if (Fuh[k,i]>Fumax) { Fumax=Fuh[k,i]; } else { if (Fuh[k,i]< Fumin) { Fumin=Fuh[k,i]; } }
+                  ^
+In file included from /usr/include/c++/4.8/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/4.8/algorithm:61,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/bits/stl_iterator.h:309:5: note: template<class _Iterator> bool std::operator>(const std::reverse_iterator<_Iterator>&, const std::reverse_iterator<_Iterator>&)
+     operator>(const reverse_iterator<_Iterator>& __x,
+     ^
+/usr/include/c++/4.8/bits/stl_iterator.h:309:5: note:   template argument deduction/substitution failed:
+proj.cpp:381:18: note:   ‘std::vector<double>’ is not derived from ‘const std::reverse_iterator<_Iterator>’
+     if (Fuh[k,i]>Fumax) { Fumax=Fuh[k,i]; } else { if (Fuh[k,i]< Fumin) { Fumin=Fuh[k,i]; } }
+                  ^
+In file included from /usr/include/c++/4.8/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/4.8/algorithm:61,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/bits/stl_iterator.h:359:5: note: template<class _IteratorL, class _IteratorR> bool std::operator>(const std::reverse_iterator<_Iterator>&, const std::reverse_iterator<_IteratorR>&)
+     operator>(const reverse_iterator<_IteratorL>& __x,
+     ^
+/usr/include/c++/4.8/bits/stl_iterator.h:359:5: note:   template argument deduction/substitution failed:
+proj.cpp:381:18: note:   ‘std::vector<double>’ is not derived from ‘const std::reverse_iterator<_Iterator>’
+     if (Fuh[k,i]>Fumax) { Fumax=Fuh[k,i]; } else { if (Fuh[k,i]< Fumin) { Fumin=Fuh[k,i]; } }
+                  ^
+In file included from /usr/include/c++/4.8/string:52:0,
+                 from /usr/include/c++/4.8/bits/locale_classes.h:40,
+                 from /usr/include/c++/4.8/bits/ios_base.h:41,
+                 from /usr/include/c++/4.8/ios:42,
+                 from /usr/include/c++/4.8/ostream:38,
+                 from /usr/include/c++/4.8/iterator:64,
+                 from proj.cpp:5:
+/usr/include/c++/4.8/bits/basic_string.h:2606:5: note: template<class _CharT, class _Traits, class _Alloc> bool std::operator>(const std::basic_string<_CharT, _Traits, _Alloc>&, const std::basic_string<_CharT, _Traits, _Alloc>&)
+     operator>(const basic_string<_CharT, _Traits, _Alloc>& __lhs,
+     ^
+/usr/include/c++/4.8/bits/basic_string.h:2606:5: note:   template argument deduction/substitution failed:
+proj.cpp:381:18: note:   ‘std::vector<double>’ is not derived from ‘const std::basic_string<_CharT, _Traits, _Alloc>’
+     if (Fuh[k,i]>Fumax) { Fumax=Fuh[k,i]; } else { if (Fuh[k,i]< Fumin) { Fumin=Fuh[k,i]; } }
+                  ^
+In file included from /usr/include/c++/4.8/string:52:0,
+                 from /usr/include/c++/4.8/bits/locale_classes.h:40,
+                 from /usr/include/c++/4.8/bits/ios_base.h:41,
+                 from /usr/include/c++/4.8/ios:42,
+                 from /usr/include/c++/4.8/ostream:38,
+                 from /usr/include/c++/4.8/iterator:64,
+                 from proj.cpp:5:
+/usr/include/c++/4.8/bits/basic_string.h:2618:5: note: template<class _CharT, class _Traits, class _Alloc> bool std::operator>(const std::basic_string<_CharT, _Traits, _Alloc>&, const _CharT*)
+     operator>(const basic_string<_CharT, _Traits, _Alloc>& __lhs,
+     ^
+/usr/include/c++/4.8/bits/basic_string.h:2618:5: note:   template argument deduction/substitution failed:
+proj.cpp:381:18: note:   ‘std::vector<double>’ is not derived from ‘const std::basic_string<_CharT, _Traits, _Alloc>’
+     if (Fuh[k,i]>Fumax) { Fumax=Fuh[k,i]; } else { if (Fuh[k,i]< Fumin) { Fumin=Fuh[k,i]; } }
+                  ^
+In file included from /usr/include/c++/4.8/string:52:0,
+                 from /usr/include/c++/4.8/bits/locale_classes.h:40,
+                 from /usr/include/c++/4.8/bits/ios_base.h:41,
+                 from /usr/include/c++/4.8/ios:42,
+                 from /usr/include/c++/4.8/ostream:38,
+                 from /usr/include/c++/4.8/iterator:64,
+                 from proj.cpp:5:
+/usr/include/c++/4.8/bits/basic_string.h:2630:5: note: template<class _CharT, class _Traits, class _Alloc> bool std::operator>(const _CharT*, const std::basic_string<_CharT, _Traits, _Alloc>&)
+     operator>(const _CharT* __lhs,
+     ^
+/usr/include/c++/4.8/bits/basic_string.h:2630:5: note:   template argument deduction/substitution failed:
+proj.cpp:381:18: note:   mismatched types ‘const _CharT*’ and ‘std::vector<double>’
+     if (Fuh[k,i]>Fumax) { Fumax=Fuh[k,i]; } else { if (Fuh[k,i]< Fumin) { Fumin=Fuh[k,i]; } }
+                  ^
+In file included from /usr/include/c++/4.8/vector:64:0,
+                 from proj.cpp:9:
+/usr/include/c++/4.8/bits/stl_vector.h:1434:5: note: template<class _Tp, class _Alloc> bool std::operator>(const std::vector<_Tp, _Alloc>&, const std::vector<_Tp, _Alloc>&)
+     operator>(const vector<_Tp, _Alloc>& __x, const vector<_Tp, _Alloc>& __y)
+     ^
+/usr/include/c++/4.8/bits/stl_vector.h:1434:5: note:   template argument deduction/substitution failed:
+proj.cpp:381:18: note:   mismatched types ‘const std::vector<_Tp, _Alloc>’ and ‘double’
+     if (Fuh[k,i]>Fumax) { Fumax=Fuh[k,i]; } else { if (Fuh[k,i]< Fumin) { Fumin=Fuh[k,i]; } }
+                  ^
+In file included from /usr/include/c++/4.8/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/4.8/algorithm:61,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/bits/stl_iterator.h:848:5: note: template<class _Iterator, class _Container> bool __gnu_cxx::operator>(const __gnu_cxx::__normal_iterator<_Iterator, _Container>&, const __gnu_cxx::__normal_iterator<_Iterator, _Container>&)
+     operator>(const __normal_iterator<_Iterator, _Container>& __lhs,
+     ^
+/usr/include/c++/4.8/bits/stl_iterator.h:848:5: note:   template argument deduction/substitution failed:
+proj.cpp:381:18: note:   ‘std::vector<double>’ is not derived from ‘const __gnu_cxx::__normal_iterator<_Iterator, _Container>’
+     if (Fuh[k,i]>Fumax) { Fumax=Fuh[k,i]; } else { if (Fuh[k,i]< Fumin) { Fumin=Fuh[k,i]; } }
+                  ^
+In file included from /usr/include/c++/4.8/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/4.8/algorithm:61,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/bits/stl_iterator.h:842:5: note: template<class _IteratorL, class _IteratorR, class _Container> bool __gnu_cxx::operator>(const __gnu_cxx::__normal_iterator<_IteratorL, _Container>&, const __gnu_cxx::__normal_iterator<_IteratorR, _Container>&)
+     operator>(const __normal_iterator<_IteratorL, _Container>& __lhs,
+     ^
+/usr/include/c++/4.8/bits/stl_iterator.h:842:5: note:   template argument deduction/substitution failed:
+proj.cpp:381:18: note:   ‘std::vector<double>’ is not derived from ‘const __gnu_cxx::__normal_iterator<_IteratorL, _Container>’
+     if (Fuh[k,i]>Fumax) { Fumax=Fuh[k,i]; } else { if (Fuh[k,i]< Fumin) { Fumin=Fuh[k,i]; } }
+                  ^
+proj.cpp:381:32: error: cannot convert ‘std::vector<double>’ to ‘double’ in assignment
+     if (Fuh[k,i]>Fumax) { Fumax=Fuh[k,i]; } else { if (Fuh[k,i]< Fumin) { Fumin=Fuh[k,i]; } }
+                                ^
+proj.cpp:381:64: error: no match for ‘operator<’ (operand types are ‘std::vector<double>’ and ‘double’)
+     if (Fuh[k,i]>Fumax) { Fumax=Fuh[k,i]; } else { if (Fuh[k,i]< Fumin) { Fumin=Fuh[k,i]; } }
+                                                                ^
+proj.cpp:381:64: note: candidates are:
+In file included from /usr/include/c++/4.8/utility:70:0,
+                 from /usr/include/c++/4.8/algorithm:60,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/bits/stl_pair.h:220:5: note: template<class _T1, class _T2> bool std::operator<(const std::pair<_T1, _T2>&, const std::pair<_T1, _T2>&)
+     operator<(const pair<_T1, _T2>& __x, const pair<_T1, _T2>& __y)
+     ^
+/usr/include/c++/4.8/bits/stl_pair.h:220:5: note:   template argument deduction/substitution failed:
+proj.cpp:381:66: note:   ‘std::vector<double>’ is not derived from ‘const std::pair<_T1, _T2>’
+     if (Fuh[k,i]>Fumax) { Fumax=Fuh[k,i]; } else { if (Fuh[k,i]< Fumin) { Fumin=Fuh[k,i]; } }
+                                                                  ^
+In file included from /usr/include/c++/4.8/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/4.8/algorithm:61,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/bits/stl_iterator.h:297:5: note: template<class _Iterator> bool std::operator<(const std::reverse_iterator<_Iterator>&, const std::reverse_iterator<_Iterator>&)
+     operator<(const reverse_iterator<_Iterator>& __x,
+     ^
+/usr/include/c++/4.8/bits/stl_iterator.h:297:5: note:   template argument deduction/substitution failed:
+proj.cpp:381:66: note:   ‘std::vector<double>’ is not derived from ‘const std::reverse_iterator<_Iterator>’
+     if (Fuh[k,i]>Fumax) { Fumax=Fuh[k,i]; } else { if (Fuh[k,i]< Fumin) { Fumin=Fuh[k,i]; } }
+                                                                  ^
+In file included from /usr/include/c++/4.8/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/4.8/algorithm:61,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/bits/stl_iterator.h:347:5: note: template<class _IteratorL, class _IteratorR> bool std::operator<(const std::reverse_iterator<_Iterator>&, const std::reverse_iterator<_IteratorR>&)
+     operator<(const reverse_iterator<_IteratorL>& __x,
+     ^
+/usr/include/c++/4.8/bits/stl_iterator.h:347:5: note:   template argument deduction/substitution failed:
+proj.cpp:381:66: note:   ‘std::vector<double>’ is not derived from ‘const std::reverse_iterator<_Iterator>’
+     if (Fuh[k,i]>Fumax) { Fumax=Fuh[k,i]; } else { if (Fuh[k,i]< Fumin) { Fumin=Fuh[k,i]; } }
+                                                                  ^
+In file included from /usr/include/c++/4.8/string:52:0,
+                 from /usr/include/c++/4.8/bits/locale_classes.h:40,
+                 from /usr/include/c++/4.8/bits/ios_base.h:41,
+                 from /usr/include/c++/4.8/ios:42,
+                 from /usr/include/c++/4.8/ostream:38,
+                 from /usr/include/c++/4.8/iterator:64,
+                 from proj.cpp:5:
+/usr/include/c++/4.8/bits/basic_string.h:2569:5: note: template<class _CharT, class _Traits, class _Alloc> bool std::operator<(const std::basic_string<_CharT, _Traits, _Alloc>&, const std::basic_string<_CharT, _Traits, _Alloc>&)
+     operator<(const basic_string<_CharT, _Traits, _Alloc>& __lhs,
+     ^
+/usr/include/c++/4.8/bits/basic_string.h:2569:5: note:   template argument deduction/substitution failed:
+proj.cpp:381:66: note:   ‘std::vector<double>’ is not derived from ‘const std::basic_string<_CharT, _Traits, _Alloc>’
+     if (Fuh[k,i]>Fumax) { Fumax=Fuh[k,i]; } else { if (Fuh[k,i]< Fumin) { Fumin=Fuh[k,i]; } }
+                                                                  ^
+In file included from /usr/include/c++/4.8/string:52:0,
+                 from /usr/include/c++/4.8/bits/locale_classes.h:40,
+                 from /usr/include/c++/4.8/bits/ios_base.h:41,
+                 from /usr/include/c++/4.8/ios:42,
+                 from /usr/include/c++/4.8/ostream:38,
+                 from /usr/include/c++/4.8/iterator:64,
+                 from proj.cpp:5:
+/usr/include/c++/4.8/bits/basic_string.h:2581:5: note: template<class _CharT, class _Traits, class _Alloc> bool std::operator<(const std::basic_string<_CharT, _Traits, _Alloc>&, const _CharT*)
+     operator<(const basic_string<_CharT, _Traits, _Alloc>& __lhs,
+     ^
+/usr/include/c++/4.8/bits/basic_string.h:2581:5: note:   template argument deduction/substitution failed:
+proj.cpp:381:66: note:   ‘std::vector<double>’ is not derived from ‘const std::basic_string<_CharT, _Traits, _Alloc>’
+     if (Fuh[k,i]>Fumax) { Fumax=Fuh[k,i]; } else { if (Fuh[k,i]< Fumin) { Fumin=Fuh[k,i]; } }
+                                                                  ^
+In file included from /usr/include/c++/4.8/string:52:0,
+                 from /usr/include/c++/4.8/bits/locale_classes.h:40,
+                 from /usr/include/c++/4.8/bits/ios_base.h:41,
+                 from /usr/include/c++/4.8/ios:42,
+                 from /usr/include/c++/4.8/ostream:38,
+                 from /usr/include/c++/4.8/iterator:64,
+                 from proj.cpp:5:
+/usr/include/c++/4.8/bits/basic_string.h:2593:5: note: template<class _CharT, class _Traits, class _Alloc> bool std::operator<(const _CharT*, const std::basic_string<_CharT, _Traits, _Alloc>&)
+     operator<(const _CharT* __lhs,
+     ^
+/usr/include/c++/4.8/bits/basic_string.h:2593:5: note:   template argument deduction/substitution failed:
+proj.cpp:381:66: note:   mismatched types ‘const _CharT*’ and ‘std::vector<double>’
+     if (Fuh[k,i]>Fumax) { Fumax=Fuh[k,i]; } else { if (Fuh[k,i]< Fumin) { Fumin=Fuh[k,i]; } }
+                                                                  ^
+In file included from /usr/include/c++/4.8/vector:64:0,
+                 from proj.cpp:9:
+/usr/include/c++/4.8/bits/stl_vector.h:1421:5: note: template<class _Tp, class _Alloc> bool std::operator<(const std::vector<_Tp, _Alloc>&, const std::vector<_Tp, _Alloc>&)
+     operator<(const vector<_Tp, _Alloc>& __x, const vector<_Tp, _Alloc>& __y)
+     ^
+/usr/include/c++/4.8/bits/stl_vector.h:1421:5: note:   template argument deduction/substitution failed:
+proj.cpp:381:66: note:   mismatched types ‘const std::vector<_Tp, _Alloc>’ and ‘double’
+     if (Fuh[k,i]>Fumax) { Fumax=Fuh[k,i]; } else { if (Fuh[k,i]< Fumin) { Fumin=Fuh[k,i]; } }
+                                                                  ^
+In file included from /usr/include/c++/4.8/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/4.8/algorithm:61,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/bits/stl_iterator.h:836:5: note: template<class _Iterator, class _Container> bool __gnu_cxx::operator<(const __gnu_cxx::__normal_iterator<_Iterator, _Container>&, const __gnu_cxx::__normal_iterator<_Iterator, _Container>&)
+     operator<(const __normal_iterator<_Iterator, _Container>& __lhs,
+     ^
+/usr/include/c++/4.8/bits/stl_iterator.h:836:5: note:   template argument deduction/substitution failed:
+proj.cpp:381:66: note:   ‘std::vector<double>’ is not derived from ‘const __gnu_cxx::__normal_iterator<_Iterator, _Container>’
+     if (Fuh[k,i]>Fumax) { Fumax=Fuh[k,i]; } else { if (Fuh[k,i]< Fumin) { Fumin=Fuh[k,i]; } }
+                                                                  ^
+In file included from /usr/include/c++/4.8/bits/stl_algobase.h:67:0,
+                 from /usr/include/c++/4.8/algorithm:61,
+                 from proj.cpp:4:
+/usr/include/c++/4.8/bits/stl_iterator.h:830:5: note: template<class _IteratorL, class _IteratorR, class _Container> bool __gnu_cxx::operator<(const __gnu_cxx::__normal_iterator<_IteratorL, _Container>&, const __gnu_cxx::__normal_iterator<_IteratorR, _Container>&)
+     operator<(const __normal_iterator<_IteratorL, _Container>& __lhs,
+     ^
+/usr/include/c++/4.8/bits/stl_iterator.h:830:5: note:   template argument deduction/substitution failed:
+proj.cpp:381:66: note:   ‘std::vector<double>’ is not derived from ‘const __gnu_cxx::__normal_iterator<_IteratorL, _Container>’
+     if (Fuh[k,i]>Fumax) { Fumax=Fuh[k,i]; } else { if (Fuh[k,i]< Fumin) { Fumin=Fuh[k,i]; } }
+                                                                  ^
+proj.cpp:381:80: error: cannot convert ‘std::vector<double>’ to ‘double’ in assignment
+     if (Fuh[k,i]>Fumax) { Fumax=Fuh[k,i]; } else { if (Fuh[k,i]< Fumin) { Fumin=Fuh[k,i]; } }
+                                                                                ^
+proj.cpp:386:51: error: no match for ‘operator/’ (operand types are ‘std::vector<double>’ and ‘double’)
+    for (k=0; k<=HH-1; k++) { FuhNorm[k,i]=Fuh[k,i]/(Fumax-Fumin); }
+                                                   ^
+proj.cpp:393:65: error: ‘sqr’ was not declared in this scope
+  for (i=0; i<=nfu-1; i++) { suGA=suGA+Shtraf[i]*sqr(FuhNorm[0,i]); }
+                                                                 ^
+proj.cpp:398:70: error: ‘sqr’ was not declared in this scope
+     for (j=0; j<=nfu-1; j++) { su1GA=su1GA+Shtraf[j]*sqr(FuhNorm[i,j]); }
+                                                                      ^
+proj.cpp:399:10: error: cannot convert ‘std::vector<double>’ to ‘double’ in assignment
+     su1GA=FuhNorm[i,1];
+          ^
+proj.cpp:409:55: error: cannot convert ‘std::vector<std::vector<std::vector<int> > >’ to ‘int*’ for argument ‘1’ to ‘void Variations(int*)’
+  for (j=0; j<=lchr-1; j++) { Variations(PopChrStr[k,j]); }
+                                                       ^
+proj.cpp:413:69: error: no match for ‘operator=’ (operand types are ‘std::vector<std::vector<std::vector<int> > >’ and ‘int’)
+  for (i=0; i<=lchr-1; i++) { for (j=0; j<=3; j++) { PopChrStr[0,i,j]=0; } }
+                                                                     ^
+proj.cpp:413:69: note: candidate is:
+In file included from /usr/include/c++/4.8/vector:69:0,
+                 from proj.cpp:9:
+/usr/include/c++/4.8/bits/vector.tcc:160:5: note: std::vector<_Tp, _Alloc>& std::vector<_Tp, _Alloc>::operator=(const std::vector<_Tp, _Alloc>&) [with _Tp = std::vector<std::vector<int> >; _Alloc = std::allocator<std::vector<std::vector<int> > >]
+     vector<_Tp, _Alloc>::
+     ^
+/usr/include/c++/4.8/bits/vector.tcc:160:5: note:   no known conversion for argument 1 from ‘int’ to ‘const std::vector<std::vector<std::vector<int> > >&’
+proj.cpp:418:57: error: cannot convert ‘std::vector<std::vector<std::vector<int> > >’ to ‘int*’ for argument ‘1’ to ‘void Variations(int*)’
+    for (j=0; j<=lchr-1; j++) { Variations(PopChrStr[i,j]); }
+                                                         ^
+proj.cpp:419:29: error: could not convert ‘PopChrPar.std::vector<_Tp, _Alloc>::operator[]<std::vector<std::vector<int> >, std::allocator<std::vector<std::vector<int> > > >(((std::vector<std::vector<std::vector<int> > >::size_type)i))’ from ‘std::vector<std::vector<int> >’ to ‘std::vector<int>’
+    GreytoVector(PopChrPar[i]);
+                             ^
+proj.cpp:425:16: error: too many arguments to function ‘long int random()’
+   j=random(HH-1)+1;
+                ^
+In file included from proj.cpp:2:0:
+/usr/include/stdlib.h:321:17: note: declared here
+ extern long int random (void) __THROW;
+                 ^
+proj.cpp:426:34: error: could not convert ‘PopChrPar.std::vector<_Tp, _Alloc>::operator[]<std::vector<std::vector<int> >, std::allocator<std::vector<std::vector<int> > > >(((std::vector<std::vector<std::vector<int> > >::size_type)j))’ from ‘std::vector<std::vector<int> >’ to ‘std::vector<int>’
+         GreytoVector(PopChrPar[j]);
+                                  ^
+proj.cpp:427:36: error: ‘ImproveChrom’ was not declared in this scope
+         ImproveChrom(q,PopChrStr[j]); 
+                                    ^
+proj.cpp:435:7: error: expected ‘;’ before ‘pt’
+ until pt>PP;
+       ^
+make: *** [proj.o] Ошибка 1

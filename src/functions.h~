@@ -1,6 +1,6 @@
 using namespace std;
 
-//константы
+//ГЄГ®Г­Г±ГІГ Г­ГІГ»
 double deltt=2.5;
 //?
 double infinity=1e8;
@@ -9,15 +9,15 @@ double eps1=1e-2;
 double pokmax=16;
 double epstermc=1e-2;
 double eps2c=0.5e-2;
-int LBasc=2;
+int Lbasc=2;
 int kLc=4;
 int kInpc=6;
 int L1c=16;
 int Mout1c=9;
 
-//почему не integer
+//ГЇГ®Г·ГҐГ¬Гі Г­ГҐ integer
 double x0c[18] = {0,2,0, 0,4,0, 0,6,0, 0,0,0, 0,0,0, 0,0,0};
-//почему не integer
+//ГЇГ®Г·ГҐГ¬Гі Г­ГҐ integer
 double xfc[9] = {-5,0,0, 0,0,0, 5,0,0};
 double uminc[6] = {-5,-1, -5,-1, -5,-1};
 double umaxc[6] = {5,1, 5,1, 5,1};
@@ -38,9 +38,9 @@ double prepc[2][5][2] = {
 		{{20,1},{8,1},{8,-1},{20,-1},{20,1}}
 };
 
-//время окончания
+//ГўГ°ГҐГ¬Гї Г®ГЄГ®Г­Г·Г Г­ГЁГї
 double tfc = 8;
-//шаг интегрирования
+//ГёГ ГЈ ГЁГ­ГІГҐГЈГ°ГЁГ°Г®ГўГ Г­ГЁГї
 double dtc = 0.01;
 
 int PsiMultBasc[4][16][16] = {
@@ -145,15 +145,15 @@ int M_Outc[9][2] = {{1,15},
 {3,13},
 {4,13}};
 
-//переменные
+//ГЇГҐГ°ГҐГ¬ГҐГ­Г­Г»ГҐ
 // Parameters of NOP
 int kL=4; // number of network operators (layers) in MNOP
 int kInP=6; // number of inputs in each layer
 int L=16; // //dimension of network operator matrices
 int kP=9; //size of the set of variables
 int kR=9; //size of the set of parameters
-int kw=20; //size of the set of unary operations
-int kv=2; //size of the set of binary operations
+int kW=20; //size of the set of unary operations
+int kV=2; //size of the set of binary operations
 int Mout=9; // number of outputs
 vector<double> Vs; //set of variables
 vector<double> Cs; //set of parameters
@@ -168,8 +168,6 @@ vector<vector <int> > M_Out; //matrix of outputs
 vector<vector <double> > z; //vector of nodes
 vector<vector <string> > zs; //string for mathematical expression
 vector<vector <vector <int> > > Psi,Psi0; //Network  operator matrices
-//int **Psi = new int *[M];
-
 
 // Parameters of GA
 int HH=1024; //number of chromosomes in the initial population
@@ -180,8 +178,8 @@ int Epo=24;  // number of generations between epochs
 int kel=8;  // number of elitaring chromosomes
 double alfa=0.4;  // parameter to calculate probability of crossover
 double pmut=0.7;  // probability of mutation
-vector<vector <vector <int> > >PopChrStr[5]; //array for structural parts of chromosomes
-vector<vector <vector <int> > >PopChrPar; //array for parametrical parts of chromosomes
+vector<vector <vector <int> > >PopChrStr; //array for structural parts of chromosomes
+vector<vector <int> > PopChrPar; //array for parametrical parts of chromosomes
 
 int nfu=2;  // number of functionals
 vector<vector <double> > Fuh; // values of functionals for each chromosome
@@ -190,7 +188,7 @@ vector<double> Shtraf;
 vector<int> Lh; // values distance to Pareto set
 vector<int> Pareto; // Pareto set
 
-vector<vector <int> > Son1s[5],Son2s[5],Son3s[5],Son4s[5]; //structural part of sons
+vector<vector <int> > Son1s,Son2s,Son3s,Son4s; //structural part of sons
 vector<int> Son1p,Son2p,Son3p,Son4p; //parametrical part of sons
 int L1,L2,L3,L4; //values distance to Pareto set for sons
 vector<double> Fu1,Fu2,Fu3,Fu4; // values of functionals for sons
@@ -248,7 +246,7 @@ vector <double> su, su1;
 int kol;
 
  //************************  1.   *******************************
-//ЋЏ€‘ЂЌ€… ‚‹Ћ†…ЌЌ›• ЏђЋ–…„“ђ € ”“ЌЉ–€‰
+//ВЋВЏВ€В‘ВЂВЌВ€В… В‚В‹ВЋВ†В…ВЌВЌВ›В• ВЏВђВЋВ–В…В„В“Вђ В€ В”В“ВЌВЉВ–В€В‰
 //**************************************************************
 void LexPM(vector<int> EAix, bool flag) {
 int i,j;
@@ -301,7 +299,7 @@ for(k=0; k<(kL-1); k++)
 }
 
 //*************************************************************
-//процедуры делают одно и тоже
+//ГЇГ°Г®Г¶ГҐГ¤ГіГ°Г» Г¤ГҐГ«Г ГѕГІ Г®Г¤Г­Г® ГЁ ГІГ®Г¦ГҐ
 void SetPsiBas(vector<vector <vector <int> > > Psi1) {
 int i,j,k;
 for(k=0; k<=(kL-1); k++)
@@ -343,9 +341,9 @@ for(j=0; j<=(p-1); j++) {
 }
 }
 //*************************************************************
-// Генерация элементарной операции
+// ГѓГҐГ­ГҐГ°Г Г¶ГЁГї ГЅГ«ГҐГ¬ГҐГ­ГІГ Г°Г­Г®Г© Г®ГЇГҐГ°Г Г¶ГЁГЁ
 bool TestSource(int j) {
-// если j-номер узла источника, то возвращает false
+// ГҐГ±Г«ГЁ j-Г­Г®Г¬ГҐГ° ГіГ§Г«Г  ГЁГ±ГІГ®Г·Г­ГЁГЄГ , ГІГ® ГўГ®Г§ГўГ°Г Г№Г ГҐГІ false
 int i,flag;
 flag=true;
 i=0;
@@ -361,46 +359,43 @@ return flag;
 }
 
 
-void GenVar(vector<int> w[5]) {
-w[0].push_back(rand()%kL+1); //номер слоя
-w[1].push_back(rand()%4+1);
-int w2 = (*w)[2];
-switch((*w)[1]) {
+void GenVar(vector<int> w) {
+w.push_back(rand()%kL+1); //Г­Г®Г¬ГҐГ° Г±Г«Г®Гї
+w.push_back(rand()%4+1);
+int w2 = w[2];
+switch(w[1]) {
 	case 0:
-	w[2].push_back(rand()%(L-1)+1);
-	w[3].push_back(rand()%(L-w2-1)+1+w2+1);
-	w[4].push_back(O1s[rand()%kw+1]);
+	w.push_back(rand()%(L-1)+1);
+	w.push_back(rand()%(L-w2-1)+1+w2+1);
+	w.push_back(O1s[rand()%kW+1]);
 	case '2':
-	w[2].push_back(rand()%(L-1)+1);
-	w[3].push_back(rand()%(L-w2-1)+1+w2+1);
-	w[4].push_back(O1s[rand()%kw+1]);
+	w.push_back(rand()%(L-1)+1);
+	w.push_back(rand()%(L-w2-1)+1+w2+1);
+	w.push_back(O1s[rand()%kW+1]);
 	case '3':
-	w[2].push_back(rand()%(L-1)+1);
-	w[3].push_back(rand()%(L-w2-1)+1+w2+1);
-	w[4].push_back(O1s[rand()%kw+1]);
+	w.push_back(rand()%(L-1)+1);
+	w.push_back(rand()%(L-w2-1)+1+w2+1);
+	w.push_back(O1s[rand()%kW+1]);
 	case '1':
-	w[2].push_back(rand()%L+1);
-	w[3].push_back((*w)[2]);
-	w[4].push_back(O2s[rand()%kv+1]);
+	w.push_back(rand()%L+1);
+	w.push_back(w[2]);
+	w.push_back(O2s[rand()%kV+1]);
  }
 }
 
 //*************************************************************
-void Variations(int w[5]) {
-// Элементарные операции
-// 0 - замена недиагонального элемента
-// 1 - замена диагонального элемента
-// 2 - добавление дуги
-// 3 - удаление дуги
+void Variations(vector<int> w) {
+// ГќГ«ГҐГ¬ГҐГ­ГІГ Г°Г­Г»ГҐ Г®ГЇГҐГ°Г Г¶ГЁГЁ
+// 0 - Г§Г Г¬ГҐГ­Г  Г­ГҐГ¤ГЁГ ГЈГ®Г­Г Г«ГјГ­Г®ГЈГ® ГЅГ«ГҐГ¬ГҐГ­ГІГ 
+// 1 - Г§Г Г¬ГҐГ­Г  Г¤ГЁГ ГЈГ®Г­Г Г«ГјГ­Г®ГЈГ® ГЅГ«ГҐГ¬ГҐГ­ГІГ 
+// 2 - Г¤Г®ГЎГ ГўГ«ГҐГ­ГЁГҐ Г¤ГіГЈГЁ
+// 3 - ГіГ¤Г Г«ГҐГ­ГЁГҐ Г¤ГіГЈГЁ
 int i,j,s1,s2;
 
 if ((w[1] != 0) || (w[2] != 0) || (w[3] != 0)) {
 	switch (w[1]) {
 		//case 0: if ((*(*(*(*Psi)[w[0]])[w[2]])[w[3]])!=0) { Psi[w[0]][w[2]][w[3]]=w[4]; }
 		case 0: if (Psi[w[0]][w[2]][w[3]] != 0) { Psi[w[0]][w[2]][w[3]]=w[4]; }
-		
-		
-		
 		case 1: if (Psi[w[0]][w[2]][w[2]]!=0) { Psi[w[0]][w[2]][w[3]]=w[4]; }
 		case 2: if (Psi[w[0]][w[2]][w[3]]==0) { if (Psi[w[0]][w[3]][w[3]]!=0) {Psi[w[0]][w[2]][w[3]]=w[4];} }
 		case 3: 
@@ -596,9 +591,10 @@ void GreytoVector(vector < int > y) {
 	double g,g1;
 	l=c+d;
 	//l1=high(y)+1;
-vector <int>::iterator result;
-	result=max_element(y.begin(), y.end());
-l1=distance(y.begin(), result);
+//vector <int>::iterator result;
+	//result=max_element(y.begin(), y.end());
+//l1=distance(y.begin(), result);
+l1=y.size() -1;
 	for (i=0; i<=(l1-1); i++) {
 		if (i%l==0) { zb[i]=y[i]; } else { zb[i]=zb[i-1] xor y[i]; }
 	}
@@ -659,20 +655,20 @@ void Viewer() {
 	double steta,cteta;
 	int i;
 	
-	// первый робот
+	// ГЇГҐГ°ГўГ»Г© Г°Г®ГЎГ®ГІ
   y[0]=x[0];
   y[1]=x[1];
   y[2]=x[2];
   steta=sin(x[2]);
   cteta=cos(x[2]);
-  xlf=x[0]*cteta+x[1]*steta+LBasc;//A1ac;
-  ylf=-x[0]*steta+x[1]*cteta+LBasc/2;//H1hc;
+  xlf=x[0]*cteta+x[1]*steta+Lbasc;//A1ac;
+  ylf=-x[0]*steta+x[1]*cteta+Lbasc/2;//H1hc;
 
-  xlb=x[0]*cteta+x[1]*steta-LBasc;//1bc;
+  xlb=x[0]*cteta+x[1]*steta-Lbasc;//1bc;
   ylb=ylf;
 
   xrf=xlf;
-  yrf=-x[0]*steta+x[1]*cteta-LBasc/2;
+  yrf=-x[0]*steta+x[1]*cteta-Lbasc/2;
 
   xrb=xlb;
   yrb=yrf;
@@ -689,20 +685,20 @@ void Viewer() {
   y[9]=xrf*cteta-yrf*steta;
   y[10]=xrf*steta+yrf*cteta;
 
-// второй робот
+// ГўГІГ®Г°Г®Г© Г°Г®ГЎГ®ГІ
   y[11]=x[3];
   y[12]=x[4];
   y[13]=x[5];
   steta=sin(x[5]);
   cteta=cos(x[5]);
-  xlf=x[3]*cteta+x[4]*steta+LBasc;//A1ac;
-  ylf=-x[3]*steta+x[4]*cteta+LBasc/2;//H1hc;
+  xlf=x[3]*cteta+x[4]*steta+Lbasc;//A1ac;
+  ylf=-x[3]*steta+x[4]*cteta+Lbasc/2;//H1hc;
 
-  xlb=x[3]*cteta+x[4]*steta-LBasc;//1bc;
+  xlb=x[3]*cteta+x[4]*steta-Lbasc;//1bc;
   ylb=ylf;
 
   xrf=xlf;
-  yrf=-x[3]*steta+x[4]*cteta-LBasc/2;
+  yrf=-x[3]*steta+x[4]*cteta-Lbasc/2;
 
   xrb=xlb;
   yrb=yrf;
@@ -719,20 +715,20 @@ void Viewer() {
   y[20]=xrf*cteta-yrf*steta;
   y[21]=xrf*steta+yrf*cteta;
 
-// третий робот
+// ГІГ°ГҐГІГЁГ© Г°Г®ГЎГ®ГІ
   y[22]=x[6];
   y[23]=x[7];
   y[24]=x[8];
   steta=sin(x[8]);
   cteta=cos(x[8]);
-  xlf=x[6]*cteta+x[7]*steta+LBasc;//A1ac;
-  ylf=-x[6]*steta+x[7]*cteta+LBasc/2;//H1hc;
+  xlf=x[6]*cteta+x[7]*steta+Lbasc;//A1ac;
+  ylf=-x[6]*steta+x[7]*cteta+Lbasc/2;//H1hc;
 
-  xlb=x[6]*cteta+x[7]*steta-LBasc;//1bc;
+  xlb=x[6]*cteta+x[7]*steta-Lbasc;//1bc;
   ylb=ylf;
 
   xrf=xlf;
-  yrf=-x[6]*steta+x[7]*cteta-LBasc/2;
+  yrf=-x[6]*steta+x[7]*cteta-Lbasc/2;
 
   xrb=xlb;
   yrb=yrf;
@@ -774,9 +770,11 @@ if ((d1*d2>0) && (d2*d3>0) && (d3*d4>0))
 }
 //*********************************************************
 double Check2(vector <double> y) {
-	int i,j;
+	int i,j, l1;
 	suGA=0;
-	for (i=0; i<=max_element(prepc.begin(), prepc.end()); i++) {
+//СѓР·РЅР°С‚СЊ С‡С‚Рѕ РІ СЌС‚Сѓ РїРµСЂРµРјРµРЅРЅСѓСЋ РїРѕРїР°РґР°РµС‚
+l1=2;
+	for (i=0; i<=l1; i++) {
 		for (j=0; j<=3; j++) {
 			suGA=suGA+Check1_4(y[3+2*j],y[4+2*j],prepc[i][0][0],prepc[i][0][1],prepc[i][1][0],
           prepc[i][1][1],prepc[i][2][0],prepc[i][2][1],prepc[i][3][0],prepc[i][3][1]);
@@ -805,7 +803,7 @@ double Check2(vector <double> y) {
 	return suGA;
 }
 //*********************************************************
-double Chech3(vector <double> y) {
+double Check3(vector <double> y) {
 	int i;
 	suGA=0;
 	//first with second
@@ -927,17 +925,17 @@ z_1_10=Ro_4(q_6*dx1)*q_5*dteta1+q_4*dy1+q_6*dx1+
   u[5]=Ro_18(3*z_1_15+Ro_19(3*z_0_15));
   OgrUpr();
   
-  if !(FlagStop[0]) {
+  if (!(FlagStop[0])) {
 	  u[0]=0;
     u[1]=0;
   }
   
-  if !(FlagStop[1]) {
+  if (!(FlagStop[1])) {
 	   u[2]=0;
     u[3]=0;
   }
   
-  if !(FlagStop[2]) {
+  if (!(FlagStop[2])) {
 	  u[4]=0;
     u[5]=0;
   }
@@ -954,20 +952,20 @@ z_1_10=Ro_4(q_6*dx1)*q_5*dteta1+q_4*dy1+q_6*dx1+
   f1[7]=u[4]*sin(x1[8]);
   f1[8]=(u[4]/Lbasc)*sin(u[5])/cos(u[5]);
 
-  f1[9]=z[M_Out[0,0]-1,M_Out[0,1]];
-  f1[10]=z[M_Out[1,0]-1,M_Out[1,1]];
-  f1[11]=z[M_Out[2,0]-1,M_Out[2,1]];
+  f1[9]=z[M_Out[0][0]-1][M_Out[0][1]];
+  f1[10]=z[M_Out[1][0]-1][M_Out[1][1]];
+  f1[11]=z[M_Out[2][0]-1][M_Out[2][1]];
 
-  f1[12]=z[M_Out[3,0]-1,M_Out[3,1]];
-  f1[13]=z[M_Out[4,0]-1,M_Out[4,1]];
-  f1[14]=z[M_Out[5,0]-1,M_Out[5,1]];
+  f1[12]=z[M_Out[3][0]-1][M_Out[3][1]];
+  f1[13]=z[M_Out[4][0]-1][M_Out[4][1]];
+  f1[14]=z[M_Out[5][0]-1][M_Out[5][1]];
 
-  f1[15]=z[M_Out[6,0]-1,M_Out[6,1]];
-  f1[16]=z[M_Out[7,0]-1,M_Out[7,1]];
-  f1[17]=z[M_Out[8,0]-1,M_Out[8,1]];
+  f1[15]=z[M_Out[6][0]-1][M_Out[6][1]];
+  f1[16]=z[M_Out[7][0]-1][M_Out[7][1]];
+  f1[17]=z[M_Out[8][0]-1][M_Out[8][1]];
   
   for (i=0; i<=(n-1); i++) {
-	  if (abs(f1[i])>infinity) { f1[i]=Ro_10(f1[i])*infinity; }
+	  if (fabs(f1[i])>infinity) { f1[i]=Ro_10(f1[i])*infinity; }
   }
 }
 //*************************************************************
@@ -1000,7 +998,7 @@ void Euler4() {
 	RP(t+dt,xs,fb);
 	for (i=0; i<=(n-1); i++) { xs[i]=x[i]+dt*(fa[i]+fb[i])/2; }
 	RP(t+dt,xs,fb);
-	for (i=0; i<=(n-1); i++) { x[i]:=x[i]+dt*(fa[i]+fb[i])/2; }
+	for (i=0; i<=(n-1); i++) { x[i]=x[i]+dt*(fa[i]+fb[i])/2; }
 	t=t+dt;
 }
 //*********************************************************
@@ -1008,8 +1006,10 @@ double Normdist(vector <double> x1, vector <double> xf1) {
 	double sum,aa;
 	int i;
 	sum=0;
-	for (i=0;i<=high(xf1); i++) {
-		aa=abs(xf1[i]-x1[i]);
+	
+
+	for (i=0;i<=(xf1.size()-1); i++) {
+		aa=fabs(xf1[i]-x1[i]);
 		if (aa>sum) { sum=aa; }
 	}
 	return sum;
@@ -1022,19 +1022,19 @@ void Func(vector <double> Fu) {
 	Initial();
 	sumpen=0;
 	for (i=0; i<=kR-1; i++) { Cs[i]=q[i]; }
-	repeat
+	do {
 	Viewer();
-	sumpen=sumpen+check2(y);
-    sumpen=sumpen+check3(y);
-    Euler2();
-	until ((t>tf) || (Normdist(x,xf)<epsterm));
+	sumpen=sumpen+Check2(y);
+    	sumpen=sumpen+Check3(y);
+    	Euler2(); }
+	while (!(t>tf) || !(Normdist(x,xf)<epsterm));
 	promah=0;
-	for (i=0; i<=high(xf1); i++) { 
-	pr1=abs(x[i]-xfc[i]);
+	for (i=0; i<=(xf1.size()-1); i++) { 
+	pr1=fabs(x[i]-xfc[i]);
 	if (pr1>promah) { promah=pr1; }
 	}
-	fu[0]=t+shtraf*sumpen*dt;
-  fu[1]=promah+shtraf*sumpen*dt;
+	Fu[0]=t+shtraf*sumpen*dt;
+  Fu[1]=promah+shtraf*sumpen*dt;
 }
 //*************************************************************
 void Integr() {
@@ -1042,12 +1042,12 @@ void Integr() {
 	bool flag;
 	for (i=0; i<=ny-1; i++) { EAix[i]=0; }
 	for (i=0; i<=nfu-1; i++) { su[i]=0; }
-	repeat
+	do {
 	for (i=0; i<=ny-1; i++) { qy[i]=qymin[i]+stepsqy[i]*EAix[i]; }
 	Func(su1);
 	for (i=0; i<=nfu-1; i++) { su[i]=su[i]+su1[i]; }
-	LexPM(EAix,flag);
-	until !flag;
+	LexPM(EAix,flag); }
+	while (flag);
 }
 //*************************************************************
 void Func0(vector <double> Fu) {
@@ -1056,14 +1056,14 @@ void Func0(vector <double> Fu) {
 	for (i=0; i<=(nfu-1); i++) { Fu[i]=su[i]; }
 }
 //*************************************************************
-void ImproveChrom(vector <double> q, int StrChrom[5])
+void ImproveChrom(vector <double> q, vector <vector <int> > StrChrom) {
 int i,j,k;
 bool flag;
 SetPsi(Psi0);
 Func0(Fu1);
 k=-1;
 for (i=0; i<=lchr-1; i++) { 
- Variations(StrChrom[i]);
+ Variations(StrChrom);
  Func0(Fu2);
  flag=true;
  for (j=0; j<=nfu-1; j++) { if (Fu2[j]>Fu1[j]) { flag=false; } }
@@ -1072,12 +1072,13 @@ for (i=0; i<=lchr-1; i++) {
 	 k=i;
  }
  for (i=k+1; i<=lchr-1;i++) {
-	 for (j=0; j<=3; j++) { StrChrom[i,j]=0; }
+	 for (j=0; j<=3; j++) { StrChrom[i][j]=0; }
  }
+}
 }
 
 ///////////////////////
-// служебное
+// Г±Г«ГіГ¦ГҐГЎГ­Г®ГҐ
 std::vector<std::string> doubeVecToStr(const std::vector<double>& vec)
 {
     std::vector<std::string> tempStr;

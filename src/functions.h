@@ -9,6 +9,11 @@ double eps1=1e-2;
 double pokmax=16;
 double epstermc=1e-2;
 double eps2c=0.5e-2;
+int LBasc=2;
+int kLc=4;
+int kInpc=6;
+int L1c=16;
+int Mout1c=9;
 
 //почему не integer
 double x0c[18] = {0,2,0, 0,4,0, 0,6,0, 0,0,0, 0,0,0, 0,0,0};
@@ -207,7 +212,9 @@ vector<double> stepsqy;//vector of steps of undefine parameters
 int kRob=3;// number of robots;
 int n=18;//dimention of system;
 int m=6;//dimention of control;
-int ll=42;//dimention of viewing;
+int lv=42;//dimention of viewing;
+
+vector <y> y;// vector of vewing
 
 vector<double> x; // vector of state
 vector<double> xs;
@@ -589,7 +596,7 @@ void GreytoVector(vector < int > y) {
 	double g,g1;
 	l=c+d;
 	//l1=high(y)+1;
-	l1=max_element();
+	l1=max_element(y.begin(), y.end());
 	for (i=0; i<=(l1-1); i++) {
 		if (i%l==0) { zb[i]=y[i]; } else { zb[i]=zb[i-1] xor y[i]; }
 	}
@@ -767,29 +774,29 @@ if ((d1*d2>0) && (d2*d3>0) && (d3*d4>0))
 double Check2(vector <double> y) {
 	int i,j;
 	suGA=0;
-	for (i=0; i<=High(prepc); i++) {
+	for (i=0; i<=max_element(prepc.begin(), prepc.end()); i++) {
 		for (j=0; j<=3; j++) {
-			suGA=suGA+Check1_4(y[3+2*j],y[4+2*j],prepc[i,0,0],prepc[i,0,1],prepc[i,1,0],
-          prepc[i,1,1],prepc[i,2,0],prepc[i,2,1],prepc[i,3,0],prepc[i,3,1]);
+			suGA=suGA+Check1_4(y[3+2*j],y[4+2*j],prepc[i][0][0],prepc[i][0][1],prepc[i][1][0],
+          prepc[i][1][1],prepc[i][2][0],prepc[i][2][1],prepc[i][3][0],prepc[i][3][1]);
 		}
 		for (j=0; j<=3; j++) {
-			suGA=suGA+Check1_4(prepc[i,j,0],prepc[i,j,1],y[3],y[4],y[5],y[6],y[7],y[8],
+			suGA=suGA+Check1_4(prepc[i][j][0],prepc[i][j][1],y[3],y[4],y[5],y[6],y[7],y[8],
            y[9],y[10]);
 		}
 		for (j=0; j<=3; j++) {
-			suGA=suGA+Check1_4(y[14+2*j],y[15+2*j],prepc[i,0,0],prepc[i,0,1],prepc[i,1,0],
-          prepc[i,1,1],prepc[i,2,0],prepc[i,2,1],prepc[i,3,0],prepc[i,3,1]);
+			suGA=suGA+Check1_4(y[14+2*j],y[15+2*j],prepc[i][0][0],prepc[i][0][1],prepc[i][1][0],
+          prepc[i][1][1],prepc[i][2][0],prepc[i][2][1],prepc[i][3][0],prepc[i][3][1]);
 		}
 		for (j=0; j<=3; j++) {
-			suGA=suGA+Check1_4(prepc[i,j,0],prepc[i,j,1],y[14],y[15],y[16],y[17],y[18],y[19],
+			suGA=suGA+Check1_4(prepc[i][j][0],prepc[i][j][1],y[14],y[15],y[16],y[17],y[18],y[19],
            y[20],y[21]);
 		}
 		for (j=0; j<=3; j++) {
-			suGA=suGA+Check1_4(y[25+2*j],y[26+2*j],prepc[i,0,0],prepc[i,0,1],prepc[i,1,0],
-          prepc[i,1,1],prepc[i,2,0],prepc[i,2,1],prepc[i,3,0],prepc[i,3,1]);
+			suGA=suGA+Check1_4(y[25+2*j],y[26+2*j],prepc[i][0][0],prepc[i][0][1],prepc[i][1][0],
+          prepc[i][1][1],prepc[i][2][0],prepc[i][2][1],prepc[i][3][0],prepc[i][3][1]);
 		}
 		for (j=0; j<=3; j++) {
-			suGA=suGA+Check1_4(prepc[i,j,0],prepc[i,j,1],y[25],y[26],y[27],y[28],y[29],y[30],
+			suGA=suGA+Check1_4(prepc[i][j][0],prepc[i][j][1],y[25],y[26],y[27],y[28],y[29],y[30],
            y[31],y[32]);
 		}
 	}
@@ -825,7 +832,7 @@ double Chech3(vector <double> y) {
                     y[7],y[8], y[9],y[10]);
 	}
 	if (su1GA>0) {
-		if (Prior[0]>Prior[2]) { FlagStop[2]=false; } else { FlagStop[0]:=false; }
+		if (Prior[0]>Prior[2]) { FlagStop[2]=false; } else { FlagStop[0]=false; }
 	}
 	suGA=suGA+su1GA;
 	//second with third
@@ -852,7 +859,6 @@ void OgrUpr() {
 	}
 }
 //*********************************************************
-Procedure RP(t1:real;x1:TArrReal;var f1:TArrReal);
 void RP(double t1, vector <double> x1, vector <double> f1) {
 const double q_0=10.218;
 const double q_1=0.44775390625;

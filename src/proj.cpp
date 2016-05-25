@@ -66,12 +66,17 @@ for (k=0; k<kL-1; k++) {
 //SetLength(M_Entr,kL,2*kInp);
 //M_Entr.resize(kL,2*kInP);
 M_Entr.resize(kL);
-for (int ii=0; ii< 2; ii++) {
+for (int ii=0; ii<2; ii++) {
 	M_Entr[ii].resize(2*kInP);
 }
 
+//cout << M_Entr.size() << " " << M_Entr[1].size() << " | " << kL-1 << " " << 2*kInP - 1 << endl;
 for (k=0; k<kL-1; k++) {
-	for (i=0; i<(2*kInP - 1); i++) {  M_Entr[k][i]=M_Entrc[k][i]; }
+	for (i=0; i<(2*kInP - 1); i++) {  
+	//M_Entr[k][i]=M_Entrc[k][i];
+	//M_Entr[k][i]=1;
+	cout << "M_Entrc[" << k << "][" << i << "] = " << M_Entrc[k][i] << endl;
+	}
 }
 /*
 //матрица выходов

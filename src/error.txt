@@ -1,14 +1,2 @@
 mpicxx  -c  proj.cpp 
-proj.cpp: In function ‘int main(int, const char**)’:
-proj.cpp:598:1: error: return-statement with no value, in function returning ‘int’ [-fpermissive]
- return;
- ^
-proj.cpp:599:1: error: expected ‘while’ at end of input
- }
- ^
-proj.cpp:599:1: error: expected ‘(’ at end of input
-proj.cpp:599:1: error: expected primary-expression at end of input
-proj.cpp:599:1: error: expected ‘)’ at end of input
-proj.cpp:599:1: error: expected ‘;’ at end of input
-proj.cpp:599:1: error: expected ‘}’ at end of input
-make: *** [proj.o] Ошибка 1
+mpicxx  proj.o  -o proj -lm 

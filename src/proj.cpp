@@ -376,8 +376,6 @@ do {
 			for (i=0; i<=nfu-1; i++) { Fuh[imax][i]=Fu1[i]; }
 		}
 		
-		
-		
         //calculating all distances for population		  
 		for (i=0; i<=HH-1; i++) { Lh[i]=Rast(Fuh[i]); }
         //mutation for 2nd son	
@@ -402,7 +400,6 @@ do {
             imax=i;
 			}
 		}
-		
 
         //if distance to Pareto set 2nd son is less than biggest distance
         //...in population then make substitution
@@ -411,13 +408,7 @@ do {
 			for (i=0; i<=(p*(c+d)-1); i++) { PopChrPar[imax][i]=Son2p[i]; }
 			for (i=0; i<= nfu-1; i++) { Fuh[imax][i]=Fu2[i]; }
 		}
-		
-		
-		
-		///////////////////////////////////////////////
-		
-		
-		
+
         //calculating all distances for population		  
 		for (i=0; i<=HH-1; i++) { Lh[i]=Rast(Fuh[i]); }
         //mutation for 3rd son
@@ -449,7 +440,6 @@ do {
 		}
         //calculating all distances for population		  
 		for (i=0; i<=HH-1; i++) { Lh[i]=Rast(Fuh[i]); }
-		//////
 		
         //mutation for 4th son		
 		if (rand()<pmut) { 
@@ -485,6 +475,7 @@ do {
 		
         //calculating all distances for population	
 		for (i=0; i<=HH-1; i++) { Lh[i]=Rast(Fuh[i]); }
+		 }
       rt++;
       //End of cycle for crossoving
 	}
@@ -496,69 +487,70 @@ do {
 	
 	    //if epoch is over then changing basic
     
-	if (pt%Epo==0) 
-    {
-      //... на наиболее близкую хромосому к утопической
-      // хромосоме в пространстве нормированных критериев
-	  for (i=0; i<=nfu-1; i++) {
-		  Fumax=Fuh[0][i];
-        Fumin=Fuh[0][i];
-		 // ищем максимальное и минимальное значения по каждому функционалу
-		 for (k=0; k<=HH-1; k++) {
-			 if (Fuh[k][i]>Fumax) { Fumax=Fuh[k][i]; } else { if (Fuh[k][i]< Fumin) { Fumin=Fuh[k][i]; } }
-		 }
-		 // нормируем критерии, поделив каждое значение на разность между
-        // максимумом и минимумом
-		if (Fumax!=Fumin) {
-			for (k=0; k<=HH-1; k++) { FuhNorm[k][i]=Fuh[k][i]/(Fumax-Fumin); }
-		}
-	  }
-	  
-      // находим хромосому с наименьшей величиной нормы нормированных критериев
-      k=0;
-      suGA=0;	
-	for (i=0; i<=nfu-1; i++) { suGA=suGA+Shtraf[i]*sqrt(FuhNorm[0][i]); }
-      suGA=sqrt(suGA);
-//      su=FuhNorm[0,1];
-	  for (i=1; i<=HH-1; i++) {
-		  su1GA=0;
-		  for (j=0; j<=nfu-1; j++) { su1GA=su1GA+Shtraf[j]*sqrt(FuhNorm[i][j]); }
-		  su1GA=FuhNorm[i][1];
-		  if (su1GA<suGA) {
-			  suGA=su1GA;
-          k=i;
+		if (pt%Epo==0) 
+		{
+		  //... на наиболее близкую хромосому к утопической
+		  // хромосоме в пространстве нормированных критериев
+		  for (i=0; i<=nfu-1; i++) {
+			  Fumax=Fuh[0][i];
+			Fumin=Fuh[0][i];
+			 // ищем максимальное и минимальное значения по каждому функционалу
+			 for (k=0; k<=HH-1; k++) {
+				 if (Fuh[k][i]>Fumax) { Fumax=Fuh[k][i]; } else { if (Fuh[k][i]< Fumin) { Fumin=Fuh[k][i]; } }
+			 }
+			 // нормируем критерии, поделив каждое значение на разность между
+			// максимумом и минимумом
+			if (Fumax!=Fumin) {
+				for (k=0; k<=HH-1; k++) { FuhNorm[k][i]=Fuh[k][i]/(Fumax-Fumin); }
+			}
 		  }
-	  }
-	  
-      // заменяем базис
-      // строим матрицу для найденной хромосомы
-      SetPsi(Psi0);
-	for (j=0; j<=lchr-1; j++) { Variations(PopChrStr[k][j]); }
-      // меняем базисную матрицу на новую
-      SetPsiBas(Psi);
-      //генерируем тождественную хромосому
-	for (i=0; i<=lchr-1; i++) { for (j=0; j<=3; j++) { PopChrStr[0][i][j]=0; } }
-	for (i=0; i<=(p*(c+d)-1); i++) { PopChrPar[0][i]=PopChrPar[k][i]; }
-      //вычисляем все фунционалы для всей популяции	  
-	  for (i=0; i<=HH-1; i++) { 
-	  SetPsi(Psi0);
-	  for (j=0; j<=lchr-1; j++) { Variations(PopChrStr[i][j]); }
-	  GreytoVector(PopChrPar[i]);
-        Func0(Fuh[i]);
-	  }
-	  
-      // формируем элиту
-	  for (i=0; i<=kel-1; i++) {
-		j=rand()% (HH-1)+1+1;
-        GreytoVector(PopChrPar[j]);
-        ImproveChrom(q,PopChrStr[j]); 
-	  }
-	  
-      //вычисляем новые расстояния
-	for (i=0; i<=HH-1; i++) {  Lh[i]=Rast(Fuh[i]); }
-	}
+		  
+		  // находим хромосому с наименьшей величиной нормы нормированных критериев
+		  k=0;
+		  suGA=0;	
+		for (i=0; i<=nfu-1; i++) { suGA=suGA+Shtraf[i]*sqrt(FuhNorm[0][i]); }
+		  suGA=sqrt(suGA);
+	//      su=FuhNorm[0,1];
+		  for (i=1; i<=HH-1; i++) {
+			  su1GA=0;
+			  for (j=0; j<=nfu-1; j++) { su1GA=su1GA+Shtraf[j]*sqrt(FuhNorm[i][j]); }
+			  su1GA=FuhNorm[i][1];
+			  if (su1GA<suGA) {
+				  suGA=su1GA;
+			  k=i;
+			  }
+		  }
+		  
+		  // заменяем базис
+		  // строим матрицу для найденной хромосомы
+		  SetPsi(Psi0);
+		for (j=0; j<=lchr-1; j++) { Variations(PopChrStr[k][j]); }
+		  // меняем базисную матрицу на новую
+		  SetPsiBas(Psi);
+		  //генерируем тождественную хромосому
+		for (i=0; i<=lchr-1; i++) { for (j=0; j<=3; j++) { PopChrStr[0][i][j]=0; } }
+		for (i=0; i<=(p*(c+d)-1); i++) { PopChrPar[0][i]=PopChrPar[k][i]; }
+		  //вычисляем все фунционалы для всей популяции	  
+		  for (i=0; i<=HH-1; i++) { 
+		  SetPsi(Psi0);
+		  for (j=0; j<=lchr-1; j++) { Variations(PopChrStr[i][j]); }
+		  GreytoVector(PopChrPar[i]);
+			Func0(Fuh[i]);
+		  }
+		  
+		  // формируем элиту
+		  for (i=0; i<=kel-1; i++) {
+			j=rand()% (HH-1)+1+1;
+			GreytoVector(PopChrPar[j]);
+			ImproveChrom(q,PopChrStr[j]); 
+		  }
+		  
+		  //вычисляем новые расстояния
+		for (i=0; i<=HH-1; i++) {  Lh[i]=Rast(Fuh[i]); }
+		}
     //конец цикла поколений
-}
+	}
+
 while (!(pt>PP));
   ChoosePareto();
   //Сохраним множество Парето в файл
@@ -579,9 +571,10 @@ for (i=0; i<=kol-2; i++) {
   
   for (i=0; i<=kol-1; i++) {
 	  //fout << "solution No " << doubeVecToStr(Pareto[i]) << ", ";
+	  fout << "solution No " << endl;
 	  for (j=0; j<=nfu-1; j++) {
 		//  fout << " F" << j << "=" << doubeVecToStr(Fuh[Pareto[i],j]) << ", ";
-		  
+		fout << " F" << endl;
 	  }
   }
   
@@ -592,9 +585,9 @@ for (i=0; i<=kol-2; i++) {
 ///////////////
 // Удаление массивов
 		 
-	}	 
+		 
 		 
 //конец
-return;
+return 0;
 }
 

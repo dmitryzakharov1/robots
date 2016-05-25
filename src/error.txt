@@ -1,2 +1,0 @@
-mpicxx  -c  proj.cpp 
-mpicxx  proj.o  -o proj -lm 

@@ -86,7 +86,8 @@ for (k=0; k<kL-1; k++) {
 //SetLength(M_Out,Mout,2);
 //M_Out.resize(Mout,2);
 M_Out.resize(Mout);
-for (int ii=0; ii< Mout-1; ii++) {
+//for (int ii=0; ii< Mout-1; ii++) {
+for (int ii=0; ii< Mout; ii++) {
 	M_Out[ii].resize(2);
 }
 
@@ -319,9 +320,9 @@ for (i=0; i<(HH-1); i++) {
 	for (j=0; j<(lchr-1); j++) { Variations(PopChrStr[i][j]); }
 	//для параметрической:
 	//текущие значения параметров в коде Грея переводим в вектор параметров
-	cout << "Start GreytoVector" << endl;
+	//cout << "Start GreytoVector" << endl;
 	GreytoVector(PopChrPar[i]);
-	cout << "End of GreytoVector" << endl;
+	//cout << "End of GreytoVector" << endl;
 	// для каждой полученной матрицы сетевого оператора и вектора параметров,
 	//определяющих искомое математическое выражение, оцениваем
 	//функции приспособленности
@@ -593,7 +594,7 @@ while (!(pt>PP));
 	  
 for (i=0; i<kol-2; i++) {
 	for (j=i+1; j<kol-1; j++) {
-		if (Fuh[Pareto[i],0]>Fuh[Pareto[j],0]) {
+		if (Fuh[Pareto[i]][0]>Fuh[Pareto[j]][0]) {
 			k=Pareto[i];
         Pareto[i]=Pareto[j];
         Pareto[j]=k;
@@ -603,10 +604,10 @@ for (i=0; i<kol-2; i++) {
 
   
   for (i=0; i<kol-1; i++) {
-	  //fout << "solution No " << doubeVecToStr(Pareto[i]) << ", ";
+	  fout << "solution No " << Pareto[i] << ", ";
 	  fout << "solution No " << endl;
 	  for (j=0; j<nfu-1; j++) {
-		//  fout << " F" << j << "=" << doubeVecToStr(Fuh[Pareto[i],j]) << ", ";
+		  fout << " F" << j << "=" << Fuh[Pareto[i]][j] << ", ";
 		fout << " F" << endl;
 	  }
   }

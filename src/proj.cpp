@@ -8,6 +8,7 @@
 #include <sstream>
 #include <vector>
 #include <fstream>
+#include <iostream>
 #include "functions.h"
 
 
@@ -38,6 +39,7 @@ for (int ii=0; ii< 3; ii++) {
 }
 
 
+
 //SetLength(Psi0,kL,L,L);
 //Psi0.resize(kL,L,L);
 Psi0.resize(kL);
@@ -48,15 +50,17 @@ for (int ii=0; ii< 3; ii++) {
 	}
 }
 
-
-for (k=0; k<=kL-1; k++) {
-	for (i=0; i<=L-1; i++) {
-		for (j=0; j<=(L-1); j++) {
+for (k=0; k<kL-1; k++) {
+	for (i=0; i<L-1; i++) {
+		for (j=0; j<(L-1); j++) {
 			Psi[k][i][j]=PsiMultBasc[k][i][j];
-            Psi0[k][i][j]=PsiMultBasc[k][i][j];
+           Psi0[k][i][j]=PsiMultBasc[k][i][j];
+		   //Psi[k][0][0]=1;
 		}
 	}
 }
+
+
 
 //матрица входов
 //SetLength(M_Entr,kL,2*kInp);
@@ -66,10 +70,10 @@ for (int ii=0; ii< 2; ii++) {
 	M_Entr[ii].resize(2*kInP);
 }
 
-
-for (k=0; k<=kL-1; k++) {
-	for (i=0; i<=(2*kInP - 1); i++) {  M_Entr[k][i]=M_Entrc[k][i]; }
+for (k=0; k<kL-1; k++) {
+	for (i=0; i<(2*kInP - 1); i++) {  M_Entr[k][i]=M_Entrc[k][i]; }
 }
+/*
 //матрица выходов
 //SetLength(M_Out,Mout,2);
 //M_Out.resize(Mout,2);
@@ -585,8 +589,9 @@ for (i=0; i<=kol-2; i++) {
 ///////////////
 // Удаление массивов
 		 
-		 
-		 
+	 */	 
+		
+		//cout << "End of program\n";
 //конец
 return 0;
 }

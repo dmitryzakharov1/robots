@@ -167,7 +167,7 @@ vector<int> Rnum; //vector of number of positions in input vector for parameters
 vector<vector <int> > M_Out; //matrix of outputs
 vector<vector <double> > z; //vector of nodes
 vector<vector <string> > zs; //string for mathematical expression
-vector<vector <vector <int> > > Psi,Psi0; //Network  operator matrices
+vector<vector<vector <int> > > Psi,Psi0; //Network  operator matrices
 
 // Parameters of GA
 int HH=1024; //number of chromosomes in the initial population

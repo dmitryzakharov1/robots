@@ -254,7 +254,7 @@ i=ny-1;
 while((i>=0) && (EAix[i]==EAixmax[i])) { i--; }
 if (i>=0) {
 	EAix[i]=EAix[i]+1;
-	for (j=i+1; j<(ny-1); j++) {
+	for (j=i+1; j<=(ny-1); j++) {
 		EAix[j]=0;
 	}
 	flag = true;
@@ -269,16 +269,16 @@ int i;
 bool flag;
 sumixmax=0;
 //ny=3
-for (i=0; i<(ny-1); i++) {
+for (i=0; i<=(ny-1); i++) {
 	EAixmax[i]=EAix1[i];
 }
-for (i=0; i<(ny-1); i++) {
+for (i=0; i<=(ny-1); i++) {
 	EAix[i]=0;
 }
 
 do {
 	sumixmax++;
-	for(i=0; i<(ny-1); i++) {
+	for(i=0; i<=(ny-1); i++) {
 		sumixmax=sumixmax+EAix[i];
 	}
 	//cout << "Start LexPM(EAix,flag)" << endl;
@@ -322,10 +322,10 @@ void VectortoGrey(vector<int> y) {
 int x,i,j,k;
 double r,g1;
 g1=1;
-for(i=0; i<(c-1); i++) { g1=g1*2; }
-for(i=0; i<(p-1); i++) { q[i]=(q[i]-qmin[i])*g1/(qmax[i]-qmin[i]); }
-for(i=0; i<(p*(c+d)-1); i++) { zb[i]=0; }
-for(j=0; j<(p-1); j++) {
+for(i=0; i<=(c-1); i++) { g1=g1*2; }
+for(i=0; i<=(p-1); i++) { q[i]=(q[i]-qmin[i])*g1/(qmax[i]-qmin[i]); }
+for(i=0; i<=(p*(c+d)-1); i++) { zb[i]=0; }
+for(j=0; j<=(p-1); j++) {
 	x=trunc(q[j]);
     r=q[j]-x;
     k=c+j*(c+d)-1;
@@ -343,7 +343,7 @@ for(j=0; j<(p-1); j++) {
         k=k+1;
 	}
 	y[j*(c+d)]=zb[j*(c+d)];
-	for(i=(j*(c+d)+1); i<((j+1)*(c+d)-1); i++) { y[i]=zb[i] xor zb[i-1]; }
+	for(i=(j*(c+d)+1); i<=((j+1)*(c+d)-1); i++) { y[i]=zb[i] xor zb[i-1]; }
 }
 }
 //*************************************************************
@@ -416,13 +416,13 @@ if ((w[1] != 0) || (w[2] != 0) || (w[3] != 0)) {
 //*************************************************************
 void SetV_Entr() {
 int i;
-for (i=0; i<kP-1; i++) { V_Entr[Pnum[i]]=Vs[i]; }	
-for (i=0; i<kR-1; i++) { V_Entr[Rnum[i]]=Cs[i]; }
+for (i=0; i<=kP-1; i++) { V_Entr[Pnum[i]]=Vs[i]; }	
+for (i=0; i<=kR-1; i++) { V_Entr[Rnum[i]]=Cs[i]; }
 }
 //*************************************************************
 double Ro_1(double z) {	return z; }
 //*************************************************************
-double Ro_2(double z) {	if (fabs(z)>sqrt(infinity)) { return infinity; } }
+double Ro_2(double z) {	if (fabs(z)>sqrt(numeric_limits<double>::infinity( ))) { return numeric_limits<double>::infinity( ); } }
 //*************************************************************
 double Ro_3(double z) {	return -z; }
 //*************************************************************
@@ -448,13 +448,13 @@ double Ro_13(double z) { return atan(z); }
 //*************************************************************
 double Ro_15(double z) { if (fabs(z)<eps) { return Ro_10(z)*eps; } else { return Ro_10(z)*exp(log(fabs(z))/3); } }
 //*************************************************************
-double Ro_14(double z) { if (fabs(z)>Ro_15(infinity)) { return Ro_10(z)*infinity; } else { return sqrt(z)*z; } }
+double Ro_14(double z) { if (fabs(z)>Ro_15(numeric_limits<double>::infinity( ))) { return Ro_10(z)*numeric_limits<double>::infinity( ); } else { return sqrt(z)*z; } }
 //*************************************************************
 double Ro_16(double z) { if (fabs(z)<1) {return z;} else { return Ro_10(z); } }
 //*************************************************************
 double Ro_17(double z) { return Ro_10(z)*log(fabs(z)+1); }
 //*************************************************************
-double Ro_18(double z) { if (fabs(z)>-log(eps)) { return Ro_10(z)*infinity; } else { return Ro_10(z)*(exp(fabs(z))-1); } }
+double Ro_18(double z) { if (fabs(z)>-log(eps)) { return Ro_10(z)*numeric_limits<double>::infinity( ); } else { return Ro_10(z)*(exp(fabs(z))-1); } }
 //*************************************************************
 double Ro_19(double z) { if (fabs(z)>1/eps) { return Ro_10(z)*eps; } else { return Ro_10(z)*exp(-fabs(z)); } }
 //*************************************************************
@@ -474,7 +474,7 @@ double Ro_26(double z) { if (fabs(z)<eps1) { return 0; } else { return Ro_10(z);
 //*************************************************************
 double Ro_27(double z) { if (fabs(z)>1) { return Ro_10(z); } else { return Ro_10(z)*(1-sqrt(1-sqrt(z))); } }
 //*************************************************************
-double Ro_28(double z) { if (z*z>log(infinity)) { return z*(1-eps); } else { return z*(1-exp(-sqrt(z))); } }
+double Ro_28(double z) { if (z*z>log(numeric_limits<double>::infinity( ))) { return z*(1-eps); } else { return z*(1-exp(-sqrt(z))); } }
 //*************************************************************
 double Xi_0(double z1, double z2) { return z1+z2; }
 //*************************************************************
@@ -496,33 +496,44 @@ void RPControl() {
 int k,i,j;
 double zz;
 SetV_Entr();
-for (k=0; k<kL-1; k++) {
-	//cout << "k=" << k << endl;
-	for (i=0; i<L-1; i++) {
+//cout << "At RPControl z.size()=" << z.size() << " z[0].size()=" << z[0].size() << endl;
+for (k=0; k<=kL-1; k++) {
+	for (i=0; i<=L-1; i++) {
+	 
 		int temp;
 		temp=Psi[k][i][i];
+		//cout << "point" << endl;
 		switch (temp) {
-			case 2:   z[k][i]=1; //cout << "Choosed 2a z[" << k << "][" << i << "]=" << z[k][i] << endl; 
-			case 3:   z[k][i]=-numeric_limits<double>::infinity( );  
-			case 4:   z[k][i]=numeric_limits<double>::infinity( ); 
-			default:  z[k][i]=0; 
+			case 2:   z[k][i]=1;  //cout << "Choosed 2a" << endl; //cout << "Choosed 2a z[" << k << "][" << i << "]=" << z[k][i] << endl; 
+			case 3:   z[k][i]=-numeric_limits<double>::infinity( ); // cout << "Choosed 3a" << endl;
+			case 4:   z[k][i]=numeric_limits<double>::infinity( );  //cout << "Choosed 4a" << endl;
+			default:  z[k][i]=0; //cout << "Choosed default" << endl;
 		}
-		//cout << "RPControl. Debug. "<< "temp=" << Psi[k][i][i] << " z[" << k << "][" << i << "]=" << z[k][i] << endl;
+		//cout <<  "k=" << k << " i=" << i << endl;
+		//cout << "RPControl. Debug. Psi[" << k << "][" << i << "][" << i <<"] " << " temp=" << Psi[k][i][i] << " z[" << k << "][" << i << "]=" << z[k][i] << endl;
 	}
 	
-		/* for (int ii=0; ii<kL-1; ii++) {
-			for (int jj=0; jj < L-1; jj++) {
+		/*for (int ii=0; ii<=kL-1; ii++) {
+			for (int jj=0; jj <= L-1; jj++) {
 				cout << "z[" << ii << "][" << jj << "]=" << z[ii][jj] << endl;
 			}
-		} */	 
+		}*/	 
 	
-	for (i=0; i<kInP-1; i++) {
-		if (M_Entr[k][2*i]==0) { z[k][i]=V_Entr[M_Entr[k][2*i+1]]; } else { z[k][i]=z[M_Entr[k][2*i]-1][M_Entr[k][2*i+1]]; }
+	for (i=0; i<=kInP-1; i++) {
+	//cout <<  "k=" << k << " i=" << i << endl;
+		//if (M_Entr[k][2*i]==0) { z[k][i]=V_Entr[M_Entr[k][2*i+1]]; } else { z[k][i]=z[M_Entr[k][2*i]-1][M_Entr[k][2*i+1]]; }
+		if (M_Entr[k][2*i]==0) { 
+		z[k][i]=V_Entr[M_Entr[k][2*i+1]]; 
+		} else {
+		z[k][i]=z[M_Entr[k][2*i]-1][M_Entr[k][2*i+1]]; 
+		}
 	}
 
-	for (i=0; i<(L-2); i++) {
+	//cout << "point" << endl;
+	
+	for (i=0; i<=(L-2); i++) {
 
-		for (j=i+1; j<(L-1); j++) {
+		for (j=i+1; j<=(L-1); j++) {
 			if (Psi[k][i][j]!=0) { 
 				if (Psi[k][j][j]!=0) {
 					switch (Psi[k][i][j]) {
@@ -576,7 +587,7 @@ for (k=0; k<kL-1; k++) {
 int Rast(vector < double > Fu) {
     int i, j, k, count;
     count = 0;
-    for (i = 0; i <(HH - 1); i++) {
+    for (i = 0; i <=(HH - 1); i++) {
         j = 0;
         while ((j < nfu) && (Fu[j] >= Fuh[i][j])) {
             j++;
@@ -596,7 +607,7 @@ int Rast(vector < double > Fu) {
 void ChoosePareto() {
 	int i,j;
 	j=0;
-	for (i=0; i<(HH-1); i++) {
+	for (i=0; i<=(HH-1); i++) {
 		if (Lh[i]==0) {
 			j++;
 			//setlength(Pareto,j);
@@ -615,14 +626,14 @@ void GreytoVector(vector < int > y) {
 	//result=max_element(y.begin(), y.end());
 //l1=distance(y.begin(), result);
 l1=y.size() -1;
-	for (i=0; i<(l1-1); i++) {
+	for (i=0; i<=(l1-1); i++) {
 		if (i%l==0) { zb[i]=y[i]; } else { zb[i]=zb[i-1] xor y[i]; }
 	}
 	j=-1;
 	g1=1;
 	g=1;
-	for (i=0; i<(c-2); i++) { g1=g1*2; }
-	for (i=0; i<(l1-1); i++) {
+	for (i=0; i<=(c-2); i++) { g1=g1*2; }
+	for (i=0; i<=(l1-1); i++) {
 		if ((i % l)==0) {
 			j++;
 			q[j]=0;
@@ -632,7 +643,7 @@ l1=y.size() -1;
 		g=g/2;
 	}
 	g1=g1*2;
-	for (j=0; j<(p-1); j++) { q[j]=(qmax[j]-qmin[j])*q[j]/g1+qmin[j]; }
+	for (j=0; j<=(p-1); j++) { q[j]=(qmax[j]-qmin[j])*q[j]/g1+qmin[j]; }
 }
 //*********************************************************
 void Initial() {
@@ -668,6 +679,11 @@ u[4]=0;
 u[5]=0;
 
 t=0;
+
+for (int jj=0; jj <x.size(); jj++) {
+		cout << "x[" << jj << "]=" << x[jj] << endl;
+	}
+
 }
 //*********************************************************
 void Viewer() {
@@ -793,29 +809,29 @@ double Check2(vector <double> y) {
 	int i,j, l1;
 	suGA=0;
 //узнать что в эту переменную попадает
-l1=2;
+l1=1;
 	for (i=0; i<l1; i++) {
-		for (j=0; j<3; j++) {
+		for (j=0; j<=3; j++) {
 			suGA=suGA+Check1_4(y[3+2*j],y[4+2*j],prepc[i][0][0],prepc[i][0][1],prepc[i][1][0],
           prepc[i][1][1],prepc[i][2][0],prepc[i][2][1],prepc[i][3][0],prepc[i][3][1]);
 		}
-		for (j=0; j<3; j++) {
+		for (j=0; j<=3; j++) {
 			suGA=suGA+Check1_4(prepc[i][j][0],prepc[i][j][1],y[3],y[4],y[5],y[6],y[7],y[8],
            y[9],y[10]);
 		}
-		for (j=0; j<3; j++) {
+		for (j=0; j<=3; j++) {
 			suGA=suGA+Check1_4(y[14+2*j],y[15+2*j],prepc[i][0][0],prepc[i][0][1],prepc[i][1][0],
           prepc[i][1][1],prepc[i][2][0],prepc[i][2][1],prepc[i][3][0],prepc[i][3][1]);
 		}
-		for (j=0; j<3; j++) {
+		for (j=0; j<=3; j++) {
 			suGA=suGA+Check1_4(prepc[i][j][0],prepc[i][j][1],y[14],y[15],y[16],y[17],y[18],y[19],
            y[20],y[21]);
 		}
-		for (j=0; j<3; j++) {
+		for (j=0; j<=3; j++) {
 			suGA=suGA+Check1_4(y[25+2*j],y[26+2*j],prepc[i][0][0],prepc[i][0][1],prepc[i][1][0],
           prepc[i][1][1],prepc[i][2][0],prepc[i][2][1],prepc[i][3][0],prepc[i][3][1]);
 		}
-		for (j=0; j<3; j++) {
+		for (j=0; j<=3; j++) {
 			suGA=suGA+Check1_4(prepc[i][j][0],prepc[i][j][1],y[25],y[26],y[27],y[28],y[29],y[30],
            y[31],y[32]);
 		}
@@ -828,12 +844,12 @@ double Check3(vector <double> y) {
 	suGA=0;
 	//first with second
 	su1GA=0;
-	for (i=0; i<(kRob - 1); i++) { FlagStop[i]=true; }
-	for (i=0; i<3; i++) {
+	for (i=0; i<=(kRob - 1); i++) { FlagStop[i]=true; }
+	for (i=0; i<=3; i++) {
 		 su1GA=su1GA+Check1_4(y[3+2*i],y[4+2*i],y[14],y[15], y[16],y[17],
                     y[18],y[19], y[20],y[21]);
 	}
-	for (i=0; i<3; i++) {
+	for (i=0; i<=3; i++) {
 		su1GA=su1GA+Check1_4(y[14+2*i],y[15+2*i],y[3],y[4], y[5],y[6],
                     y[7],y[8], y[9],y[10]);
 	}
@@ -843,11 +859,11 @@ double Check3(vector <double> y) {
 	suGA=suGA+su1GA;
 	//first with third
 	su1GA=0;
-	for (i=0; i<3; i++) {
+	for (i=0; i<=3; i++) {
 		su1GA=su1GA+Check1_4(y[3+2*i],y[4+2*i],y[25],y[26], y[27],y[28],
                     y[29],y[30], y[31],y[32]);
 	}
-	for (i=0; i<3; i++) {
+	for (i=0; i<=3; i++) {
 		su1GA=su1GA+Check1_4(y[25+2*i],y[26+2*i],y[3],y[4], y[5],y[6],
                     y[7],y[8], y[9],y[10]);
 	}
@@ -857,11 +873,11 @@ double Check3(vector <double> y) {
 	suGA=suGA+su1GA;
 	//second with third
 	su1GA=0;
-	for (i=0; i<3; i++) {
+	for (i=0; i<=3; i++) {
 		su1GA=su1GA+Check1_4(y[14+2*i],y[15+2*i],y[25],y[26], y[27],y[28],
                     y[29],y[30], y[31],y[32]);
 	}
-	for (i=0; i<3; i++) {
+	for (i=0; i<=3; i++) {
 		 su1GA=su1GA+Check1_4(y[25+2*i],y[26+2*i],y[14],y[15], y[16],y[17],
                     y[18],y[19], y[20],y[21]);
 	}
@@ -874,7 +890,7 @@ double Check3(vector <double> y) {
 //*************************************************************
 void OgrUpr() {
 	int i;
-	for (i=0; i<(m-1); i++) {
+	for (i=0; i<=(m-1); i++) {
 		if (u[i]>umax[i]) { u[i]=umax[i]; } else { if (u[i]<umin[i]) { u[i]=umin[i]; } }
 	}
 }
@@ -904,9 +920,9 @@ Vs[6]=x1[15];
 Vs[7]=x1[16];
 Vs[8]=x1[17];
 
-
+//cout << "start RPControl()" << endl;
 RPControl();
-
+//cout << "end of RPControl()" << endl;
 
 dx1=x1[9]-x1[0];
 dy1=x1[10]-x1[1];
@@ -946,8 +962,9 @@ z_1_10=Ro_4(q_6*dx1)*q_5*dteta1+q_4*dy1+q_6*dx1+
   u[4]=3*z_0_15/2;
   u[5]=Ro_18(3*z_1_15+Ro_19(3*z_0_15));
 
-
+//cout << "start OgrUpr()" << endl;
   OgrUpr();
+//cout << "end of OgrUpr()" << endl;
 
   
   if (!(FlagStop[0])) {
@@ -965,7 +982,6 @@ z_1_10=Ro_4(q_6*dx1)*q_5*dteta1+q_4*dy1+q_6*dx1+
     u[5]=0;
   }
   
-//z задается kL и L  4 и 16
   
   f1[0]=u[0]*cos(x1[2]);
   f1[1]=u[0]*sin(x1[2]);
@@ -981,91 +997,55 @@ z_1_10=Ro_4(q_6*dx1)*q_5*dteta1+q_4*dy1+q_6*dx1+
 
   f1[9]=z[M_Out[0][0]-1][M_Out[0][1]];
   f1[10]=z[M_Out[1][0]-1][M_Out[1][1]];
-//cout << "M_Out[2][0]-1=" << M_Out[2][0]-1 << " M_Out[2][1]=" << M_Out[2][1] << endl;
-//cout << "z[" << M_Out[2][0]-1 << "][" <<M_Out[2][1] <<"]=" << z[M_Out[2][0]-1][M_Out[2][1]] << endl;
-//cout << "M_Out[2][0]=" << M_Out[2][0] << " M_Out[2][1]=" << M_Out[2][1] << endl;
+  f1[11]=z[M_Out[2][0]-1][M_Out[2][1]];
 
-
-/* for (int ii=0; ii<kL-1; ii++) {
-	for (int jj=0; jj < L-1; jj++) {
-		cout << "z[" << ii << "][" << jj << "]=" << z[ii][jj] << endl;
-	}
-} */
-
-
-////
-//for (int jj=0; jj < z.size(); jj++) {
-//	for (int aa=0; aa<z[jj].size(); aa++) {
-//	cout << "z[" << jj << "][" << aa << "]=" << z[jj][aa] << endl;
-//	}
-//}
-
-////
-
-  //f1[11]=z[M_Out[2][0]-1][M_Out[2][1]];
-  f1[11]=z[M_Out[2][0]-1-1][M_Out[2][1]];
-//cout << "point" << endl;
-
-
-
-  f1[12]=z[M_Out[3][0]-1][M_Out[3][1]];
-  
+  f1[12]=z[M_Out[3][0]-1][M_Out[3][1]]; 
   f1[13]=z[M_Out[4][0]-1][M_Out[4][1]];
-  //cout << "point" << endl;
-  //f1[14]=z[M_Out[5][0]-1][M_Out[5][1]];
-  f1[14]=z[M_Out[5][0]-1-1][M_Out[5][1]];
-//cout << "point" << endl;
+  f1[14]=z[M_Out[5][0]-1][M_Out[5][1]];
+
 
   f1[15]=z[M_Out[6][0]-1][M_Out[6][1]];
-  f1[16]=z[M_Out[7][0]-1][M_Out[7][1]];
-  
-  //cout << "M_Out[8][0]-1=" << M_Out[8][0]-1 << endl;
-//cout << z[2][14] << endl;
-  
-  //f1[17]=z[M_Out[8][0]-1][M_Out[8][1]];
-  f1[17]=z[M_Out[8][0]][M_Out[8][1]];
-//cout << "point" << endl;
+  f1[16]=z[M_Out[7][0]-1][M_Out[7][1]];  
+  f1[17]=z[M_Out[8][0]-1][M_Out[8][1]];
 
-  for (i=0; i<(n-1); i++) {
-	  if (fabs(f1[i])>infinity) { 
-
-f1[i]=Ro_10(f1[i])*infinity; 
-}
-  }
+  for (i=0; i<=(n-1); i++) { if (fabs(f1[i])>numeric_limits<double>::infinity( )) { f1[i]=Ro_10(f1[i])*numeric_limits<double>::infinity( ); } }
 }
 //*************************************************************
 void Euler2() {
+//t не меняется
 	int i;
-	//cout << "start rp" << endl;
+	//cout << "start rp1" << endl;
 	RP(t,x,fa);
-//cout << "end of rp" << endl;
-	for (i=0; i<(n-1); i++) { xs[i]=x[i]+dt*fa[i]; }
+	//cout << "end of rp1" << endl;
+	for (i=0; i<=(n-1); i++) { xs[i]=x[i]+dt*fa[i]; }
+	//cout << "start rp2" << endl;
 	RP(t+dt,xs,fb);
-	for (i=0; i<(n-1); i++) { x[i]=x[i]+dt*(fa[i]+fb[i])/2; }
+	//cout << "end of rp2" << endl;
+	for (i=0; i<=(n-1); i++) { x[i]=x[i]+dt*(fa[i]+fb[i])/2; }
 	t=t+dt;
 }
 //*************************************************************
 void Euler3() {
 	int i;
 	RP(t,x,fa);
-	for (i=0; i<(n-1); i++) { xs[i]=x[i]+dt*fa[i]; }
+	for (i=0; i<=(n-1); i++) { xs[i]=x[i]+dt*fa[i]; }
 	RP(t+dt,xs,fb);
-	for (i=0; i<(n-1); i++) { xs[i]=x[i]+dt*(fa[i]+fb[i])/2; }
+	for (i=0; i<=(n-1); i++) { xs[i]=x[i]+dt*(fa[i]+fb[i])/2; }
 	RP(t+dt,xs,fb);
-	for (i=0; i<(n-1); i++) { x[i]=x[i]+dt*(fa[i]+fb[i])/2; }
+	for (i=0; i<=(n-1); i++) { x[i]=x[i]+dt*(fa[i]+fb[i])/2; }
 	t=t+dt;
 }
 //*************************************************************
 void Euler4() {
 	int i;
 	RP(t,x,fa);
-	for (i=0; i<(n-1); i++) { xs[i]=x[i]+dt*fa[i]; }
+	for (i=0; i<=(n-1); i++) { xs[i]=x[i]+dt*fa[i]; }
 	RP(t+dt,xs,fb);
-	for (i=0; i<(n-1); i++) { xs[i]=x[i]+dt*(fa[i]+fb[i])/2; }
+	for (i=0; i<=(n-1); i++) { xs[i]=x[i]+dt*(fa[i]+fb[i])/2; }
 	RP(t+dt,xs,fb);
-	for (i=0; i<(n-1); i++) { xs[i]=x[i]+dt*(fa[i]+fb[i])/2; }
+	for (i=0; i<=(n-1); i++) { xs[i]=x[i]+dt*(fa[i]+fb[i])/2; }
 	RP(t+dt,xs,fb);
-	for (i=0; i<(n-1); i++) { x[i]=x[i]+dt*(fa[i]+fb[i])/2; }
+	for (i=0; i<=(n-1); i++) { x[i]=x[i]+dt*(fa[i]+fb[i])/2; }
 	t=t+dt;
 }
 //*********************************************************
@@ -1073,10 +1053,11 @@ double Normdist(vector <double> x1, vector <double> xf1) {
 	double sum,aa;
 	int i;
 	sum=0;
-	
-
-	for (i=0;i<(xf1.size()-1); i++) {
+	//cout << "x1.size()=" << x1.size() << " xf1.size()=" << xf1.size() << endl;
+ 	for (i=0;i<xf1.size(); i++) {
+	//cout << "i=" << i << endl;
 		aa=fabs(xf1[i]-x1[i]);
+		//cout << "aa=" << aa << " sum=" << sum << endl;
 		if (aa>sum) { sum=aa; }
 	}
 	return sum;
@@ -1086,21 +1067,27 @@ void Func(vector <double> Fu) {
 	const double shtraf=0.5;
 	double sumpen,promah,pr1;
 	int i;
+	//cout << "Start Initial()" << endl;
 	Initial();
+	//cout << "End of Initial()" << endl;
 	sumpen=0;
 	//for (i=0; i<kR-1; i++) { Cs[i]=q[i]; }
 	Cs=q;
+	//t должно меняться и Normdist(x,xf) тоже
+	
 	do {
-	Viewer();
-	sumpen=sumpen+Check2(y);
+		Viewer();
+		sumpen=sumpen+Check2(y);
     	sumpen=sumpen+Check3(y);
-//cout << "Start Euler2()" << endl;
+		//cout << "Start Euler2()" << endl;
     	Euler2();
-//cout << "End of Euler2()" << endl; 
+		//cout << "End of Euler2()" << endl; 
+		cout << "t=" << t << " tf=" << tf << " Normdist(x,xf)=" << Normdist(x,xf) << " epsterm=" << epsterm << endl;
 }
 	while (!(t>tf) || !(Normdist(x,xf)<epsterm));
 	promah=0;
-	for (i=0; i<(xf1.size()-1); i++) { 
+	cout << "point" << endl;
+	for (i=0; i<xf1.size(); i++) { 
 	pr1=fabs(x[i]-xfc[i]);
 	if (pr1>promah) { promah=pr1; }
 	}
@@ -1111,24 +1098,24 @@ void Func(vector <double> Fu) {
 void Integr() {
 	int i,j;
 	bool flag;
-	for (i=0; i<ny-1; i++) { EAix[i]=0; }
-	for (i=0; i<nfu-1; i++) { su[i]=0; }
+	for (i=0; i<=ny-1; i++) { EAix[i]=0; }
+	for (i=0; i<=nfu-1; i++) { su[i]=0; }
 	do {
-	for (i=0; i<ny-1; i++) { qy[i]=qymin[i]+stepsqy[i]*EAix[i]; }
-//cout << "Start Func(su1)" << endl;
+	for (i=0; i<=ny-1; i++) { qy[i]=qymin[i]+stepsqy[i]*EAix[i]; }
+cout << "Start Func(su1)" << endl;
 	Func(su1);
-//cout << "End of Func(su1)" << endl;
-	for (i=0; i<nfu-1; i++) { su[i]=su[i]+su1[i]; }
+cout << "End of Func(su1)" << endl;
+	for (i=0; i<=nfu-1; i++) { su[i]=su[i]+su1[i]; }
 	LexPM(EAix,flag); }
 	while (flag);
 }
 //*************************************************************
 void Func0(vector <double> Fu) {
 	int i;
-//cout << "Start Integr()" << endl;
+cout << "Start Integr()" << endl;
 	Integr();
-//cout << "End of Integr()" << endl;
-	for (i=0; i<(nfu-1); i++) { Fu[i]=su[i]; }
+cout << "End of Integr()" << endl;
+	for (i=0; i<=(nfu-1); i++) { Fu[i]=su[i]; }
 }
 //*************************************************************
 void ImproveChrom(vector <double> q, vector <vector <int> > StrChrom) {
@@ -1137,32 +1124,18 @@ bool flag;
 SetPsi(Psi0);
 Func0(Fu1);
 k=-1;
-for (i=0; i<lchr-1; i++) { 
+for (i=0; i<=lchr-1; i++) { 
  Variations(StrChrom[i]);
  Func0(Fu2);
  flag=true;
- for (j=0; j<nfu-1; j++) { if (Fu2[j]>Fu1[j]) { flag=false; } }
+ for (j=0; j<=nfu-1; j++) { if (Fu2[j]>Fu1[j]) { flag=false; } }
  if (flag) {
-	 for (j=0; j<nfu-1; j++) { Fu1[j]=Fu2[j]; }
+	 for (j=0; j<=nfu-1; j++) { Fu1[j]=Fu2[j]; }
 	 k=i;
  }
- for (i=k+1; i<lchr-1;i++) {
-	 for (j=0; j<3; j++) { StrChrom[i][j]=0; }
+ for (i=k+1; i<=lchr-1;i++) {
+	 for (j=0; j<=3; j++) { StrChrom[i][j]=0; }
  }
 }
 }
 
-///////////////////////
-// ñëóæåáíîå
-std::vector<std::string> doubeVecToStr(const std::vector<double>& vec)
-{
-    std::vector<std::string> tempStr;
-
-    for (unsigned int i(0); i < vec.size(); ++i){
-        std::ostringstream doubleStr;
-        doubleStr << vec[i];    
-        tempStr.push_back(doubleStr.str());
-    }
-
-    return tempStr;
-}

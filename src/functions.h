@@ -170,9 +170,9 @@ vector<vector <string> > zs; //string for mathematical expression
 vector<vector<vector <int> > > Psi,Psi0; //Network  operator matrices
 
 // Parameters of GA
-int HH=1024; //number of chromosomes in the initial population
-int PP=64; // number of generations (loops of GA)
-int RR=64; // number of couples in one generation
+int HH=102; //number of chromosomes in the initial population 1024
+int PP=6; // number of generations (loops of GA) 64
+int RR=6; // number of couples in one generation 64
 int lchr=8; //length of structural part of chromosome
 int Epo=24;  // number of generations between epochs
 int kel=8;  // number of elitaring chromosomes
@@ -322,19 +322,24 @@ void VectortoGrey(vector<int> y) {
 int x,i,j,k;
 double r,g1;
 g1=1;
-for(i=0; i<=(c-1); i++) { g1=g1*2; }
+for(i=0; i<=(c-1); i++) { g1=g1*2;  }
 for(i=0; i<=(p-1); i++) { q[i]=(q[i]-qmin[i])*g1/(qmax[i]-qmin[i]); }
 for(i=0; i<=(p*(c+d)-1); i++) { zb[i]=0; }
+
+
+
 for(j=0; j<=(p-1); j++) {
 	x=trunc(q[j]);
     r=q[j]-x;
     k=c+j*(c+d)-1;
+
 	while(k>=j*(c+d)) {
 		zb[k]=x%2;
         x=x/2;
         k=k-1;
 	}
 	k=c+j*(c+d);
+
 	while(k<(c+d)*(j+1)) {
 		r=2*r;
         x=floor(r);
@@ -342,9 +347,21 @@ for(j=0; j<=(p-1); j++) {
         r=r-x;
         k=k+1;
 	}
+	
+	//for(int jj=0; jj<zb.size(); jj++) {
+	//	cout << "zb[" << jj << "]=" << fixed << zb[jj] << endl;
+	//	}
+	
 	y[j*(c+d)]=zb[j*(c+d)];
+	
 	for(i=(j*(c+d)+1); i<=((j+1)*(c+d)-1); i++) { y[i]=zb[i] xor zb[i-1]; }
 }
+
+		//for(int jj=0; jj<y.size(); jj++) {
+		//cout << "y[" << jj << "]=" << fixed << y[jj] << endl;
+		//}
+		//getchar();
+
 }
 //*************************************************************
 // Ãåíåðàöèÿ ýëåìåíòàðíîé îïåðàöèè
@@ -400,9 +417,8 @@ int i,j,s1,s2;
 
 if ((w[1] != 0) || (w[2] != 0) || (w[3] != 0)) {
 	switch (w[1]) {
-		//case 0: if ((*(*(*(*Psi)[w[0]])[w[2]])[w[3]])!=0) { Psi[w[0]][w[2]][w[3]]=w[4]; }
 		case 0: if (Psi[w[0]][w[2]][w[3]] != 0) { Psi[w[0]][w[2]][w[3]]=w[4]; }
-		case 1: if (Psi[w[0]][w[2]][w[2]]!=0) { Psi[w[0]][w[2]][w[3]]=w[4]; }
+		case 1: if (Psi[w[0]][w[2]][w[2]]!=0) { Psi[w[0]][w[2]][w[2]]=w[4]; }
 		case 2: if (Psi[w[0]][w[2]][w[3]]==0) { if (Psi[w[0]][w[3]][w[3]]!=0) {Psi[w[0]][w[2]][w[3]]=w[4];} }
 		case 3: 
 		s1=0;
@@ -587,26 +603,38 @@ for (k=0; k<=kL-1; k++) {
 int Rast(vector < double > Fu) {
     int i, j, k, count;
     count = 0;
+	
+	for(int jj=0; jj<Fu.size(); jj++) {
+	cout << "Fu[" << jj << "]=" << Fu[jj] << endl;
+	}
+	
+	for(int jj=0; jj<Fuh[jj].size(); jj++) {
+	cout << "Fuh[0][" << jj << "]=" << Fuh[0][jj] << endl;
+	}
+	
     for (i = 0; i <=(HH - 1); i++) {
         j = 0;
-        while ((j < nfu) && (Fu[j] >= Fuh[i][j])) {
-            j++;
-        }
+        while ((j < nfu) && (Fu[j] >= Fuh[i][j])) { j++; }
         if (j >= nfu) {
             k = 0;
-            while ((k < nfu) && (Fu[k] = Fuh[i][k])) {
-                if (k < nfu) {
-                    count++;
-                }
-            }
+            while ((k < nfu) && (Fu[k] = Fuh[i][k])) { k++; }
+                if (k < nfu) { count++; }
+            
         }
     }
+	cout << "count=" << count << endl;
+	getchar();
     return count;
 }
 //*************************************************************
 void ChoosePareto() {
 	int i,j;
 	j=0;
+	
+	for(int jj=0; jj<Lh.size(); jj++) {
+	cout << "Lh[" << jj << "]=" << Lh[jj] << endl;
+	}
+	
 	for (i=0; i<=(HH-1); i++) {
 		if (Lh[i]==0) {
 			j++;
@@ -615,6 +643,10 @@ void ChoosePareto() {
 			Pareto[j-1]=i;
 		}
 	}
+	for(int jj=0; jj<Pareto.size(); jj++) {
+	cout << "Pareto[" << jj << "]=" << Pareto[jj] << endl;
+	}
+	getchar();
 }
 //*************************************************************
 void GreytoVector(vector < int > y) {
@@ -622,11 +654,13 @@ void GreytoVector(vector < int > y) {
 	double g,g1;
 	l=c+d;
 	//l1=high(y)+1;
-//vector <int>::iterator result;
-	//result=max_element(y.begin(), y.end());
-//l1=distance(y.begin(), result);
-l1=y.size() -1;
-	for (i=0; i<=(l1-1); i++) {
+	
+	for (int jj=0; jj <y.size(); jj++) {
+		cout << "y[" << jj << "]=" << y[jj] << endl;
+		}
+	
+	l1=y.size();
+	for (i=0; i<y.size(); i++) {
 		if (i%l==0) { zb[i]=y[i]; } else { zb[i]=zb[i-1] xor y[i]; }
 	}
 	j=-1;
@@ -640,10 +674,31 @@ l1=y.size() -1;
 			g=g1;
 		}
 		q[j]=q[j]+g*zb[i];
+		
+		
+		//for (int jj=0; jj <zb.size(); jj++) {
+		//cout << "zb[" << jj << "]=" << zb[jj] << endl;
+		//}
+		//for (int jj=0; jj <q.size(); jj++) {
+		//cout << "q[" << jj << "]=" << q[jj] << endl;
+		//}
+		getchar();
+		
 		g=g/2;
 	}
 	g1=g1*2;
-	for (j=0; j<=(p-1); j++) { q[j]=(qmax[j]-qmin[j])*q[j]/g1+qmin[j]; }
+	
+	for (j=0; j<=(p-1); j++) {
+	cout << "q[" << j << "]=" << q[j];	
+	q[j]=(qmax[j]-qmin[j])*q[j]/g1+qmin[j]; 
+	cout << " qmax[" << j << "]=" << qmax[j] << " qmin[" << j << "]=" << qmin[j] << " q[" << j << "]=" << q[j] << " g1=" << g1 << endl; 
+	}
+	
+	//for (int jj=0; jj <qmin.size(); jj++) {
+	//	cout << "qmin[" << jj << "]=" << qmin[jj] << endl;
+	//}
+	
+	//getchar();
 }
 //*********************************************************
 void Initial() {
@@ -680,9 +735,11 @@ u[5]=0;
 
 t=0;
 
-for (int jj=0; jj <x.size(); jj++) {
-		cout << "x[" << jj << "]=" << x[jj] << endl;
-	}
+//for (int jj=0; jj <x.size(); jj++) {
+//		cout << "x[" << jj << "]=" << x[jj] << endl;
+//	}
+	
+//	getchar();
 
 }
 //*********************************************************
@@ -1023,6 +1080,8 @@ void Euler2() {
 	//cout << "end of rp2" << endl;
 	for (i=0; i<=(n-1); i++) { x[i]=x[i]+dt*(fa[i]+fb[i])/2; }
 	t=t+dt;
+	//cout << "t=" << t << endl;
+	//getchar();
 }
 //*************************************************************
 void Euler3() {
@@ -1054,10 +1113,22 @@ double Normdist(vector <double> x1, vector <double> xf1) {
 	int i;
 	sum=0;
 	//cout << "x1.size()=" << x1.size() << " xf1.size()=" << xf1.size() << endl;
+	
+		//for(int jj=0; jj<xf1.size(); jj++) {
+		//cout << "xf1[" << jj << "]=" << fixed << xf1[jj] << endl;
+		//}
+		//for(int jj=0; jj<x1.size(); jj++) {
+		//cout << "x1[" << jj << "]=" << fixed << x1[jj] << endl;
+		//}
+	
  	for (i=0;i<xf1.size(); i++) {
 	//cout << "i=" << i << endl;
 		aa=fabs(xf1[i]-x1[i]);
-		//cout << "aa=" << aa << " sum=" << sum << endl;
+		
+
+		
+		//cout << "aa=" << aa << " sum=" << fixed <<  sum << endl;
+		//getchar();
 		if (aa>sum) { sum=aa; }
 	}
 	return sum;
@@ -1073,26 +1144,39 @@ void Func(vector <double> Fu) {
 	sumpen=0;
 	//for (i=0; i<kR-1; i++) { Cs[i]=q[i]; }
 	Cs=q;
-	//t должно меняться и Normdist(x,xf) тоже
+	
+	
+	//for(int jj=0; jj<y.size(); jj++) {
+	//	cout << "y[" << jj << "]=" << fixed << y[jj] << endl;
+	//	}
+	
+	//getchar();
 	
 	do {
 		Viewer();
 		sumpen=sumpen+Check2(y);
     	sumpen=sumpen+Check3(y);
+		
+		cout << "sumpen=" << fixed << sumpen << endl;
+		
 		//cout << "Start Euler2()" << endl;
     	Euler2();
 		//cout << "End of Euler2()" << endl; 
-		cout << "t=" << t << " tf=" << tf << " Normdist(x,xf)=" << Normdist(x,xf) << " epsterm=" << epsterm << endl;
+		//cout << "t=" << t << " tf=" << tf << " Normdist(x,xf)=" << fixed << setprecision(3) << Normdist(x,xf) << " epsterm=" << fixed << setprecision(3) << epsterm << endl;
 }
-	while (!(t>tf) || !(Normdist(x,xf)<epsterm));
+	while (!((t>tf) || (Normdist(x,xf)<epsterm)));
 	promah=0;
-	cout << "point" << endl;
+	//cout << "point" << endl;
 	for (i=0; i<xf1.size(); i++) { 
-	pr1=fabs(x[i]-xfc[i]);
-	if (pr1>promah) { promah=pr1; }
+		pr1=fabs(x[i]-xfc[i]);
+		if (pr1>promah) { promah=pr1; }
 	}
 	Fu[0]=t+shtraf*sumpen*dt;
-  Fu[1]=promah+shtraf*sumpen*dt;
+	cout << "t=" << t << " shtraf=" << shtraf << " sumpen=" << sumpen << " dt=" << dt << endl;
+	Fu[1]=promah+shtraf*sumpen*dt;
+	cout << "promah=" << promah << " shtraf=" << shtraf << " sumpen=" << sumpen << " dt=" << dt << endl;
+    //cout << "Fu[0]=" << Fu[0] << " Fu[1]=" << Fu[1] << endl;
+	getchar();
 }
 //*************************************************************
 void Integr() {
@@ -1102,9 +1186,9 @@ void Integr() {
 	for (i=0; i<=nfu-1; i++) { su[i]=0; }
 	do {
 	for (i=0; i<=ny-1; i++) { qy[i]=qymin[i]+stepsqy[i]*EAix[i]; }
-cout << "Start Func(su1)" << endl;
+//cout << "Start Func(su1)" << endl;
 	Func(su1);
-cout << "End of Func(su1)" << endl;
+//cout << "End of Func(su1)" << endl;
 	for (i=0; i<=nfu-1; i++) { su[i]=su[i]+su1[i]; }
 	LexPM(EAix,flag); }
 	while (flag);
@@ -1112,9 +1196,9 @@ cout << "End of Func(su1)" << endl;
 //*************************************************************
 void Func0(vector <double> Fu) {
 	int i;
-cout << "Start Integr()" << endl;
+//cout << "Start Integr()" << endl;
 	Integr();
-cout << "End of Integr()" << endl;
+//cout << "End of Integr()" << endl;
 	for (i=0; i<=(nfu-1); i++) { Fu[i]=su[i]; }
 }
 //*************************************************************

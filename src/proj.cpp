@@ -98,7 +98,7 @@ for (i=0; i<Mout; i++) {
 	}
 }
 
-cout << "M_Out[8][0]=" << M_Out[8][0] << endl; 
+//cout << "M_Out[8][0]=" << M_Out[8][0] << endl; 
 
 //параметры модели
 dt=dtc;
@@ -324,10 +324,16 @@ for (i=0; i< lchr; i++) {
 }
 
 //наполняем вектора случайными возможными значениями
+//PopChrStr заполнена нулями, а так бытьне должно
 for (i=1; i<=HH-1; i++) {
 	for (j=0; j<=lchr-1; j++) { GenVar(PopChrStr[i][j]); }
-	for (j=0; j<=(p*(c+d)-1); j++) { PopChrPar[i][j]=rand()%2+1; }
+	for (j=0; j<=(p*(c+d)-1); j++) { PopChrPar[i][j]=rand()%2;  }
 }
+
+		for (int jj=0; jj <PopChrStr.size(); jj++) {
+		cout << "PopChrStr[" << jj << "]=" << PopChrStr[jj][0][] << endl;
+		}
+		getchar();
 
 cout << "start calculating of functionals..." << endl;
 // считаем значения функционалов для каждой хромосомы
@@ -348,9 +354,9 @@ for (i=0; i<=(HH-1); i++) {
 	//функции приспособленности
 	
 	//тяжелая функция, надо ускорять
-	cout << "Start Func0(Fuh[i])" << endl;
+	//cout << "Start Func0(Fuh[i])" << endl;
 	Func0(Fuh[i]);
-	cout << "End of Func0(Fuh[i])" << endl;
+	//cout << "End of Func0(Fuh[i])" << endl;
 }
 cout << "end of calculating of functionals..." << endl; 
 //caculating distances to Pareto set
@@ -363,15 +369,15 @@ do {
     rt=1;//first couple for crossoving
     do {
       //select of two parents
-      k1=rand()% HH + 1;
-      k2=rand()% HH + 1;
+      k1=rand()% HH;
+      k2=rand()% HH;
       ksi=rand();
       if ((ksi<(1+alfa*Lh[k1])/(1+Lh[k1])) ||
          (ksi<(1+alfa*Lh[k2])/(1+Lh[k2]))) {
       
         //if true
-        ks1=random() % lchr+1;
-        ks2=random() % (p*(c+d))+1;
+        ks1=rand() % lchr;
+        ks2=rand() % (p*(c+d));
         //crossover creating four sons
 	
 		for (i=0; i<=lchr-1; i++) {
@@ -405,8 +411,8 @@ do {
 		
         //mutation for 1st son	
 		if (rand()<pmut) {
-		Son1p[random()%(p*(c+d))+1]=rand()%2+1;
-          GenVar(Son1s[rand()%lchr+1]);
+		Son1p[rand()%(p*(c+d))]=rand()%2;
+          GenVar(Son1s[rand()%lchr]);
 		}
 		
         //functional for 1st son
@@ -438,8 +444,8 @@ do {
 		for (i=0; i<=HH-1; i++) { Lh[i]=Rast(Fuh[i]); }
         //mutation for 2nd son	
 		if (rand()<pmut) {
-		Son2p[rand()%(p*(c+d))+1]=rand()%2+1;
-          GenVar(Son2s[rand()%lchr+1]);
+		Son2p[rand()%(p*(c+d))]=rand()%2;
+          GenVar(Son2s[rand()%lchr]);
 		}
         //functional for 2nd son
         SetPsi(Psi0);		  
@@ -471,8 +477,8 @@ do {
 		for (i=0; i<=HH-1; i++) { Lh[i]=Rast(Fuh[i]); }
         //mutation for 3rd son
 		if (rand()<pmut) { 
-		Son3p[rand()%(p*(c+d))+1]=rand()%2+1;
-        GenVar(Son3s[rand()%lchr+1]);
+		Son3p[rand()%(p*(c+d))+1]=rand()%2;
+        GenVar(Son3s[rand()%lchr]);
 		}
         //functional for 3rd son
         SetPsi(Psi0);	  
@@ -501,8 +507,8 @@ do {
 		
         //mutation for 4th son		
 		if (rand()<pmut) { 
-		Son4p[rand()%(p*(c+d))+1]=rand()%2+1;
-        GenVar(Son4s[rand()%lchr+1]);
+		Son4p[rand()%(p*(c+d))+1]=rand()%2;
+        GenVar(Son4s[rand()%lchr]);
 		}
 		
         //functional for 4th son
@@ -598,7 +604,7 @@ do {
 		  
 		  // формируем элиту
 		  for (i=0; i<=kel-1; i++) {
-			j=rand()% (HH-1)+1+1;
+			j=rand()% (HH-1)+1;
 			GreytoVector(PopChrPar[j]);
 			ImproveChrom(q,PopChrStr[j]); 
 		  }
@@ -614,6 +620,8 @@ while (!(pt>PP));
   //Сохраним множество Парето в файл
   ofstream fout("output.txt");
   kol=Pareto.size();
+  
+  cout << "kol=" << kol << " nfu=" << nfu << endl;
   //сортируем решения по возрастанию
 	  
 for (i=0; i<=kol-2; i++) {
@@ -629,23 +637,14 @@ for (i=0; i<=kol-2; i++) {
   
   for (i=0; i<=kol-1; i++) {
 	  fout << "solution No " << Pareto[i] << ", ";
-	  fout << "solution No " << endl;
 	  for (j=0; j<=nfu-1; j++) {
-		  fout << " F" << j << "=" << Fuh[Pareto[i]][j] << ", ";
-		fout << " F" << endl;
+		  fout << " F" << j << "=" << Fuh[Pareto[i]][j] << ", " << endl;
 	  }
   }
   
   fout.close();
 
-		 
 
-///////////////
-// Удаление массивов
-		 
-	  
-		
-		//cout << "End of program\n";
 //конец
 return 0;
 }

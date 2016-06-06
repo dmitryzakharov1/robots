@@ -317,10 +317,10 @@ for (int ii=0; ii< kL; ii++) {
 //cout << "End of SetPsiBas(Psi)" << endl;
 //cout << "Start VectortoGrey(PopChrPar[0])" << endl;
   //генерируем начальную (нулевую) популяцию векторов вариаций 
-  //VectortoGrey(PopChrPar[0]);
-	VectortoGrey(0, PopChrPar);   
-  	//for(int jj=0; jj<Psi[0].size(); jj++) {
-	//	cout << "Psi[" << jj << "]=" << fixed << Psi[0][jj] << endl;
+  VectortoGrey(PopChrPar[0]);
+	//VectortoGrey(0, PopChrPar);   
+  	//for(int jj=0; jj<PopChrPar[0].size(); jj++) {
+	//	cout << "PopChrPar[" << jj << "]=" <<  PopChrPar[0][jj] << endl;
 	//	}
 	//	getchar();
 //cout << "End of VectortoGrey(PopChrPar[0])" << endl;

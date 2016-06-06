@@ -248,7 +248,7 @@ int kol;
  //************************  1.   *******************************
 //    
 //**************************************************************
-void LexPM(vector<int> &EAix, bool &flag) {
+void LexPM(vector<int> EAix, bool flag) {
 int i,j;
 i=ny-1;
 while((i>=0) && (EAix[i]==EAixmax[i])) { i--; }
@@ -290,7 +290,7 @@ while (flag);
 }
 
 //*************************************************************
-void SetPsi(vector<vector <vector <int> > > &Psi1) {
+void SetPsi(vector<vector <vector <int> > > Psi1) {
 //int i,j,k;
 //for(k=0; k<(kL-1); k++)
 //{
@@ -305,7 +305,7 @@ Psi=Psi1;
 
 //*************************************************************
 //ïðîöåäóðû äåëàþò îäíî è òîæå
-void SetPsiBas(vector<vector <vector <int> > > &Psi1) {
+void SetPsiBas(vector<vector <vector <int> > > Psi1) {
 //int i,j,k;
 //for(k=0; k<(kL-1)-1; k++)
 //{
@@ -318,8 +318,7 @@ void SetPsiBas(vector<vector <vector <int> > > &Psi1) {
 Psi=Psi1;		  
 }
 //*************************************************************
-//void VectortoGrey(vector<int> y) {
-void VectortoGrey(int indeks, vector<vector <int> > &y) {
+void VectortoGrey(vector<int> y) {
 int x,i,j,k;
 double r,g1;
 g1=1;
@@ -353,9 +352,9 @@ for(j=0; j<=(p-1); j++) {
 	//	cout << "zb[" << jj << "]=" << fixed << zb[jj] << endl;
 	//	}
 	
-	y[indeks][j*(c+d)]=zb[j*(c+d)];
+	y[j*(c+d)]=zb[j*(c+d)];
 	
-	for(i=(j*(c+d)+1); i<=((j+1)*(c+d)-1); i++) { y[indeks][i]=zb[i] xor zb[i-1]; }
+	for(i=(j*(c+d)+1); i<=((j+1)*(c+d)-1); i++) { y[i]=zb[i] xor zb[i-1]; }
 }
 
 		//for(int jj=0; jj<y[indeks].size(); jj++) {
@@ -616,7 +615,7 @@ for (k=0; k<=kL-1; k++) {
 
 }
 //*************************************************************
-int Rast(vector < double > &Fu) {
+int Rast(vector < double > Fu) {
     int i, j, k, count;
     count = 0;
 	
@@ -884,14 +883,11 @@ if ((d1*d2>0) && (d2*d3>0) && (d3*d4>0))
 }	
 }
 //*********************************************************
-double Check2(vector <double> y) {
+double Check2(vector <double> &y) {
 	int i,j, l1;
 	suGA=0;
 	
-	  for(int jj=0; jj<y.size(); jj++) {
-		cout << "y[" << jj << "]=" << fixed << y[jj] << endl;
-		}
-		getchar();
+	 
 	
 //узнать что в эту переменную попадает
 l1=1;
@@ -925,7 +921,7 @@ l1=1;
 	return suGA;
 }
 //*********************************************************
-double Check3(vector <double> y) {
+double Check3(vector <double> &y) {
 	int i;
 	suGA=0;
 	//first with second

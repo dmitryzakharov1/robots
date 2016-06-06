@@ -317,23 +317,38 @@ for (int ii=0; ii< kL; ii++) {
 //cout << "End of SetPsiBas(Psi)" << endl;
 //cout << "Start VectortoGrey(PopChrPar[0])" << endl;
   //генерируем начальную (нулевую) популяцию векторов вариаций 
-  VectortoGrey(PopChrPar[0]); 
+  //VectortoGrey(PopChrPar[0]);
+	VectortoGrey(0, PopChrPar);   
+  	//for(int jj=0; jj<Psi[0].size(); jj++) {
+	//	cout << "Psi[" << jj << "]=" << fixed << Psi[0][jj] << endl;
+	//	}
+	//	getchar();
 //cout << "End of VectortoGrey(PopChrPar[0])" << endl;
 for (i=0; i< lchr; i++) {
 	for (j=0; j<=4; j++) { PopChrStr[0][i][j]=0; }
 }
 
+
 //наполняем вектора случайными возможными значениями
-//PopChrStr заполнена нулями, а так бытьне должно
+//PopChrStr заполнена нулями, а так быть не должно
 for (i=1; i<=HH-1; i++) {
-	for (j=0; j<=lchr-1; j++) { GenVar(PopChrStr[i][j]); }
+	for (j=0; j<=lchr-1; j++) { 
+	GenVar(PopChrStr[i][j]);
+	
+	//for (int jj=0; jj <PopChrStr.size(); jj++) {
+			//for (int jj1=0; jj1<PopChrStr[jj].size(); jj1++) {
+				for (int jj2=0; jj2<PopChrStr[i][j].size(); jj2++ ) {
+				//cout << "PopChrStr[" << i << "]["<< j <<"][" << jj2 <<"]=" << PopChrStr[i][j][jj2] << endl;
+				}
+			//}
+		//}
+		//getchar();
+	
+	}
 	for (j=0; j<=(p*(c+d)-1); j++) { PopChrPar[i][j]=rand()%2;  }
 }
 
-		for (int jj=0; jj <PopChrStr.size(); jj++) {
-		cout << "PopChrStr[" << jj << "]=" << PopChrStr[jj][0][] << endl;
-		}
-		getchar();
+
 
 cout << "start calculating of functionals..." << endl;
 // считаем значения функционалов для каждой хромосомы
@@ -357,10 +372,40 @@ for (i=0; i<=(HH-1); i++) {
 	//cout << "Start Func0(Fuh[i])" << endl;
 	Func0(Fuh[i]);
 	//cout << "End of Func0(Fuh[i])" << endl;
+	
+		//for (int jj=0; jj <PopChrStr.size(); jj++) {
+		//	for (int jj1=0; jj1<PopChrStr[jj].size(); jj1++) {
+		//		for (int jj2=0; jj2<PopChrStr[jj][jj2].size(); jj2++ ) {
+		//		cout << "PopChrStr[" << jj << "]["<< jj1 <<"][" << jj2 <<"]=" << PopChrStr[jj][jj1][jj2] << endl;
+		//		}
+		//	}
+		//}
+		
+		
+		//for (int jj=0; jj <PopChrPar.size(); jj++) {
+		//	for (int jj1=0; jj1<PopChrPar[jj].size(); jj1++) {
+				//for (int jj2=0; jj2<PopChrPar[jj][jj2].size(); jj2++ ) {
+		//		cout << "PopChrPar[" << jj << "]["<< jj1 <<"]=" << PopChrPar[jj][jj1] << endl;
+				//}
+		//	}
+		//}
+		
+		for (int jj=0; jj <Fuh.size(); jj++) {
+			for (int jj1=0; jj1<Fuh[jj].size(); jj1++) {
+				cout << "Fuh[" << jj << "]["<< jj1 <<"]=" << Fuh[jj][jj1] << endl;
+			}
+		}
+		getchar();
+	
 }
 cout << "end of calculating of functionals..." << endl; 
 //caculating distances to Pareto set
 for (i=0; i<=HH-1; i++) { Lh[i]=Rast(Fuh[i]); }
+
+//for (int jj2=0; jj2<Lh.size(); jj2++ ) {
+//cout << "LH[" << jj2 <<"]=" << Lh[jj2] << endl;
+//}
+//getchar();
 //Start of cycle for generations
 pt=1;  // first current generation
 

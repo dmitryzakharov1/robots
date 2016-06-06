@@ -248,7 +248,7 @@ int kol;
  //************************  1.   *******************************
 //    
 //**************************************************************
-void LexPM(vector<int> EAix, bool flag) {
+void LexPM(vector<int> &EAix, bool &flag) {
 int i,j;
 i=ny-1;
 while((i>=0) && (EAix[i]==EAixmax[i])) { i--; }
@@ -264,7 +264,7 @@ if (i>=0) {
 }
 
 //**************************************************************
-void SetEAixmax(vector<int> EAix1) {
+void SetEAixmax(vector<int> &EAix1) {
 int i;
 bool flag;
 sumixmax=0;
@@ -290,7 +290,7 @@ while (flag);
 }
 
 //*************************************************************
-void SetPsi(vector<vector <vector <int> > > Psi1) {
+void SetPsi(vector<vector <vector <int> > > &Psi1) {
 //int i,j,k;
 //for(k=0; k<(kL-1); k++)
 //{
@@ -305,7 +305,7 @@ Psi=Psi1;
 
 //*************************************************************
 //ïðîöåäóðû äåëàþò îäíî è òîæå
-void SetPsiBas(vector<vector <vector <int> > > Psi1) {
+void SetPsiBas(vector<vector <vector <int> > > &Psi1) {
 //int i,j,k;
 //for(k=0; k<(kL-1)-1; k++)
 //{
@@ -318,7 +318,8 @@ void SetPsiBas(vector<vector <vector <int> > > Psi1) {
 Psi=Psi1;		  
 }
 //*************************************************************
-void VectortoGrey(vector<int> y) {
+//void VectortoGrey(vector<int> y) {
+void VectortoGrey(int indeks, vector<vector <int> > &y) {
 int x,i,j,k;
 double r,g1;
 g1=1;
@@ -352,62 +353,70 @@ for(j=0; j<=(p-1); j++) {
 	//	cout << "zb[" << jj << "]=" << fixed << zb[jj] << endl;
 	//	}
 	
-	y[j*(c+d)]=zb[j*(c+d)];
+	y[indeks][j*(c+d)]=zb[j*(c+d)];
 	
-	for(i=(j*(c+d)+1); i<=((j+1)*(c+d)-1); i++) { y[i]=zb[i] xor zb[i-1]; }
+	for(i=(j*(c+d)+1); i<=((j+1)*(c+d)-1); i++) { y[indeks][i]=zb[i] xor zb[i-1]; }
 }
 
-		//for(int jj=0; jj<y.size(); jj++) {
-		//cout << "y[" << jj << "]=" << fixed << y[jj] << endl;
+		//for(int jj=0; jj<y[indeks].size(); jj++) {
+		//cout << "y["<< indeks <<"][" << jj << "]=" << fixed << y[indeks][jj] << endl;
 		//}
 		//getchar();
 
 }
 //*************************************************************
 // Ãåíåðàöèÿ ýëåìåíòàðíîé îïåðàöèè
-bool TestSource(int j) {
+//bool TestSource(int j) {
 // åñëè j-íîìåð óçëà èñòî÷íèêà, òî âîçâðàùàåò false
-int i,flag;
-flag=true;
-i=0;
+//int i,flag;
+//flag=true;
+//i=0;
 
-while(i<=(*max_element(Pnum.begin(), Pnum.end())) && (j!=Pnum[i])) { i++; }
+//while(i<=Pnum.size() && (j!=Pnum[i])) { i++; }
 
-if (i<=*max_element(Rnum.begin(), Rnum.end())) { flag=false; } else {
-	i=0;
-	while((i<=*max_element(Rnum.begin(), Rnum.end())) and (j!=Rnum[i])) { i++; }
-	if (i<=*max_element(Rnum.begin(), Rnum.end())) {flag=false;}
-}
-return flag;	
-}
+//if (i<=Rnum.size()) { flag=false; } else {
+//	i=0;
+//	while((i<=Rnum.size()) && (j!=Rnum[i])) { i++; }
+//	if (i<=Rnum.size()) {flag=false;}
+//}
+//return flag;	
+//}
 
 
-void GenVar(vector<int> w) {
-w.push_back(rand()%kL+1); //íîìåð ñëîÿ
-w.push_back(rand()%4+1);
-int w2 = w[2];
+void GenVar(vector<int> &w) {
+
+//for (int jj=0; jj <w.size(); jj++) {
+//		cout << "w[" << jj << "]=" << w[jj] << endl;
+//		}
+//		getchar();
+w[0]=rand()%kL; //íîìåð ñëîÿ
+w[1]=rand()%4;
 switch(w[1]) {
 	case 0:
-	w.push_back(rand()%(L-1)+1);
-	w.push_back(rand()%(L-w2-1)+1+w2+1);
-	w.push_back(O1s[rand()%kW+1]);
-	case '2':
-	w.push_back(rand()%(L-1)+1);
-	w.push_back(rand()%(L-w2-1)+1+w2+1);
-	w.push_back(O1s[rand()%kW+1]);
-	case '3':
-	w.push_back(rand()%(L-1)+1);
-	w.push_back(rand()%(L-w2-1)+1+w2+1);
-	w.push_back(O1s[rand()%kW+1]);
-	case '1':
-	w.push_back(rand()%L+1);
-	w.push_back(w[2]);
-	w.push_back(O2s[rand()%kV+1]);
+	w[2]=rand()%(L-1);
+	w[3]=rand()%(L-w[2]-1)+w[2]+1;
+	w[4]=O1s[rand()%kW];
+	case 2:
+	w[2]=rand()%(L-1);
+	w[3]=rand()%(L-w[2]-1)+w[2]+1;
+	w[4]=O1s[rand()%kW];
+	case 3:
+	w[2]=rand()%(L-1);
+	w[3]=rand()%(L-w[2]-1)+w[2]+1;
+	w[4]=O1s[rand()%kW];
+	case 1:
+	w[2]=rand()%L;
+	w[3]=w[2];
+	w[4]=O2s[rand()%kV];
  }
+	//for (int jj=0; jj <w.size(); jj++) {
+	//	cout << "w[" << jj << "]=" << w[jj] << endl;
+	//	}
+	//	getchar();
 }
 
 //*************************************************************
-void Variations(vector<int> w) {
+void Variations(vector<int> &w) {
 // Ýëåìåíòàðíûå îïåðàöèè
 // 0 - çàìåíà íåäèàãîíàëüíîãî ýëåìåíòà
 // 1 - çàìåíà äèàãîíàëüíîãî ýëåìåíòà
@@ -436,7 +445,7 @@ for (i=0; i<=kP-1; i++) { V_Entr[Pnum[i]]=Vs[i]; }
 for (i=0; i<=kR-1; i++) { V_Entr[Rnum[i]]=Cs[i]; }
 }
 //*************************************************************
-double Ro_1(double z) {	return z; }
+double Ro_1(double z) { return z; }
 //*************************************************************
 double Ro_2(double z) {	if (fabs(z)>sqrt(numeric_limits<double>::infinity( ))) { return numeric_limits<double>::infinity( ); } }
 //*************************************************************
@@ -510,7 +519,7 @@ double Xi_7(double z1, double z2) { return Ro_10(z1+z2)*Xi_2(fabs(z1),fabs(z2));
 //*************************************************************
 void RPControl() {
 int k,i,j;
-double zz;
+double zz, zz1;
 SetV_Entr();
 //cout << "At RPControl z.size()=" << z.size() << " z[0].size()=" << z[0].size() << endl;
 for (k=0; k<=kL-1; k++) {
@@ -518,22 +527,19 @@ for (k=0; k<=kL-1; k++) {
 	 
 		int temp;
 		temp=Psi[k][i][i];
-		//cout << "point" << endl;
-		switch (temp) {
-			case 2:   z[k][i]=1;  //cout << "Choosed 2a" << endl; //cout << "Choosed 2a z[" << k << "][" << i << "]=" << z[k][i] << endl; 
-			case 3:   z[k][i]=-numeric_limits<double>::infinity( ); // cout << "Choosed 3a" << endl;
-			case 4:   z[k][i]=numeric_limits<double>::infinity( );  //cout << "Choosed 4a" << endl;
-			default:  z[k][i]=0; //cout << "Choosed default" << endl;
-		}
+			
+			if (temp ==  2) {   z[k][i]=1; } else {
+				if (temp ==  3) {   z[k][i]=-numeric_limits<double>::infinity( ); } else {
+					if (temp ==  4) {   z[k][i]=numeric_limits<double>::infinity( );  } else {
+						{  z[k][i]=0; }
+					}
+				}
+			}
+		
 		//cout <<  "k=" << k << " i=" << i << endl;
 		//cout << "RPControl. Debug. Psi[" << k << "][" << i << "][" << i <<"] " << " temp=" << Psi[k][i][i] << " z[" << k << "][" << i << "]=" << z[k][i] << endl;
 	}
-	
-		/*for (int ii=0; ii<=kL-1; ii++) {
-			for (int jj=0; jj <= L-1; jj++) {
-				cout << "z[" << ii << "][" << jj << "]=" << z[ii][jj] << endl;
-			}
-		}*/	 
+ 
 	
 	for (i=0; i<=kInP-1; i++) {
 	//cout <<  "k=" << k << " i=" << i << endl;
@@ -544,73 +550,83 @@ for (k=0; k<=kL-1; k++) {
 		z[k][i]=z[M_Entr[k][2*i]-1][M_Entr[k][2*i+1]]; 
 		}
 	}
-
-	//cout << "point" << endl;
 	
+
 	for (i=0; i<=(L-2); i++) {
 
 		for (j=i+1; j<=(L-1); j++) {
 			if (Psi[k][i][j]!=0) { 
 				if (Psi[k][j][j]!=0) {
-					switch (Psi[k][i][j]) {
-						case 1: zz=Ro_1(z[k][i]);
-						case 2: zz=Ro_2(z[k][i]);
-						case 3: zz=Ro_3(z[k][i]);
-						case 4: zz=Ro_4(z[k][i]);
-						case 5: zz=Ro_5(z[k][i]);
-						case 6: zz=Ro_6(z[k][i]);
-						case 7: zz=Ro_7(z[k][i]);
-						case 8: zz=Ro_8(z[k][i]);
-						case 9: zz=Ro_9(z[k][i]);
-						case 10: zz=Ro_10(z[k][i]);
-						case 11: zz=Ro_11(z[k][i]);
-						case 12: zz=Ro_12(z[k][i]);
-						case 13: zz=Ro_13(z[k][i]);
-						case 14: zz=Ro_14(z[k][i]);
-						case 15: zz=Ro_15(z[k][i]);
-						case 16: zz=Ro_16(z[k][i]);
-						case 17: zz=Ro_17(z[k][i]);
-						case 18: zz=Ro_18(z[k][i]);
-						case 19: zz=Ro_19(z[k][i]);
-						case 20: zz=Ro_20(z[k][i]);
-						case 21: zz=Ro_21(z[k][i]);
-						case 22: zz=Ro_22(z[k][i]);
-						case 23: zz=Ro_23(z[k][i]);
-						case 24: zz=Ro_24(z[k][i]);
-						case 25: zz=Ro_25(z[k][i]);
-						case 26: zz=Ro_26(z[k][i]);
-						case 27: zz=Ro_27(z[k][i]); 
-						case 28: zz=Ro_28(z[k][i]);
-					}
-					switch (Psi[k][j][j]) {
-						case 1: z[k][j]=Xi_0(z[k][j],zz);
-						case 2: z[k][j]=Xi_1(z[k][j],zz); //cout << "Choosed 2b z[" << k << "][" << j << "]=" << z[k][i] << endl;
-						case 3: z[k][j]=Xi_2(z[k][j],zz);
-						case 4: z[k][j]=Xi_3(z[k][j],zz);
-						case 5: z[k][j]=Xi_4(z[k][j],zz);
-						case 6: z[k][j]=Xi_5(z[k][j],zz);
-						case 7: z[k][j]=Xi_6(z[k][j],zz);
-						case 8: z[k][j]=Xi_7(z[k][j],zz);
-					}
+
+					if (Psi[k][i][j] == 1) { zz=Ro_1(z[k][i]); } 
+						if (Psi[k][i][j] == 2) { zz=Ro_2(z[k][i]); }  
+						if (Psi[k][i][j] == 3) {zz=Ro_3(z[k][i]); } 
+						if (Psi[k][i][j] == 4) {zz=Ro_4(z[k][i]); } 
+						if (Psi[k][i][j] == 5) {zz=Ro_5(z[k][i]); } 
+						if (Psi[k][i][j] == 6) {zz=Ro_6(z[k][i]); } 
+						if (Psi[k][i][j] == 7) {zz=Ro_7(z[k][i]); } 
+						if (Psi[k][i][j] == 8) {zz=Ro_8(z[k][i]); } 
+						if (Psi[k][i][j] == 9) {zz=Ro_9(z[k][i]); } 
+						if (Psi[k][i][j] == 10) {zz=Ro_10(z[k][i]); } 
+						if (Psi[k][i][j] == 11) {zz=Ro_11(z[k][i]); } 
+						if (Psi[k][i][j] == 12) {zz=Ro_12(z[k][i]); } 
+						if (Psi[k][i][j] == 13) {zz=Ro_13(z[k][i]); } 
+						if (Psi[k][i][j] == 14) {zz=Ro_14(z[k][i]); } 
+						if (Psi[k][i][j] == 15) {zz=Ro_15(z[k][i]); } 
+						if (Psi[k][i][j] == 16) {zz=Ro_16(z[k][i]); } 
+						if (Psi[k][i][j] == 17) {zz=Ro_17(z[k][i]); } 
+						if (Psi[k][i][j] == 18) {zz=Ro_18(z[k][i]); } 
+						if (Psi[k][i][j] == 19) {zz=Ro_19(z[k][i]); } 
+						if (Psi[k][i][j] == 20) {zz=Ro_20(z[k][i]); } 
+						if (Psi[k][i][j] == 21) {zz=Ro_21(z[k][i]); } 
+						if (Psi[k][i][j] == 22) {zz=Ro_22(z[k][i]); } 
+						if (Psi[k][i][j] == 23) {zz=Ro_23(z[k][i]); } 
+						if (Psi[k][i][j] == 24) {zz=Ro_24(z[k][i]); }
+						if (Psi[k][i][j] == 25) {zz=Ro_25(z[k][i]); }
+						if (Psi[k][i][j] == 26) {zz=Ro_26(z[k][i]); } 
+						if (Psi[k][i][j] == 27) {zz=Ro_27(z[k][i]); } 
+						if (Psi[k][i][j] == 28) {zz=Ro_28(z[k][i]); } 
+					
+					//cout << "zz=" << zz << endl;
+					//cout << "zz1=" << zz1 << endl;
+					//cout << "k=" << k << " i=" << i << " j=" << j <<" zz=" << zz << endl;
+					//cout << "Psi[" <<k <<"]["<<i<<"]["<<j<<"]="<<Psi[k][i][j] << " z[" << k << "][" << i << "]=" << z[k][i] << " Ro_1(z[k][i])=" << Ro_1(z[k][i]) <<" zz=" << zz << endl;
+					
+					if (Psi[k][j][j]==  1) {  z[k][j]=Xi_0(z[k][j],zz); }
+					if (Psi[k][j][j]==  2) {  z[k][j]=Xi_1(z[k][j],zz); }
+					if (Psi[k][j][j]==  3) {  z[k][j]=Xi_2(z[k][j],zz); }
+					if (Psi[k][j][j]==  4) {  z[k][j]=Xi_3(z[k][j],zz); }
+					if (Psi[k][j][j]==  5) {  z[k][j]=Xi_4(z[k][j],zz); }
+					if (Psi[k][j][j]==  6) {  z[k][j]=Xi_5(z[k][j],zz); }
+					if (Psi[k][j][j]==  7) {  z[k][j]=Xi_6(z[k][j],zz); }
+					if (Psi[k][j][j]==  8) {  z[k][j]=Xi_7(z[k][j],zz); }
+						
+					//getchar();
 				}
 			}
 		}
 	}
 }	
 
+//for(int jj=0; jj<z[0].size(); jj++) {
+//	cout << "z[0][" << jj << "]=" << z[0][jj] << endl;
+//	}
+//	getchar();
+
+
 }
 //*************************************************************
-int Rast(vector < double > Fu) {
+int Rast(vector < double > &Fu) {
     int i, j, k, count;
     count = 0;
 	
-	for(int jj=0; jj<Fu.size(); jj++) {
-	cout << "Fu[" << jj << "]=" << Fu[jj] << endl;
-	}
+	//for(int jj=0; jj<Fu.size(); jj++) {
+	//cout << "Fu[" << jj << "]=" << Fu[jj] << endl;
+	//}
 	
-	for(int jj=0; jj<Fuh[jj].size(); jj++) {
-	cout << "Fuh[0][" << jj << "]=" << Fuh[0][jj] << endl;
-	}
+	//for(int jj=0; jj<Fuh[jj].size(); jj++) {
+	//cout << "Fuh[0][" << jj << "]=" << Fuh[0][jj] << endl;
+	//}
 	
     for (i = 0; i <=(HH - 1); i++) {
         j = 0;
@@ -622,8 +638,8 @@ int Rast(vector < double > Fu) {
             
         }
     }
-	cout << "count=" << count << endl;
-	getchar();
+	//cout << "count=" << count << endl;
+	//getchar();
     return count;
 }
 //*************************************************************
@@ -631,9 +647,9 @@ void ChoosePareto() {
 	int i,j;
 	j=0;
 	
-	for(int jj=0; jj<Lh.size(); jj++) {
-	cout << "Lh[" << jj << "]=" << Lh[jj] << endl;
-	}
+	//for(int jj=0; jj<Lh.size(); jj++) {
+	//cout << "Lh[" << jj << "]=" << Lh[jj] << endl;
+	//}
 	
 	for (i=0; i<=(HH-1); i++) {
 		if (Lh[i]==0) {
@@ -643,21 +659,21 @@ void ChoosePareto() {
 			Pareto[j-1]=i;
 		}
 	}
-	for(int jj=0; jj<Pareto.size(); jj++) {
-	cout << "Pareto[" << jj << "]=" << Pareto[jj] << endl;
-	}
-	getchar();
+	//for(int jj=0; jj<Pareto.size(); jj++) {
+	//cout << "Pareto[" << jj << "]=" << Pareto[jj] << endl;
+	//}
+	//getchar();
 }
 //*************************************************************
-void GreytoVector(vector < int > y) {
+void GreytoVector(vector < int > &y) {
 	int i,j,l1,l;
 	double g,g1;
 	l=c+d;
 	//l1=high(y)+1;
 	
-	for (int jj=0; jj <y.size(); jj++) {
-		cout << "y[" << jj << "]=" << y[jj] << endl;
-		}
+	//or (int jj=0; jj <y.size(); jj++) {
+	//	cout << "y[" << jj << "]=" << y[jj] << endl;
+	//	}
 	
 	l1=y.size();
 	for (i=0; i<y.size(); i++) {
@@ -682,16 +698,16 @@ void GreytoVector(vector < int > y) {
 		//for (int jj=0; jj <q.size(); jj++) {
 		//cout << "q[" << jj << "]=" << q[jj] << endl;
 		//}
-		getchar();
+		//getchar();
 		
 		g=g/2;
 	}
 	g1=g1*2;
 	
 	for (j=0; j<=(p-1); j++) {
-	cout << "q[" << j << "]=" << q[j];	
+	//cout << "q[" << j << "]=" << q[j];	
 	q[j]=(qmax[j]-qmin[j])*q[j]/g1+qmin[j]; 
-	cout << " qmax[" << j << "]=" << qmax[j] << " qmin[" << j << "]=" << qmin[j] << " q[" << j << "]=" << q[j] << " g1=" << g1 << endl; 
+	//cout << " qmax[" << j << "]=" << qmax[j] << " qmin[" << j << "]=" << qmin[j] << " q[" << j << "]=" << q[j] << " g1=" << g1 << endl; 
 	}
 	
 	//for (int jj=0; jj <qmin.size(); jj++) {
@@ -839,6 +855,12 @@ void Viewer() {
   y[32]=xrf*steta+yrf*cteta;
   
   for (i=0; i<=8; i++) { y[33+i]=x[9+i]; }
+  
+  //for(int jj=0; jj<y.size(); jj++) {
+	//	cout << "y[" << jj << "]=" << fixed << y[jj] << endl;
+	//	}
+	
+	//getchar();
 }
 //*********************************************************
 double Check1_4(double xt,double yt, double x1,double y1, double x2, double y2, double x3, double y3, double x4, double y4) {
@@ -865,6 +887,12 @@ if ((d1*d2>0) && (d2*d3>0) && (d3*d4>0))
 double Check2(vector <double> y) {
 	int i,j, l1;
 	suGA=0;
+	
+	  for(int jj=0; jj<y.size(); jj++) {
+		cout << "y[" << jj << "]=" << fixed << y[jj] << endl;
+		}
+		getchar();
+	
 //узнать что в эту переменную попадает
 l1=1;
 	for (i=0; i<l1; i++) {
@@ -893,6 +921,7 @@ l1=1;
            y[31],y[32]);
 		}
 	}
+	cout << "check2 suGA=" << suGA << endl;
 	return suGA;
 }
 //*********************************************************
@@ -942,6 +971,7 @@ double Check3(vector <double> y) {
 		if (Prior[1]>Prior[2]) { FlagStop[2]=false; } else { FlagStop[1]=false; }
 	}
 	suGA=suGA+su1GA;
+	cout << "check3 suGA=" << suGA << endl;
 	return suGA;
 }
 //*************************************************************
@@ -952,7 +982,7 @@ void OgrUpr() {
 	}
 }
 //*********************************************************
-void RP(double t1, vector <double> x1, vector <double> f1) {
+void RP(double t1, vector <double> &x1, vector <double> &f1) {
 const double q_0=10.218;
 const double q_1=0.44775390625;
 const double q_2=1.4932;
@@ -1053,6 +1083,8 @@ z_1_10=Ro_4(q_6*dx1)*q_5*dteta1+q_4*dy1+q_6*dx1+
   f1[8]=(u[4]/Lbasc)*sin(u[5])/cos(u[5]);
 
   f1[9]=z[M_Out[0][0]-1][M_Out[0][1]];
+  //cout << "z[" << M_Out[0][0]-1 << "][" << M_Out[0][1] <<  "]=" << z[M_Out[0][0]-1][M_Out[0][1]] << endl;
+  //getchar();
   f1[10]=z[M_Out[1][0]-1][M_Out[1][1]];
   f1[11]=z[M_Out[2][0]-1][M_Out[2][1]];
 
@@ -1066,6 +1098,12 @@ z_1_10=Ro_4(q_6*dx1)*q_5*dteta1+q_4*dy1+q_6*dx1+
   f1[17]=z[M_Out[8][0]-1][M_Out[8][1]];
 
   for (i=0; i<=(n-1); i++) { if (fabs(f1[i])>numeric_limits<double>::infinity( )) { f1[i]=Ro_10(f1[i])*numeric_limits<double>::infinity( ); } }
+  
+  //for(int jj=0; jj<f1.size(); jj++) {
+	//	cout << "f1[" << jj << "]=" << fixed << f1[jj] << endl;
+	//	}
+	//	getchar();
+  
 }
 //*************************************************************
 void Euler2() {
@@ -1073,12 +1111,26 @@ void Euler2() {
 	int i;
 	//cout << "start rp1" << endl;
 	RP(t,x,fa);
+
 	//cout << "end of rp1" << endl;
 	for (i=0; i<=(n-1); i++) { xs[i]=x[i]+dt*fa[i]; }
 	//cout << "start rp2" << endl;
 	RP(t+dt,xs,fb);
 	//cout << "end of rp2" << endl;
 	for (i=0; i<=(n-1); i++) { x[i]=x[i]+dt*(fa[i]+fb[i])/2; }
+		
+		
+		//for(int jj=0; jj<fa.size(); jj++) {
+		//cout << "fa[" << jj << "]=" << fixed << fa[jj] << endl;
+		//}
+		//for(int jj=0; jj<fb.size(); jj++) {
+		//cout << "fb[" << jj << "]=" << fixed << fb[jj] << endl;
+		//}
+		//for(int jj=0; jj<x.size(); jj++) {
+		//cout << "x[" << jj << "]=" << fixed << x[jj] << endl;
+		//}
+		//getchar();
+		
 	t=t+dt;
 	//cout << "t=" << t << endl;
 	//getchar();
@@ -1087,6 +1139,7 @@ void Euler2() {
 void Euler3() {
 	int i;
 	RP(t,x,fa);
+
 	for (i=0; i<=(n-1); i++) { xs[i]=x[i]+dt*fa[i]; }
 	RP(t+dt,xs,fb);
 	for (i=0; i<=(n-1); i++) { xs[i]=x[i]+dt*(fa[i]+fb[i])/2; }
@@ -1108,7 +1161,7 @@ void Euler4() {
 	t=t+dt;
 }
 //*********************************************************
-double Normdist(vector <double> x1, vector <double> xf1) {
+double Normdist(vector <double> &x1, vector <double> &xf1) {
 	double sum,aa;
 	int i;
 	sum=0;
@@ -1117,24 +1170,20 @@ double Normdist(vector <double> x1, vector <double> xf1) {
 		//for(int jj=0; jj<xf1.size(); jj++) {
 		//cout << "xf1[" << jj << "]=" << fixed << xf1[jj] << endl;
 		//}
-		//for(int jj=0; jj<x1.size(); jj++) {
-		//cout << "x1[" << jj << "]=" << fixed << x1[jj] << endl;
-		//}
+		
 	
  	for (i=0;i<xf1.size(); i++) {
 	//cout << "i=" << i << endl;
 		aa=fabs(xf1[i]-x1[i]);
 		
-
-		
-		//cout << "aa=" << aa << " sum=" << fixed <<  sum << endl;
-		//getchar();
 		if (aa>sum) { sum=aa; }
 	}
+	//cout << "aa=" << aa << " sum=" << fixed <<  sum << endl;
+	//	getchar();
 	return sum;
 }
 //*********************************************************
-void Func(vector <double> Fu) {
+void Func(vector <double> &Fu) {
 	const double shtraf=0.5;
 	double sumpen,promah,pr1;
 	int i;
@@ -1145,28 +1194,45 @@ void Func(vector <double> Fu) {
 	//for (i=0; i<kR-1; i++) { Cs[i]=q[i]; }
 	Cs=q;
 	
+		//for(int jj=0; jj<y.size(); jj++) {
+		//cout << "y[" << jj << "]=" << fixed << y[jj] << endl;
+		//}
+		//getchar();
 	
-	//for(int jj=0; jj<y.size(); jj++) {
-	//	cout << "y[" << jj << "]=" << fixed << y[jj] << endl;
-	//	}
-	
-	//getchar();
 	
 	do {
-		Viewer();
-		sumpen=sumpen+Check2(y);
-    	sumpen=sumpen+Check3(y);
 		
-		cout << "sumpen=" << fixed << sumpen << endl;
+		
+		Viewer();
+		//for(int jj=0; jj<y.size(); jj++) {
+		//cout << "y[" << jj << "]=" << fixed << y[jj] << endl;
+		//}
+		//getchar();
+	
+		sumpen=sumpen+Check2(y);
+		cout << "sumpen1=" << sumpen << endl;
+
+		
+    	sumpen=sumpen+Check3(y);
+		cout << "sumpen2=" << sumpen << endl;
+
 		
 		//cout << "Start Euler2()" << endl;
     	Euler2();
+		cout << "sumpen=" << fixed << sumpen << endl;
+		getchar();
+		
+
 		//cout << "End of Euler2()" << endl; 
-		//cout << "t=" << t << " tf=" << tf << " Normdist(x,xf)=" << fixed << setprecision(3) << Normdist(x,xf) << " epsterm=" << fixed << setprecision(3) << epsterm << endl;
+	
+		//cout << "t=" << t << " tf=" << tf << " Normdist(x,xf)=" << fixed << Normdist(x,xf) << " epsterm=" << fixed << epsterm << endl;
+		//getchar();
 }
 	while (!((t>tf) || (Normdist(x,xf)<epsterm)));
 	promah=0;
-	//cout << "point" << endl;
+	
+
+
 	for (i=0; i<xf1.size(); i++) { 
 		pr1=fabs(x[i]-xfc[i]);
 		if (pr1>promah) { promah=pr1; }
@@ -1175,7 +1241,7 @@ void Func(vector <double> Fu) {
 	cout << "t=" << t << " shtraf=" << shtraf << " sumpen=" << sumpen << " dt=" << dt << endl;
 	Fu[1]=promah+shtraf*sumpen*dt;
 	cout << "promah=" << promah << " shtraf=" << shtraf << " sumpen=" << sumpen << " dt=" << dt << endl;
-    //cout << "Fu[0]=" << Fu[0] << " Fu[1]=" << Fu[1] << endl;
+    cout << "Fu[0]=" << Fu[0] << " Fu[1]=" << Fu[1] << endl;
 	getchar();
 }
 //*************************************************************
@@ -1183,26 +1249,38 @@ void Integr() {
 	int i,j;
 	bool flag;
 	for (i=0; i<=ny-1; i++) { EAix[i]=0; }
-	for (i=0; i<=nfu-1; i++) { su[i]=0; }
 	do {
 	for (i=0; i<=ny-1; i++) { qy[i]=qymin[i]+stepsqy[i]*EAix[i]; }
 //cout << "Start Func(su1)" << endl;
+	for (i=0; i<=nfu-1; i++) { su[i]=0; }
+
 	Func(su1);
+	
+	//for (int jj=0; jj <su1.size(); jj++) {
+	//		cout << "su1[" << jj << "]=" << su1[jj] << endl;
+	//	}
+	//getchar();
+	
 //cout << "End of Func(su1)" << endl;
 	for (i=0; i<=nfu-1; i++) { su[i]=su[i]+su1[i]; }
+	
+	
+	
 	LexPM(EAix,flag); }
 	while (flag);
 }
 //*************************************************************
-void Func0(vector <double> Fu) {
+void Func0(vector <double> &Fu) {
 	int i;
 //cout << "Start Integr()" << endl;
 	Integr();
 //cout << "End of Integr()" << endl;
-	for (i=0; i<=(nfu-1); i++) { Fu[i]=su[i]; }
+	//for (i=0; i<=(nfu-1); i++) { Fu[i]=su[i]; }
+	Fu=su;
+	
 }
 //*************************************************************
-void ImproveChrom(vector <double> q, vector <vector <int> > StrChrom) {
+void ImproveChrom(vector <double> &q, vector <vector <int> > &StrChrom) {
 int i,j,k;
 bool flag;
 SetPsi(Psi0);

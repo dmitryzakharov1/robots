@@ -4,7 +4,7 @@ CC = mpicxx
 IFLAGS = /opt/intel/impi/include64/
 #libraries
 #LFLAGS = -shared-intel
-LFLAGS = -floop-parallelize-all -ftree-parallelize-loops=2
+LFLAGS = -floop-parallelize-all -ftree-parallelize-loops=2 -O3
 all: proj
 proj: proj.o 
 	$(CC) $(LFLAGS) proj.o  -o proj -lm 

@@ -3,7 +3,7 @@ using namespace std;
 //êîíñòàíòû
 //double deltt=2.5;
 //?
-double infinity = 100000000;
+double infinity = 1e8;
 double eps = 1e-8;
 double eps1 = 1e-2;
 double pokmax = 16;
@@ -34,7 +34,7 @@ vector < int > Pnumc(arr, arr + 9);
 int arr1[] = {9,10,11, 12,13,14, 15,16,17};
 vector < int > Rnumc(arr1, arr1 + 9);
 double prepc[2][5][2] = {
-	{{-8,1},{-20,1},{-20,1},{-8,-1},{-8,1}},
+	{{-8,1},{-20,1},{-20,-1},{-8,-1},{-8,1}},
 		{{20,1},{8,1},{8,-1},{20,-1},{20,1}}
 };
 

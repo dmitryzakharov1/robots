@@ -1,3 +1,0 @@
-start calculating of functionals...
-su[0]=0.01
-su[1]=0
